@@ -19,12 +19,12 @@ export const INTRO = {
   beats: [
     { at: 500,  t: '28 august 2026.', cls: 'mono' },
     { at: 4000, t: "raksha bandhan. and a problem.", cls: 'mono' },
-    { at: 7500, t: 'bhai is in gurugram. didi is in mumbai.', cls: '' },
+    { at: 7500, t: 'bhai is in gurugram. didi is in pune.', cls: '' },
     { at: 11500, t: "can't be there in person. so.", cls: '' },
     { at: 14500, t: 'he stayed up stupidly late', cls: '' },
     { at: 17500, t: 'and built this instead.', cls: 'big' },
-    { at: 21500, t: 'GURUGRAM ————————— MUMBAI', cls: 'thread mono' },
-    { at: 25000, t: 'one sky. one thread. 1,424 km.', cls: '' },
+    { at: 21500, t: 'GURUGRAM ————————— PUNE', cls: 'thread mono' },
+    { at: 25000, t: 'one sky. one thread. 1,450 km.', cls: '' },
     { at: 28500, t: 'for one person only.', cls: 'big' },
   ],
   total: 31500,
@@ -35,7 +35,7 @@ export const INTRO = {
 };
 
 export const LANDING = {
-  kicker: '28.08.2026 · made in gurugram. for mumbai.',
+  kicker: '28.08.2026 · made in gurugram. for pune.',
   line1: 'OK FINE.',
   line2: 'I MADE THIS.',
   sub: 'a whole website. for you. yes really.',
@@ -55,7 +55,7 @@ export const FILE = {
   head: ['THE FILE:', 'DAYAN'],
   cards: [
     { n: '18', l: 'AGE (APPARENTLY)', d: 'adult on paper. behaviour still pending.' },
-    { n: 'MUMBAI', l: 'LAST SEEN', d: 'where the mirror selfies come from. daily.' },
+    { n: 'PUNE', l: 'LAST SEEN', d: 'where the mirror selfies come from. daily.' },
     { n: '10PM', l: 'BEDTIME (HERS)', d: 'she sleeps early. like a responsible adult. i built this at 2am. we are not the same.' },
     { n: '100%', l: 'TEASING RATE', d: 'mostly in front of people. thanks for that.' },
   ],
@@ -112,7 +112,7 @@ export const TX = {
     { slug: 'phone-wallpaper', label: 'WALLPAPER' },
     { slug: 'my-wallpaper', label: 'MY WALLPAPER' },
     { slug: 'wallpaper', label: 'BACKUP' },
-    { slug: 'randomly-received', label: 'RANDOM FILE FROM MUMBAI', big: true },
+    { slug: 'randomly-received', label: 'RANDOM FILE FROM PUNE', big: true },
     { slug: 'rendem-again', label: 'THE "RENDEM" SERIES' },
   ],
   chatMeta: 'MY DRAFTS TO HER · NEVER SENT (TIL NOW)',
@@ -129,13 +129,13 @@ export const TX = {
 
 export const DIST = {
   tag: 'THE DISTANCE THING',
-  kmMax: 1424,
-  thesis: ['1,424 KM', 'AND STILL ANNOYING.'],
+  kmMax: 1450,
+  thesis: ['1,450 KM', 'AND STILL ANNOYING.'],
   thesis2: 'distance tried. distance failed.',
   cards: [
     { n: 'APR 2026', l: 'START', d: 'random month. random person. now this.' },
-    { n: '2', l: 'CITIES', d: 'gurugram ↔ mumbai. same sky tho.' },
-    { n: '1,424 KM', l: 'DISTANCE', d: 'checked. irrelevant. the thread is longer.' },
+    { n: '2', l: 'CITIES', d: 'gurugram ↔ pune. same sky tho.' },
+    { n: '1,450 KM', l: 'DISTANCE', d: 'checked. irrelevant. the thread is longer.' },
     { n: '1', l: 'MOON', d: 'look up tonight. i am looking too. deal?' },
   ],
 };
@@ -148,11 +148,11 @@ export const RAKHI = {
 export const RITUAL = {
   tag: 'THE MAIN PART',
   head: ['NOW YOU', 'TIE IT.'],
-  sub: "i can't come to mumbai rn so. hold the button and tie it yourself ok.",
+  sub: "i can't come to pune rn so. hold the button and tie it yourself ok.",
   hold: 'HOLD TO TIE',
   releasing: "don't let go…",
   tiedTitle: 'TIED. DONE.',
-  tiedSub: "u just tied a rakhi from 1,424 km away. tell me that's not cool.",
+  tiedSub: "u just tied a rakhi from 1,450 km away. tell me that's not cool.",
   tiedNext: 'ok now the letter →',
   stamp: 'DONE · 28.08.2026 · FOREVER',
   hint: 'hold it. watch the wrist.',
@@ -166,7 +166,7 @@ export const TIMELINE = {
     { date: 'APR 2026', title: 'FIRST CONTACT', d: "met her in april. didn't think she'd stay this long lol", slug: 'grouped' },
     { date: 'MAY 2026', title: 'THE ROAST ERA', d: 'she found out teasing me is fun. it never stopped.', slug: 'teasing' },
     { date: 'JUN–JUL', title: 'THE CALL ERA', d: 'actual calls. normal hours. she sleeps early like a normal person. i was up anyway.', slug: 'mirror-selfie' },
-    { date: '28 AUG', title: 'THREAD TIED', d: 'she tied it herself. from mumbai. over a website. 2026 is wild.', slug: 'hand-smile' },
+    { date: '28 AUG', title: 'THREAD TIED', d: 'she tied it herself. from pune. over a website. 2026 is wild.', slug: 'hand-smile' },
   ],
   tail: '— season 2 starts tomorrow —',
 };
@@ -180,7 +180,7 @@ export const LETTER = {
     "here's the thing. we're not blood related at all. zero. and you're still the most sister anyone has ever been to me. i think that's bigger.",
     'april was 4 months ago. now my gallery, my wallpaper, my phone. all you.',
     "your birthday text? still saved. i read it sometimes. don't act cool about it.",
-    'mumbai is far but the moon is the same one. look at it sometimes. i am on the other side doing the same dumb thing.',
+    'pune is far but the moon is the same one. look at it sometimes. i am on the other side doing the same dumb thing.',
     'happy raksha bandhan didi. the roasting never stops. that is a threat and a promise.',
   ],
   sign: '— your bhai (15, sleep-deprived, gurugram)',
@@ -204,7 +204,7 @@ export const FINALE = {
     lines: [
       'This is to certify that',
       'D I D I',
-      '(a.k.a. THE DAYAN · Mumbai)',
+      '(a.k.a. THE DAYAN · Pune)',
       'has been doing sister duties at an',
       'UNREASONABLY GOOD level since April 2026,',
       'and therefore gets:',

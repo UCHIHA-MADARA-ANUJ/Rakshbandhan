@@ -100,7 +100,7 @@ function Clock() {
     f(); const iv = setInterval(f, 1000);
     return () => clearInterval(iv);
   }, []);
-  return <span className="navclock hud-txt">MUMBAI {t} IST</span>;
+  return <span className="navclock hud-txt">PUNE {t} IST</span>;
 }
 
 export default function Chrome({ children }) {

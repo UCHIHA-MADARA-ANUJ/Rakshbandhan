@@ -16,6 +16,11 @@ export default function Dossier() {
       <div className="charge-roll hud-txt">
         {C.FILE.charges.map((c, i) => <span key={i}>⚠ {c}</span>)}
       </div>
+      <div className="threat">
+        <span className="hud-txt gold">THREAT LEVEL:</span>
+        <div className="threat-bar"><i /></div>
+        <span className="threat-val">MAXIMUM</span>
+      </div>
       <div className="aliases">
         <p className="hud-txt gold mb">{C.ALIASES.tag}</p>
         <div className="alias-row">

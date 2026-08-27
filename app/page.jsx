@@ -9,7 +9,7 @@ const DESC = {
   '/dossier': 'subject file: dayan. charges included.',
   '/scanner': 'face scan. 11 moods. all dumb.',
   '/transmission': 'my phone is a museum of you.',
-  '/distance': '1,424 km. and why it lost.',
+  '/distance': '1,450 km. and why it lost.',
   '/ritual': 'tie the rakhi yourself. hold the button.',
   '/letter': 'the part i cannot say out loud',
   '/finale': 'the ending. obviously.',
@@ -112,7 +112,7 @@ export default function Landing() {
         <div className="hud-txt tl">
           <span className="gold pulse">■ SIGNAL: STRONG</span>
           <span>SRC: GURUGRAM · 28.4595° N</span>
-          <span>DEST: MUMBAI · 19.0760° N</span>
+          <span>DEST: PUNE · 18.5204° N</span>
         </div>
         <div className="hud-txt tr">
           <span>THREAD_STATUS: INTACT</span>

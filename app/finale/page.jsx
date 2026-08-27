@@ -26,9 +26,29 @@ export default function Finale() {
         c: cols[(Math.random() * cols.length) | 0], a: 0.5 + Math.random() * 0.5,
       }));
       let t2 = 0;
+      const FW = [];
+      const boom = () => {
+        const bx = cv.width * (0.15 + Math.random() * 0.7), by = cv.height * (0.12 + Math.random() * 0.35);
+        const col = ['#FF2E4D', '#D9A441', '#F2E8D5'][(Math.random() * 3) | 0];
+        for (let k = 0; k < 42; k++) {
+          const a = (k / 42) * 6.29, sp = 1.4 + Math.random() * 2.6;
+          FW.push({ x: bx, y: by, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, c: Math.random() < 0.8 ? col : '#fff' });
+        }
+      };
+      const boomIv = setInterval(() => { boom(); boom(); }, 1500);
+      setTimeout(boom, 900);
       (function loop() {
         t2 += 0.016;
         ctx.clearRect(0, 0, cv.width, cv.height);
+        for (const s of FW) {
+          s.x += s.vx; s.y += s.vy; s.vy += 0.045; s.vx *= 0.985; s.life -= 0.012;
+          if (s.life > 0) {
+            ctx.globalAlpha = Math.max(0, s.life); ctx.fillStyle = s.c;
+            ctx.beginPath(); ctx.arc(s.x, s.y, 1.6 + s.life * 1.8, 0, 6.29); ctx.fill();
+          }
+        }
+        for (let k = FW.length - 1; k >= 0; k--) if (FW[k].life <= 0) FW.splice(k, 1);
+        ctx.globalAlpha = 1;
         for (const p of P) {
           p.y += p.vy / 620; p.ph += 0.02;
           if (p.y > 1.05) { p.y = -0.05; p.x = Math.random(); }

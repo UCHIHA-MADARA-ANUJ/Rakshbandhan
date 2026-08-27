@@ -19,7 +19,7 @@ export default function Letter() {
         </h2>
         <div className="letter-col">
           <div className="letter-body">
-            {C.LETTER.body.map((l, i) => <p key={i}>{l}</p>)}
+            {C.LETTER.body.map((l, i) => <p key={i} style={{ animationDelay: `${0.3 + i * 0.38}s` }}>{l}</p>)}
             <p className="sign">{C.LETTER.sign}</p>
             <p className="ps">{C.LETTER.ps}</p>
           </div>
