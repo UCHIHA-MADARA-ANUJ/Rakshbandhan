@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST='{"app/page.jsx -> ./audio.js":{"id":5841,"files":["static/chunks/841.99cadbd5136a096c.js"]},"app/page.jsx -> ./eggs.js":{"id":9527,"files":["static/chunks/527.26272755d6cfde06.js"]},"app/page.jsx -> ./particles.jsx":{"id":4226,"files":[]}}';
+self.__REACT_LOADABLE_MANIFEST='{"app/chrome.jsx -> ./audio.js":{"id":5841,"files":["static/chunks/841.99cadbd5136a096c.js"]},"app/chrome.jsx -> ./particles.jsx":{"id":4226,"files":[]}}';

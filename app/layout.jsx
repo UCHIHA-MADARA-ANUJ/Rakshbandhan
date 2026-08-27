@@ -1,5 +1,6 @@
 import './globals.css';
 import localFont from 'next/font/local';
+import Chrome from './chrome.jsx';
 
 const display = localFont({
   variable: '--font-oswald',
@@ -46,7 +47,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${display.variable} ${mono.variable} ${hand.variable}`}>
-        {children}
+        <Chrome>{children}</Chrome>
       </body>
     </html>
   );

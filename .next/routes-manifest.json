@@ -33,10 +33,58 @@
       "namedRegex": "^/_not\\-found(?:/)?$"
     },
     {
+      "page": "/archive",
+      "regex": "^/archive(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/archive(?:/)?$"
+    },
+    {
+      "page": "/distance",
+      "regex": "^/distance(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/distance(?:/)?$"
+    },
+    {
+      "page": "/dossier",
+      "regex": "^/dossier(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dossier(?:/)?$"
+    },
+    {
+      "page": "/finale",
+      "regex": "^/finale(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/finale(?:/)?$"
+    },
+    {
       "page": "/icon.svg",
       "regex": "^/icon\\.svg(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/icon\\.svg(?:/)?$"
+    },
+    {
+      "page": "/letter",
+      "regex": "^/letter(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/letter(?:/)?$"
+    },
+    {
+      "page": "/ritual",
+      "regex": "^/ritual(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/ritual(?:/)?$"
+    },
+    {
+      "page": "/scanner",
+      "regex": "^/scanner(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/scanner(?:/)?$"
+    },
+    {
+      "page": "/transmission",
+      "regex": "^/transmission(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/transmission(?:/)?$"
     }
   ],
   "dataRoutes": [],

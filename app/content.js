@@ -194,3 +194,48 @@ export const ALL_SLUGS = [
   'with-soft-toy', 'again-with-soft-toy', 'grouped', 'again-grouped',
   'hand-jwellery', 'hand-smile', 'my-pfp', 'blurry', 'mystery',
 ];
+
+// ── multi-route mission map ──
+export const ROUTES = [
+  { path: '/', tag: 'SIGNAL', short: 'SIGNAL' },
+  { path: '/dossier', tag: 'DOSSIER', short: 'DOSSIER' },
+  { path: '/scanner', tag: 'SCANNER', short: 'SCANNER' },
+  { path: '/transmission', tag: 'TRANSMISSION', short: 'TX' },
+  { path: '/distance', tag: 'DISTANCE', short: 'DISTANCE' },
+  { path: '/ritual', tag: 'RITUAL', short: 'RITUAL' },
+  { path: '/letter', tag: 'LETTER', short: 'LETTER' },
+  { path: '/finale', tag: 'FINALE', short: 'FINALE' },
+];
+
+export const LANDING = {
+  kicker: 'INCOMING TRANSMISSION · 28.08.2026 · ONE RECIPIENT',
+  line1: 'SAME SKY.',
+  line2: 'ONE THREAD.',
+  sub: 'a raksha bandhan protocol · deployed from gurugram → mumbai',
+  gateTag: 'VERIFY RECIPIENT',
+  gateQ: '> WHO IS THIS FOR?',
+  placeholder: 'her codename…',
+  granted: '> RECIPIENT VERIFIED — PROCEED, DAYAN',
+  wrong: ['> NOT HER. TRY AGAIN.', '> HINT: HAUNTS MY PHONE AT 2 AM.', '> STARTS WITH D. ENDS WITH DAYAN.'],
+  fine: '> …fine. come in anyway. you are obviously her.',
+  gridTag: 'SELECT SEQUENCE',
+};
+
+export const RITUAL = {
+  tag: 'PROTOCOL 05 — THE RITUAL',
+  head: ['NOW TIE IT', 'YOURSELF.'],
+  sub: 'press and hold. the thread knows the way from here.',
+  hold: 'HOLD TO TIE',
+  releasing: 'DON\'T LET GO…',
+  tiedTitle: 'THREAD SECURED.',
+  tiedSub: 'tied by you, from 1,424 km away. no network issues. no expiry. lifetime warranty.',
+  tiedNext: 'read the letter →',
+  stamp: 'SECURED · 28.08.2026 · LIFETIME',
+  hint: 'hold the button — watch the wrist',
+};
+
+export const ARCHIVE = {
+  tag: 'CLASSIFIED ARCHIVE — DECLASSIFIED',
+  head: ['THE FULL', 'COLLECTION.'],
+  sub: 'every file my phone holds. yes, all of them. no, i will not apologize.',
+};
