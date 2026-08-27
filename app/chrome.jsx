@@ -41,7 +41,14 @@ const initAudio = async () => {
   await A.unlock();
   A.onPulse = (v) => setAudioLevel(Math.min(1, v * 1.5));
   // optional: if bhai drops a real track at public/audio/music.mp3, it replaces the plucks
-  try { if (await A.attachMusic('/audio/music.mp3')) A.startMusic(); } catch {}
+  try {
+    if (await A.attachMusic('/audio/music.mp3')) {
+      A.startMusic();
+      // iOS: if the gesture chain broke, the next tap kicks playback
+      const kick = () => { if (A.musicEl?.paused) A.startMusic(); removeEventListener('pointerdown', kick); };
+      addEventListener('pointerdown', kick);
+    }
+  } catch {}
 };
 
 export function useReveals() {
