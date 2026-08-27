@@ -1,0 +1,113 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/distance",
+      "regex": "^/distance(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/distance(?:/)?$"
+    },
+    {
+      "page": "/dossier",
+      "regex": "^/dossier(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dossier(?:/)?$"
+    },
+    {
+      "page": "/finale",
+      "regex": "^/finale(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/finale(?:/)?$"
+    },
+    {
+      "page": "/icon.svg",
+      "regex": "^/icon\\.svg(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/icon\\.svg(?:/)?$"
+    },
+    {
+      "page": "/letter",
+      "regex": "^/letter(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/letter(?:/)?$"
+    },
+    {
+      "page": "/lie",
+      "regex": "^/lie(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/lie(?:/)?$"
+    },
+    {
+      "page": "/love",
+      "regex": "^/love(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/love(?:/)?$"
+    },
+    {
+      "page": "/ritual",
+      "regex": "^/ritual(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/ritual(?:/)?$"
+    },
+    {
+      "page": "/timeline",
+      "regex": "^/timeline(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/timeline(?:/)?$"
+    },
+    {
+      "page": "/transmission",
+      "regex": "^/transmission(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/transmission(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}
