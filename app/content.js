@@ -223,5 +223,5 @@ export const LOVE = {
   deny: '(if u screenshot this i will deny everything)',
   tapHeart: 'tap the heart. i dare u.',
   heartBoom: "🤍 ok that felt good. one time only, i said.",
-  footer: '— your bhai. forever. 28.08.2026 · ek hi chand 🌙',
+  footer: '— your bhai. forever. 28.08.2026 · ek hi chand 🌙 · ♪ baarishein — anuv jain (acoustic)',
 };

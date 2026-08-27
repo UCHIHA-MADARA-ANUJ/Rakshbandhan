@@ -26,6 +26,14 @@ function Intro({ onDone }) {
 
   useEffect(() => () => { introState.active = false; }, []);
 
+  // accessibility: reduced motion = short intro, straight to the gate
+  useEffect(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const t = setTimeout(onDone, 2000);
+      return () => clearTimeout(t);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     if (now < 0) return;
     let raf;
