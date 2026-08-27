@@ -751,3 +751,19 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
 #love-box.in .love-deny{opacity:.7}
 .love-hint{margin-top:4vh;opacity:0;transition:opacity 1s 4s}
 #love-box.in .love-hint{opacity:1}
+
+/* ══ TAP TO BEGIN + WIPE LABELS ══ */
+.begin-btn{background:transparent;border:1.5px solid var(--reso);color:var(--reso);
+  font-family:var(--f-mono);font-size:clamp(.95rem,4vw,1.25rem);letter-spacing:.4em;
+  padding:20px 44px;cursor:pointer;transition:all .3s;
+  animation:beginpulse 2.2s ease-in-out infinite}
+@keyframes beginpulse{0%,100%{box-shadow:0 0 0 rgba(217,164,65,0);border-color:rgba(217,164,65,.5)}
+  50%{box-shadow:0 0 60px rgba(217,164,65,.35);border-color:var(--reso)}}
+.begin-btn:hover{background:var(--reso);color:#000}
+#intro{flex-direction:column;gap:26px}
+#wipe .wlabel{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(3rem,17vw,11rem);letter-spacing:-.02em;color:transparent;
+  -webkit-text-stroke:1.5px rgba(217,164,65,.75);opacity:0;transform:scale(1.15);
+  transition:opacity .45s .1s,transform .5s .1s}
+body.wiping #wipe .wlabel{opacity:1;transform:scale(1)}

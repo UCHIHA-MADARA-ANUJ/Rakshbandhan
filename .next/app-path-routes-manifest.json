@@ -5,11 +5,11 @@
   "/distance/page": "/distance",
   "/dossier/page": "/dossier",
   "/finale/page": "/finale",
+  "/letter/page": "/letter",
   "/love/page": "/love",
   "/page": "/",
-  "/ritual/page": "/ritual",
   "/scanner/page": "/scanner",
+  "/ritual/page": "/ritual",
   "/timeline/page": "/timeline",
-  "/transmission/page": "/transmission",
-  "/letter/page": "/letter"
+  "/transmission/page": "/transmission"
 }

@@ -117,6 +117,7 @@ void main() {
 }`;
 
 let audioLevel = 0;          // module-level — page sets it via setAudioLevel()
+export const introState = { active: false, p: 0 }; // intro film drives camera
 export function setAudioLevel(v) { audioLevel = Math.max(0, Math.min(1, v)); }
 
 function Drift() {
@@ -124,9 +125,39 @@ function Drift() {
     const t = state.clock.getElapsedTime();
     state.camera.position.x = Math.sin(t * 0.05) * 0.9;
     state.camera.position.y = Math.cos(t * 0.04) * 0.55;
+    // intro: slow dolly INTO the sky, then settle back
+    const targetZ = introState.active ? 11.6 - introState.p * 1.4 : 15;
+    state.camera.position.z += (targetZ - state.camera.position.z) * 0.018;
     state.camera.lookAt(0, 0, 0);
   });
   return null;
+}
+
+// 🌙 the one moon — rises during the intro, blooms forever
+function Moon() {
+  const ref = useRef(null);
+  useFrame((state) => {
+    const m = ref.current; if (!m) return;
+    const t = state.clock.getElapsedTime();
+    const rise = introState.active ? (1 - introState.p) * -2.6 : 0;
+    m.position.set(
+      3.4 + Math.sin(t * 0.06) * 0.25,
+      3.1 + Math.sin(t * 0.09) * 0.15 + rise,
+      -2.5
+    );
+  });
+  return (
+    <group>
+      <mesh ref={ref} position={[3.4, 3.1, -2.5]}>
+        <circleGeometry args={[0.8, 48]} />
+        <meshBasicMaterial color="#F7F0DF" transparent opacity={0.95} />
+      </mesh>
+      <mesh position={[3.75, 2.75, -2.52]}>
+        <circleGeometry args={[0.8, 48]} />
+        <meshBasicMaterial color="#05050A" transparent opacity={1} />
+      </mesh>
+    </group>
+  );
 }
 
 function Particles({ count }) {
@@ -200,7 +231,7 @@ export default function ParticleField({ count = 60000 }) {
   return (
     <div className="particle-host" aria-hidden="true">
       <Canvas camera={{ position: [0, 0, 15], fov: 45 }} dpr={[1, 1.5]} gl={{ antialias: false, powerPreference: 'high-performance' }}>
-        <><Drift /><Particles count={n} /></>
+        <><Drift /><Moon /><Particles count={n} /></>
         <EffectComposer>
           <Bloom intensity={1.4} luminanceThreshold={0.08} luminanceSmoothing={0.6} mipmapBlur radius={0.85} />
         </EffectComposer>

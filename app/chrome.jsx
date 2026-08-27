@@ -34,7 +34,7 @@ export const toast = (msg, ms = 2600) => {
   el._t = setTimeout(() => { el.style.opacity = 0; el.style.transform = 'translate(-50%,16px)'; }, ms);
 };
 
-const initAudio = async () => {
+export const initAudio = async () => {
   if (A) { if (A.ctx?.state === 'suspended') await A.ctx.resume(); return; }
   const { Baarishein } = await import('./audio.js');
   A = new Baarishein();
@@ -158,6 +158,9 @@ export default function Chrome({ children }) {
       e.preventDefault();
       if (wiped.current) return; wiped.current = true;
       A?.sfx('whoosh');
+      const r = C.ROUTES.concat([{ path: '/archive', tag: 'ARCHIVE' }]).find((x) => x.path === href);
+      const wl = document.querySelector('#wipe .wlabel');
+      if (wl && r) wl.textContent = r.tag;
       document.body.classList.add('wiping');
       setTimeout(() => {
         sessionStorage.setItem('rk_wipe', '1');
@@ -193,7 +196,7 @@ export default function Chrome({ children }) {
       <ParticleField />
       <Cursor />
 
-      <div id="wipe" aria-hidden="true"><i /></div>
+      <div id="wipe" aria-hidden="true"><span className="wlabel" /><i /></div>
 
       {menu && (
         <div id="routemenu" onClick={() => setMenu(false)}>

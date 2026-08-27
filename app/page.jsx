@@ -2,7 +2,8 @@
 import { useEffect, useRef, useState } from 'react';
 import * as C from './content.js';
 import { useReveals, getAudio } from './chrome.jsx';
-import { setAudioLevel } from './particles.jsx';
+import { setAudioLevel, introState } from './particles.jsx';
+import { initAudio } from './chrome.jsx';
 
 const DESC = {
   '/timeline': 'april 2026 to today. the whole story.',
@@ -20,23 +21,37 @@ const HOLD = 3600; // ms each line stays
 
 // ── the 30 second opening film (one line at a time, crossfade) ──
 function Intro({ onDone }) {
-  const [now, setNow] = useState(0);
-  const t0 = useRef(performance.now());
+  const [now, setNow] = useState(-1); // -1 = idle (tap to begin)
+  const t0 = useRef(0);
+
+  useEffect(() => () => { introState.active = false; }, []);
 
   useEffect(() => {
+    if (now < 0) return;
     let raf;
     const step = (t) => {
+      if (!t0.current) t0.current = t;
       const el = t - t0.current;
+      introState.active = true; introState.p = Math.min(1, el / C.INTRO.total);
       setNow(el);
       if (el < C.INTRO.total) raf = requestAnimationFrame(step);
+      else { introState.active = false; onDone(); }
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, []);
+  }, [now >= 0]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const begin = async () => {
+    if (now >= 0) return;
+    try { await initAudio(); } catch {}
+    getAudio()?.sfx('whoosh');
+    setNow(0);
+  };
+  const skip = () => { introState.active = false; onDone(); };
 
   // which line is on stage right now
   let cur = -1;
-  C.INTRO.beats.forEach((b, i) => {
+  if (now >= 0) C.INTRO.beats.forEach((b, i) => {
     if (now >= b.at && now < b.at + HOLD) cur = i;
   });
   const threadOn = cur === C.INTRO.beats.findIndex((b) => b.cls?.includes('thread'));
@@ -55,8 +70,17 @@ function Intro({ onDone }) {
         </svg>
       </div>
       <div className="intro-progress"><i /></div>
-      <button className="intro-skip" onClick={onDone}>{C.INTRO.skip}</button>
-      <p className="intro-sound hud-txt">🎧 sound on, volume low</p>
+      {now < 0 ? (
+        <>
+          <button className="begin-btn" onClick={begin}>TAP TO BEGIN</button>
+          <p className="hud-txt intro-sound">🎧 baarishein will play. volume low.</p>
+        </>
+      ) : (
+        <>
+          <button className="intro-skip" onClick={skip}>{C.INTRO.skip}</button>
+          <p className="intro-sound hud-txt">🎧 sound on, volume low</p>
+        </>
+      )}
     </div>
   );
 }
