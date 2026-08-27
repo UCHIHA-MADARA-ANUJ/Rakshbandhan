@@ -210,4 +210,29 @@ export class Baarishein {
     this.master.gain.linearRampToValueAtTime(target, this.ctx.currentTime + 0.4);
     if (this.musicEl) this.musicEl.volume = (this.muted ? 0 : 0.85) * (on ? 0.2 : 1);
   }
+
+  // ── hold-to-tie riser ──────────────────────────────
+  rise(on) {
+    if (!this.ctx || !this.master) return;
+    if (on && !this._rise) {
+      const o = this.ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = 55;
+      const f = this.ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 420; f.Q.value = 4;
+      const g = this.ctx.createGain(); g.gain.value = 0;
+      o.connect(f); f.connect(g); g.connect(this.master); o.start();
+      g.gain.linearRampToValueAtTime(0.085, this.ctx.currentTime + 0.25);
+      this._rise = { o, g, f };
+    } else if (!on && this._rise) {
+      const { o, g } = this._rise;
+      g.gain.cancelScheduledValues(this.ctx.currentTime);
+      g.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.25);
+      setTimeout(() => { try { o.stop(); } catch {} }, 380);
+      this._rise = null;
+    }
+  }
+  risePitch(p) {
+    if (this._rise) {
+      this._rise.o.frequency.setTargetAtTime(55 + p * 260, this.ctx.currentTime, 0.05);
+      this._rise.f.frequency.setTargetAtTime(420 + p * 2200, this.ctx.currentTime, 0.05);
+    }
+  }
 }

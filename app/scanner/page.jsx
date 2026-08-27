@@ -1,16 +1,37 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as C from '../content.js';
 import { useReveals, getAudio } from '../chrome.jsx';
 
 export default function Scanner() {
   const [mood, setMood] = useState(0);
+  const [pct, setPct] = useState(0);
+  const touched = useRef(false);
   useReveals();
+
+  // auto-scan until she grabs it
+  useEffect(() => {
+    const iv = setInterval(() => {
+      if (touched.current) { clearInterval(iv); return; }
+      setMood((m) => (m + 1) % C.SCAN.moods.length);
+    }, 1700);
+    return () => clearInterval(iv);
+  }, []);
+  useEffect(() => {
+    const t0 = performance.now();
+    const step = (t) => {
+      const p = Math.min(1, (t - t0) / 3000);
+      setPct(Math.round((1 - Math.pow(1 - p, 2)) * (88 + Math.random() * 10)));
+      if (p < 1) requestAnimationFrame(step); else setPct(100);
+    };
+    const raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   const moodDrag = (() => {
     let sx = null, acc = 0;
     return {
-      down: (e) => { sx = e.clientX; acc = 0; try { e.currentTarget.setPointerCapture(e.pointerId); } catch {} },
+      down: (e) => { touched.current = true; sx = e.clientX; acc = 0; try { e.currentTarget.setPointerCapture(e.pointerId); } catch {} },
       move: (e) => {
         if (sx == null) return;
         acc += e.clientX - sx; sx = e.clientX;
@@ -35,6 +56,10 @@ export default function Scanner() {
         </h2>
       </div>
       <div className="scanner">
+        <div className="scan-topline">
+          <span className="hud-txt">SUBJECT_LOCK: {(pct)}%</span>
+          <span className="hud-txt gold">CAM_01 · LIVE</span>
+        </div>
         <div className="mood-stack"
           onPointerDown={moodDrag.down} onPointerMove={moodDrag.move}
           onPointerUp={moodDrag.up} onPointerCancel={moodDrag.up}>
@@ -44,6 +69,7 @@ export default function Scanner() {
           ))}
           <i className="scan-beam" />
           <i className="scan-grid" />
+          <i className="scan-corners" />
         </div>
         <div className="mood-label hud-txt">{C.SCAN.moods[mood]?.label}</div>
         <div className="verdict hud-txt gold">{C.SCAN.verdict}</div>

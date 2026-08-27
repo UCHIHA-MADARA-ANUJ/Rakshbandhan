@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import * as C from '../content.js';
-import { getAudio } from '../chrome.jsx';
+import { getAudio, toast } from '../chrome.jsx';
 import { setAudioLevel } from '../particles.jsx';
 
 export default function Finale() {
@@ -15,7 +15,6 @@ export default function Finale() {
       document.getElementById('finale-box')?.classList.add('in');
       getAudio()?.sfx('whoosh');
       setAudioLevel(1);
-      // petals
       const cv = petalsRef.current; if (!cv) return;
       const ctx = cv.getContext('2d');
       const fit = () => { cv.width = cv.offsetWidth; cv.height = cv.offsetHeight; };
@@ -45,6 +44,11 @@ export default function Finale() {
     }, 500);
     return () => clearTimeout(t);
   }, []);
+
+  const copyReply = async () => {
+    try { await navigator.clipboard.writeText(C.FINALE_REPLY); toast('copied. now paste it to bhai 🖤'); }
+    catch { toast('copy blocked — screenshot it 😅'); }
+  };
 
   const openCert = async () => {
     setCert(true);
@@ -103,8 +107,12 @@ export default function Finale() {
         <div id="finale-box">
           <div className="moon-final" data-moon />
           <p className="hud-txt gold kicker">{C.FINALE.kicker}</p>
-          <h1 className="giant lg">
-            {C.FINALE.title.map((t, i) => <span key={i} className="fout">{t}</span>)}
+          <h1 className="giant lg fin-title">
+            {C.FINALE.title.map((word, w) => (
+              <span className="fword" key={w}>
+                {[...word].map((ch, i) => <b key={i} style={{ transitionDelay: `${0.7 + w * 0.5 + i * 0.06}s` }}>{ch}</b>)}
+              </span>
+            ))}
           </h1>
           <div className="fin-name">{C.FINALE.name}</div>
           <p className="fin-credit">{C.FINALE.credit[0]}<br /><span className="dim2">{C.FINALE.credit[1]}</span></p>
@@ -113,6 +121,7 @@ export default function Finale() {
             <button className="fbtn" onClick={openCert} {...mag}>{C.FINALE.cert}</button>
             <a className="fbtn" href="#" target="_blank" rel="noopener" {...mag}>{C.FINALE.reply}</a>
           </div>
+          <button className="copy-reply" onClick={copyReply}>or tap to copy your reply 📋</button>
         </div>
         <footer className="hud-txt fin-footer">{C.FINALE.footer}</footer>
       </section>

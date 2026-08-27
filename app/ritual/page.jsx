@@ -19,23 +19,32 @@ export default function Ritual() {
       const dt = Math.min(0.05, (t - last) / 1000); last = t;
       if (!tiedRef.current) {
         progRef.current = holdRef.current
-          ? Math.min(100, progRef.current + dt * 33)
-          : Math.max(0, progRef.current - dt * 24);
+          ? Math.min(100, progRef.current + dt * 30)
+          : Math.max(0, progRef.current - dt * 26);
         if (progRef.current >= 100) {
           tiedRef.current = true; setTied(true);
-          getAudio()?.sfx('stamp');
-          getAudio()?.sfx('whoosh');
+          const a = getAudio();
+          a?.rise(false);
+          a?.sfx('stamp'); a?.sfx('whoosh');
           setAudioLevel(1);
-          setTimeout(() => setAudioLevel(0.75), 900);
-          try { navigator.vibrate?.([40, 60, 90]); } catch {}
+          setTimeout(() => setAudioLevel(0.8), 1200);
+          try { navigator.vibrate?.([50, 60, 120]); } catch {}
+          document.body.classList.add('shake');
+          setTimeout(() => document.body.classList.remove('shake'), 600);
         }
         setProg(progRef.current);
+        getAudio()?.risePitch(progRef.current / 100);
       }
       raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
+    return () => { cancelAnimationFrame(raf); getAudio()?.rise(false); };
   }, []);
+
+  const setHold = (on) => {
+    holdRef.current = on; setHolding(on);
+    getAudio()?.rise(on);
+  };
 
   const wrapP = (i) => Math.max(0, Math.min(1, (prog - i * 30) / 26));
   const medal = tied || prog > 88;
@@ -74,10 +83,10 @@ export default function Ritual() {
         <div className="hold-zone">
           <button
             className={`hold-btn ${holding && !tied ? 'holding' : ''} ${tied ? 'done' : ''}`}
-            onPointerDown={(e) => { e.preventDefault(); holdRef.current = true; setHolding(true); }}
-            onPointerUp={() => { holdRef.current = false; setHolding(false); }}
-            onPointerLeave={() => { holdRef.current = false; setHolding(false); }}
-            onPointerCancel={() => { holdRef.current = false; setHolding(false); }}
+            onPointerDown={(e) => { e.preventDefault(); setHold(true); }}
+            onPointerUp={() => setHold(false)}
+            onPointerLeave={() => setHold(false)}
+            onPointerCancel={() => setHold(false)}
             onContextMenu={(e) => e.preventDefault()}
           >
             <svg className="hring" viewBox="0 0 120 120">

@@ -239,3 +239,12 @@ export const ARCHIVE = {
   head: ['THE FULL', 'COLLECTION.'],
   sub: 'every file my phone holds. yes, all of them. no, i will not apologize.',
 };
+
+export const VEIL = {
+  small: 'RAKHI.PROTOCOL_v2.8 — ENCRYPTED TRANSMISSION',
+  big: 'FOR DIDI. ONLY.',
+  enter: 'TAP TO OPEN — SOUND ON 🎧',
+  note: 'headphones strongly advised. this was built at 2 AM.',
+};
+
+export const FINALE_REPLY = "i saw it. ALL of it.\nthe dayan file? the scanner? THE CERTIFICATE? 😭\nhappy raksha bandhan, bhai. you're insane. thank you for all of this.";
