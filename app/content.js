@@ -143,18 +143,18 @@ export const RITUAL = {
 };
 
 export const TIMELINE = {
-  tag: 'SYSTEM LOG \u00b7 2026 \u00b7 LIVE',
+  tag: 'SYSTEM LOG \u00b7 PARTIAL RECOVERY',
   head: ['HOW IT', 'HAPPENED.'],
-  sub: 'four months. zero blood. full siblings. pulled from the records.',
+  sub: "four months. zero blood. full siblings. exact dates: forgotten. the log is honest about it.",
   entries: [
-    { d: 'APR 01', t: 'NEW PERSON DETECTED', l: 'appeared out of nowhere. refused to leave. respectfully.' },
-    { d: 'APR 14', t: 'FIRST ROAST RECEIVED', l: 'damage: moderate. recovery: never completed.' },
-    { d: 'MAY 09', t: 'TEASING MODE: ENABLED', l: 'has not been switched off since. will not be.' },
-    { d: 'JUN 21', t: 'CALL FREQUENCY: HIGH', l: 'she talks. i listen. best deal i ever made.' },
-    { d: 'JUL 17', t: 'GALLERY TAKEOVER: 40%', l: 'my wallpaper too. no i will not apologize.' },
-    { d: 'AUG 28', t: 'PROTOCOL: RAKHI', l: 'thread tied from 1,450 km away. system status: family.' },
+    { d: 'APRIL 2026', t: 'NEW PERSON DETECTED', l: 'this one i remember. she appeared and refused to leave. respectfully.' },
+    { d: 'DATE: NOT RECORDED', t: 'FIRST ROAST RECEIVED', l: 'early days. damage: moderate. recovery: never completed.' },
+    { d: 'SOMETIME AFTER THAT', t: 'TEASING MODE: ENABLED', l: 'nobody knows the exact day. it never switched off. that is the record.' },
+    { d: 'PROBABLY JUNE?', t: 'CALLS BECAME A THING', l: 'regular. normal hours. she sleeps early. i do not.' },
+    { d: 'IDK WHEN', t: 'GALLERY TAKEOVER: 40%', l: 'also my wallpaper. gradual. unstoppable. no regrets.' },
+    { d: 'TODAY \u00b7 28.08', t: 'PROTOCOL: RAKHI', l: 'thread tied from 1,450 km away. system status: family.' },
   ],
-  tail: '\u2014 log continues. forever, apparently \u2014',
+  tail: '\u2014 rest of the log: corrupted. feelings: intact \u2014',
 };
 
 export const LETTER = {
