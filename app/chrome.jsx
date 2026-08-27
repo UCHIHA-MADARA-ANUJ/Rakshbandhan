@@ -40,6 +40,8 @@ const initAudio = async () => {
   A = new Baarishein();
   await A.unlock();
   A.onPulse = (v) => setAudioLevel(Math.min(1, v * 1.5));
+  // optional: if bhai drops a real track at public/audio/music.mp3, it replaces the plucks
+  try { if (await A.attachMusic('/audio/music.mp3')) A.startMusic(); } catch {}
 };
 
 export function useReveals() {
