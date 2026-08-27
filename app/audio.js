@@ -127,6 +127,10 @@ export class Baarishein {
     burst.connect(delay); delay.connect(lp); lp.connect(fb); fb.connect(delay);
     delay.connect(out); out.connect(this.master);
     burst.start(when);
+    if (this.onPulse) {
+      const delay = Math.max(0, (when - this.ctx.currentTime) * 1000);
+      setTimeout(() => { try { this.onPulse(vel); } catch {} }, delay);
+    }
   }
 
   // ── scheduler: arpeggio at 72bpm, density by energy ─

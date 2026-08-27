@@ -5,6 +5,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import * as C from './content.js';
+import { initStarfield, burstField, initCursor, scramble, initTilt, initSkew, magnetize } from './fx.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -53,6 +54,18 @@ export function render() {
   // act4 stats
   $('#stats').innerHTML = C.ACT4.stats.map(s => `<span>${s}</span>`).join('');
 
+  // text fills (position-based, port-safe)
+  const tl = $$('#turn .turn-lines .big-line');
+  if (tl[0]) tl[0].textContent = C.ACT3.turnLines[0];
+  if (tl[1]) tl[1].textContent = C.ACT3.turnLines[1];
+  const th = $$('.thesis .big-line');
+  if (th[0]) th[0].textContent = C.ACT4.thesis[0];
+  if (th[1]) th[1].textContent = C.ACT4.thesis[1];
+  const hl = $$('#hand-wrap .big-line');
+  if (hl[0]) hl[0].textContent = C.ACT5.lines[0];
+  if (hl[1]) hl[1].textContent = C.ACT5.lines[1];
+  const ek = $('.end-kicker'); if (ek) ek.textContent = C.ACT6.end.kicker;
+
   // act5 hand
   $('#hand-img').src = C.PHOTOS(C.ACT5.handSlug);
   $('#hand-img').alt = C.ACT5.handAlt;
@@ -87,6 +100,23 @@ export function render() {
 export function initStory() {
   history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
+
+  // ── FX: alive layer ──
+  initStarfield();
+  initCursor();
+  initTilt();
+  initSkew('#exhibits');
+  if (audio) audio.onPulse = (v) => {
+    burstField(v);
+    if (v >= 0.3) {
+      document.querySelectorAll('[data-moon]').forEach((m) => {
+        m.classList.add('beat'); setTimeout(() => m.classList.remove('beat'), 130);
+      });
+      const tc = $('#thread-curve');
+      if (tc) { tc.classList.add('beat'); setTimeout(() => tc.classList.remove('beat'), 150); }
+    }
+  };
+  $$('.mono-tag, .wanted-head, .wanted-foot, .scene-caption, .city-name').forEach((el) => scramble(el, 22));
 
   // thread progress (always)
   const bar = $('#threadbar');
@@ -133,6 +163,16 @@ export function initStory() {
     label.textContent = C.ACT2.moods[mi].label;
   };
   setMood(0);
+  // drag-to-scrub the mood wall
+  const stack = $('#mood-stack');
+  let sx = null, acc = 0;
+  stack.addEventListener('pointerdown', (e) => { sx = e.clientX; acc = 0; try { stack.setPointerCapture(e.pointerId); } catch {} });
+  stack.addEventListener('pointermove', (e) => {
+    if (sx == null) return;
+    acc += e.clientX - sx; sx = e.clientX;
+    while (Math.abs(acc) > 44) { setMood(mi + (acc > 0 ? 1 : -1)); acc = 0; }
+  });
+  ['pointerup', 'pointercancel'].forEach((ev) => stack.addEventListener(ev, () => { sx = null; }));
   if (hasGSAP) {
     const wall = $('#moods');
     const spacer = document.createElement('div');
@@ -214,6 +254,8 @@ export function initStory() {
   io(t => {
     t.classList.add('in');
     audio?.setEnergy(1);
+    scramble($('.end-kicker'), 30);
+    magnetize($$('.end-btn'));
     startPetals();
   }, { threshold: 0.4 }).observe($('#end'));
 

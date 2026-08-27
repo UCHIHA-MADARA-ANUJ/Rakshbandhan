@@ -1,128 +1,127 @@
-// ⭐ BHAJI — YE EK FILE MEIN SAB LIKHA HAI. yahan badlo, site badlegi.
-// (voice note: public/audio/voice.m4a · photos: public/assets/photos/<slug>.webp)
+// ⭐ ALL WORDS LIVE HERE — edit this file, site changes. (photos: public/assets/photos/<slug>.webp)
 
 export const PHOTOS = (s) => `assets/photos/${s}.webp`;
 
 export const PRELOADER = {
   lines: [
-    { t: 'yeh website nahi hai.', cls: '' },
-    { t: 'ye reply hai.', cls: '' },
+    { t: 'this is not a website.', cls: '' },
+    { t: "it's a reply.", cls: '' },
     { t: '28 · 08 · 2026', cls: 'mono' },
   ],
-  enter: 'andar aao',
-  hint: '🔊 sound on — headphones better',
+  enter: 'initialize',
+  hint: '🔊 sound required — headphones recommended',
 };
 
 export const GATE = {
-  question: 'kaun ho tum?',
-  placeholder: 'jo bhai bulata hai',
-  wrong: ['nahi.', 'hint: raat 2 baje kaun yaad aata hai?', 'D se shuru. dayan.'],
+  question: 'who are you?',
+  placeholder: 'what he calls you',
+  wrong: ['no.', 'hint: who haunts my phone at 2 AM?', 'starts with D. ends with dayan.'],
   accept: {
     dayan:   { keys: ['dayan', 'dayaan', 'dayn'], resp: '', stamp: true },
-    chudail: { keys: ['chudail', 'witch'], resp: 'theek hai. khud bola. andar aa jao.', stamp: true },
-    dii:     { keys: ['diii', 'didi', 'di'], resp: 'diii 🌙 andar aa jao.', stamp: false },
-    real:    { keys: ['mital', 'mitu', 'mintu'], resp: 'formal naam yahan nahi chalega. yahan tum dayan ho.', stamp: true },
-    eyiz:    { keys: ['eyiz', 'eyez', 'eyis'], resp: 'eyiz 🥹 andar.', stamp: false },
+    chudail: { keys: ['chudail', 'witch'], resp: 'you said it yourself. come in.', stamp: true },
+    dii:     { keys: ['diii', 'didi', 'di'], resp: 'diii 🌙 come in.', stamp: false },
+    real:    { keys: ['mital', 'mitu', 'mintu'], resp: 'real name has no power here. here, you are dayan.', stamp: true },
+    eyiz:    { keys: ['eyiz', 'eyez', 'eyis'], resp: 'eyiz 🥹 come in.', stamp: false },
   },
-  grantedLine: 'aaja.',
+  grantedLine: 'enter.',
 };
 
 export const ACT1 = {
   caption: '28 august · gurugram · 2:22 am',
   wanted: {
-    meta: '18 · mumbai · khatra level: didi',
+    meta: '18 · mumbai · threat level: didi',
     charges: [
-      'bhai ko roz pagal banaana — 100% success rate',
-      'raat 2 baje call karna — chronic',
-      'gusse mein bhi pyaari lag jaana — unfair',
-      'pankha saaf karti hue pakdi gayi (rare)',
+      'driving her brother insane — daily, 100% success rate',
+      'calling at 2 AM like a ghost with a phone plan',
+      'looking cute while angry — clearly unfair tactics',
+      'spotted cleaning a fan once (rare footage)',
     ],
-    foot: 'evidence neeche hai. scroll.',
+    foot: 'evidence below. scroll.',
   },
 };
 
 export const ACT2 = {
-  head: ['dayan ki file', 'kholdi gayi.'],
+  head: ['the dayan files', 'now open.'],
   exhibits: [
-    { slug: 'alien',         tag: 'EXHIBIT A', cap: 'real roop. proof.' },
-    { slug: 'funny-face',    tag: 'EXHIBIT B', cap: '"maine kya kiya?" — har baar yehi' },
-    { slug: 'teasing',       tag: 'EXHIBIT C', cap: 'asli kaam: teasing' },
-    { slug: 'pankha',        tag: 'EXHIBIT D', cap: 'RARE — dayan working' },
-    { slug: 'dayumm',        tag: 'EXHIBIT E', cap: 'khud se impressed. valid.' },
-    { slug: 'mirror-selfie', tag: 'EXHIBIT F', cap: 'mumbai · 2:22 am' },
-    { slug: 'style',         tag: 'EXHIBIT G', cap: 'main character' },
+    { slug: 'alien',         tag: 'EXHIBIT A', cap: 'true form. caught on camera.' },
+    { slug: 'funny-face',    tag: 'EXHIBIT B', cap: '"what did I do?" — every single time' },
+    { slug: 'teasing',       tag: 'EXHIBIT C', cap: 'occupation: teasing' },
+    { slug: 'pankha',        tag: 'EXHIBIT D', cap: 'RARE — dayan actually working' },
+    { slug: 'dayumm',        tag: 'EXHIBIT E', cap: 'impressed herself. honestly, valid.' },
+    { slug: 'mirror-selfie', tag: 'EXHIBIT F', cap: 'mumbai mirror · 2:22 am' },
+    { slug: 'style',         tag: 'EXHIBIT G', cap: 'main character energy' },
   ],
   moodLabel: 'MOOD INDEX — v4.2',
   moods: [
     { slug: 'eyes',          label: 'analyzing…' },
     { slug: 'eyiz-smile',    label: 'eyiz + smile — rare combo' },
     { slug: 'eyiz-nose',     label: 'eyiz + nose — anatomy ch. 2' },
-    { slug: 'edited-eyes',   label: 'self-edit skills: okayish' },
-    { slug: 'straight-eyes', label: 'direct eye contact — very rare' },
+    { slug: 'edited-eyes',   label: 'self-edited. skills: mid.' },
+    { slug: 'straight-eyes', label: 'direct eye contact — ultra rare' },
     { slug: 'left-side',     label: 'angle #47' },
     { slug: 'smile',         label: 'save this one' },
     { slug: 'full-face',     label: 'full power' },
-    { slug: 'normal',        label: '"normal" — needs citation' },
+    { slug: 'normal',        label: '"normal" — citation needed' },
     { slug: 'idk',           label: 'idk × 1000' },
-    { slug: 'blushing',      label: 'sharma gayi — ab asli story' },
+    { slug: 'blushing',      label: 'shy mode — real story starts here' },
   ],
-  moodFoot: ['real photos. bhai ka phone bhar rakha hai.', 'scroll karo — dayan react karegi.'],
+  moodFoot: ['yes, real photos. my phone is full of these.', 'scroll or drag — she reacts.'],
 };
 
 export const ACT3 = {
-  head: ['mera phone', 'yaadon ka godown hai.'],
+  head: ['my phone is', 'a museum of her.'],
   phone: [
     { slug: 'insta-pfp',      label: 'insta', big: false },
     { slug: 'wa-pfp',         label: 'whatsapp', big: false },
     { slug: 'lock-screen',    label: 'lock screen', big: false },
     { slug: 'phone-wallpaper',label: 'wallpaper', big: false },
-    { slug: 'my-wallpaper',   label: 'bhai ka wallpaper', big: false },
+    { slug: 'my-wallpaper',   label: 'my wallpaper', big: false },
     { slug: 'wallpaper',      label: 'backup', big: false },
     { slug: 'randomly-received', label: '2 AM FILE — mumbai', big: true },
     { slug: 'rendem-again',   label: '"rendem" series', big: false },
   ],
-  phoneCap: 'sab kuch tumhara hai. wallpapers tak.',
-  // ⚠️ BHAJI: asli birthday messages yahan daal (side: 'her' | 'me')
-  chatMeta: 'birthday wala din',
+  phoneCap: "everything's hers. even the wallpapers.",
+  // ⚠️ BHAJI: real birthday messages go here (side: 'her' | 'me') — English or Hinglish, as she wrote it
+  chatMeta: 'the birthday',
   chat: [
     { side: 'her', text: 'HAPPY BIRTHDAY BHAI 🎂', time: '00:02' },
     { side: 'her', text: 'i love you yaar' },
     { side: 'her', text: 'god bless. always smiling, ok?' },
   ],
-  turnLines: ['aisi cheezein tum sirf mujhe likhti ho.', 'isliye ye bana.'],
+  turnLines: ["she only writes like this when nobody's watching.", 'so I built this.'],
 };
 
 export const ACT4 = {
-  stats: ['<b>APR 2026</b> — start', '<b>2</b> sheher', '<b>1</b> chand', '<b>~1,400</b> km', '<b>1</b> dayan'],
-  thesis: ['doori ne humein toota nahi.', 'rakhi ka thread lamba kar diya. bas.'],
+  stats: ['<b>APR 2026</b> — where it started', '<b>2</b> cities', '<b>1</b> moon', '<b>~1,400</b> km', '<b>1</b> dayan'],
+  thesis: ['the distance never broke us.', 'it just made the thread longer.'],
   kmMax: 1424,
 };
 
 export const ACT5 = {
   handSlug: 'hand-jwellery',
   handAlt: 'diii ka haath — rakhi yahan',
-  lines: ['thread ab wrist pe hai.', 'network issue nahi hota isme.'],
+  lines: ['the thread is on your wrist now.', 'no network issues in this one.'],
   dateStamp: '28 · 08 · 2026',
 };
 
 export const ACT6 = {
   letter: [
     'Diii,',
-    'likh raha hoon, kyunki bolte hue ruk jaata hoon.',
-    'april 2026. tum aayi thi random. ab sabse important ho.',
-    'khoon ka rishta nahi hai humaara — wahi best part hai. ye humne choose kiya. aur main roz phir choose karunga.',
-    'birthday wala message screenshot ke saath rakha hai. kabhi kabhi padh leta hoon.',
-    'mumbai door hai. par chand ek hi hai na? wahi dekh lena. main bhi dekh raha hoon.',
+    'writing this because I stop halfway every time I try to say it out loud.',
+    'april 2026. you appeared out of nowhere. now you matter more than most things that were always here.',
+    "there's no blood between us — and that's the best part. we chose this. every single day, I'd choose it again.",
+    'I still have the screenshot of your birthday message. I re-read it sometimes.',
+    "mumbai is far. but it's the same moon up there, right? look up tonight — I'm looking too.",
     'happy raksha bandhan, dayan.',
   ],
-  sign: '— tumhara bhai (15, gurugram)',
-  ps: 'P.S. bada hoke bhi roast karunga. taiyaar rehna.',
+  sign: '— your brother (15, gurugram)',
+  ps: 'P.S. the roasting never stops. stay ready.',
   end: {
-    kicker: 'bol hi dete hain',
+    kicker: 'say it properly, finally —',
     title: ['HAPPY', 'RAKSHA', 'BANDHAN'],
     name: 'Diii 🌙',
-    credit: ['— tumhara 15-saal ka bhai', 'raat 2 baje bana tha. yaad rakhna.'],
-    // TODO(bhai): number bhar — tel:+91XXXXXXXXXX aur https://wa.me/91XXXXXXXXXX
+    credit: ['— your 15-year-old brother', 'built at 2 AM. remember that.'],
+    // TODO(bhai): your number — tel:+91XXXXXXXXXX and https://wa.me/91XXXXXXXXXX
     callHref: 'tel:',
     replyHref: 'https://wa.me/',
   },
@@ -140,7 +139,7 @@ export const ACT6 = {
       'unlimited roast insurance',
       '2 AM call rights — forever',
     ],
-    sign: '— tumhara bhai',
+    sign: '— your brother',
     footer: '28.08.2026 · valid: permanently · ek hi chand',
   },
 };

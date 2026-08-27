@@ -152,7 +152,7 @@ section{position:relative}
 .polaroid .pol-cap b{color:var(--thread)}
 .polaroid .pol-time{position:absolute;bottom:34px;right:16px;color:#6d6a80;font-family:var(--f-mono);font-size:.6rem}
 .moodwall{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:3vh;background:radial-gradient(120% 90% at 50% 110%, #10101d 0%, var(--night) 60%)}
+  align-items:center;justify-content:center;gap:3vh;background:radial-gradient(120% 90% at 50% 110%, rgba(16,16,29,.72) 0%, rgba(6,6,11,.25) 60%)}
 .mood-head{position:absolute;top:calc(18px + env(safe-area-inset-top))}
 .mood-stack{position:relative;width:min(78vw,380px);aspect-ratio:4/5}
 .mood-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
@@ -194,7 +194,7 @@ section{position:relative}
 .turn-lines .big-line.in{opacity:1;transform:none;filter:blur(0)}
 
 /* ── ACT IV — cities ───────────────────────────────── */
-.cities-wrap{background:linear-gradient(180deg,var(--night) 0%,#0a0a14 50%,var(--night) 100%)}
+.cities-wrap{background:linear-gradient(180deg,rgba(6,6,11,0) 0%,rgba(10,10,20,.5) 50%,rgba(6,6,11,0) 100%)}
 .cities{position:absolute;inset:0}
 .city{position:absolute;width:100vw;height:44vh}
 .city-ggm{top:0}.city-ggm .skyline{top:0;bottom:auto;transform:scaleY(-1)}
@@ -264,7 +264,7 @@ section{position:relative}
 .voice-btn.playing{background:var(--gold);color:var(--night)}
 .end{min-height:100vh;position:sticky;top:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;text-align:center;gap:2.4vh;padding:12vh 24px 8vh;overflow:hidden;
-  background:radial-gradient(130% 100% at 50% 115%, #141426 0%, var(--night) 55%)}
+  background:radial-gradient(130% 100% at 50% 115%, rgba(20,20,38,.75) 0%, rgba(6,6,11,.35) 55%)}
 #petals{position:absolute;inset:0;pointer-events:none}
 .end > *:not(canvas){position:relative;z-index:1}
 .moon-final{position:relative;width:min(30vw,130px);height:min(30vw,130px);margin-bottom:2vh;
@@ -328,3 +328,24 @@ body.halloween .moon{background:radial-gradient(circle at 34% 30%,#fff4e0,#ffb35
   *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
   html{scroll-behavior:auto}
 }
+
+/* ══ FX LAYER — starfield, cursor, ripples, beats ══ */
+#fx-stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+#story{position:relative;z-index:1}
+.fine-cursor, .fine-cursor *{cursor:none}
+#cur{position:fixed;top:-5px;left:-5px;width:10px;height:10px;border-radius:50%;
+  background:var(--moon);z-index:99;pointer-events:none;mix-blend-mode:difference}
+#curg{position:fixed;top:-19px;left:-19px;width:38px;height:38px;border-radius:50%;
+  border:1.5px solid rgba(217,164,65,.85);z-index:99;pointer-events:none;
+  transition:width .25s,height .25s,top .25s,left .25s,border-color .25s}
+#curg.big{width:64px;height:64px;top:-32px;left:-32px;border-color:var(--gold)}
+.ripple{position:fixed;width:70px;height:70px;margin:-35px 0 0 -35px;border-radius:50%;
+  border:2px solid var(--gold);z-index:98;pointer-events:none;animation:rip .7s ease-out forwards}
+@keyframes rip{from{opacity:.9;transform:scale(.15)}to{opacity:0;transform:scale(1)}}
+.moon{transition:filter .13s ease}
+.moon.beat{filter:brightness(1.5) drop-shadow(0 0 26px rgba(242,232,213,.55))}
+#thread-curve{transition:stroke-width .14s}
+#thread-curve.beat{stroke-width:2.2;filter:drop-shadow(0 0 12px rgba(217,164,65,.95))}
+.mood-stack{touch-action:pan-y}
+.fine-cursor .mood-stack{cursor:grab}
+.mood-stack:active{cursor:grabbing}
