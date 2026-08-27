@@ -1,0 +1,11 @@
+🎵 BHAI: Baarishein mp3 yahan daalo, is exact naam se:
+
+    public/audio/music.mp3
+
+(ya GitHub ke pics/ folder mein music.mp3 — dono auto-detect hote hain)
+
+Site khud detect karegi:
+- song low volume (0.3) pe loop hogi — hamesha
+- synth guitar plucks band ho jayenge
+- halki rain ambience rahegi (song rain ke baare mein hai, duh)
+- volume badalna ho: app/audio.js -> "musicVol = 0.3" wali line

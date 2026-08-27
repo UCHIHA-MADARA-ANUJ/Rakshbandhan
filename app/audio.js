@@ -13,6 +13,7 @@ export class Baarishein {
     this.step = 0;
     this.timer = null;
     this.musicEl = null;      // optional mp3 override
+    this.musicVol = 0.3;      // 🎵 bg song volume (0.3 = low). bhai: change here.
     // gentle, Baarishein-coded progression (Maj7 family, ~72bpm)
     this.prog = [
       { root: 'C3',  chord: ['C3','G3','B3','E4'] },
@@ -54,7 +55,7 @@ export class Baarishein {
   setMuted(m) {
     this.muted = m; localStorage.setItem('rk_mute', m ? '1' : '0');
     if (this.master) this.master.gain.linearRampToValueAtTime(m ? 0 : 1, this.ctx.currentTime + 0.3);
-    if (this.musicEl) this.musicEl.volume = m ? 0 : 0.85;
+    if (this.musicEl) this.musicEl.volume = m ? 0 : this.musicVol;
   }
 
   // ── rain: filtered noise, two layers ──────────────
@@ -137,9 +138,15 @@ export class Baarishein {
   schedule() {
     if (!this.started) return;
     this.energy += (this.targetEnergy - this.energy) * 0.04;
+    if (this.musicEl) {
+      // real song mode: synth pad OFF (key clash), rain stays as faint atmosphere
+      if (this.padGain) this.padGain.gain.setTargetAtTime(0, this.ctx.currentTime, 1.2);
+      if (this.rainBase) this.rainBase.gain.setTargetAtTime(0.02, this.ctx.currentTime, 2);
+      return; // plucks off — anuv has the stage
+    }
     if (this.padGain) this.padGain.gain.setTargetAtTime(0.028 * this.energy, this.ctx.currentTime, 1.2);
     if (this.rainBase) this.rainBase.gain.setTargetAtTime(0.045 + 0.02 * this.energy, this.ctx.currentTime, 2);
-    if (this.musicEl || this.energy < 0.08) return;
+    if (this.energy < 0.08) return;
     const beat = 60 / 72;
     while (this.nextT < this.ctx.currentTime + 0.6) {
       const t = this.nextT;
@@ -167,7 +174,7 @@ export class Baarishein {
       const r = await fetch(url, { method: 'HEAD' });
       if (!r.ok) return false;
       this.musicEl = new Audio(url);
-      this.musicEl.loop = true; this.musicEl.volume = this.muted ? 0 : 0.85;
+      this.musicEl.loop = true; this.musicEl.volume = this.muted ? 0 : this.musicVol;
       return true;
     } catch { return false; }
   }
@@ -208,7 +215,7 @@ export class Baarishein {
     if (!this.master || this.musicEl) return;
     const target = (this.muted ? 0 : 1) * (on ? 0.25 : 1);
     this.master.gain.linearRampToValueAtTime(target, this.ctx.currentTime + 0.4);
-    if (this.musicEl) this.musicEl.volume = (this.muted ? 0 : 0.85) * (on ? 0.2 : 1);
+    if (this.musicEl) this.musicEl.volume = (this.muted ? 0 : this.musicVol) * (on ? 0.2 : 1);
   }
 
   // ── hold-to-tie riser ──────────────────────────────
