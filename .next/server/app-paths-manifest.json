@@ -6,6 +6,7 @@
   "/dossier/page": "app/dossier/page.js",
   "/finale/page": "app/finale/page.js",
   "/letter/page": "app/letter/page.js",
+  "/love/page": "app/love/page.js",
   "/page": "app/page.js",
   "/ritual/page": "app/ritual/page.js",
   "/scanner/page": "app/scanner/page.js",

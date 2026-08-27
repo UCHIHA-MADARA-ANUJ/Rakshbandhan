@@ -13,6 +13,7 @@ const DESC = {
   '/ritual': 'tie the rakhi yourself. hold the button.',
   '/letter': 'the part i cannot say out loud',
   '/finale': 'the ending. obviously.',
+  '/love': 'ok. one time only. look quick. ❤️',
 };
 
 // ── the 30 second opening film ──

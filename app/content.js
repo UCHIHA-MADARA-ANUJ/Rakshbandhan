@@ -12,6 +12,7 @@ export const ROUTES = [
   { path: '/ritual', tag: 'RITUAL', short: 'RITUAL' },
   { path: '/letter', tag: 'LETTER', short: 'LETTER' },
   { path: '/finale', tag: 'FINALE', short: 'FINALE' },
+  { path: '/love', tag: 'I LOVE YOU', short: 'ILY ❤️' },
 ];
 
 export const INTRO = {
@@ -234,3 +235,14 @@ export const ALL_SLUGS = [
   'with-soft-toy', 'again-with-soft-toy', 'grouped', 'again-grouped',
   'hand-jwellery', 'hand-smile', 'my-pfp', 'blurry', 'mystery',
 ];
+
+export const LOVE = {
+  kicker: 'one last thing. then u can roast me forever —',
+  words: ['I LOVE', 'YOU'],
+  name: 'DIDI 🌙🤍',
+  said: "ok. i said it. one time only. don't make it weird.",
+  deny: '(if u screenshot this i will deny everything)',
+  tapHeart: 'tap the heart. i dare u.',
+  heartBoom: "🤍 ok that felt good. one time only, i said.",
+  footer: '— your bhai. forever. 28.08.2026 · ek hi chand 🌙',
+};

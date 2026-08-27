@@ -721,3 +721,30 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
 .threat-val{font-family:var(--f-display);font-weight:700;text-transform:uppercase;color:var(--shock);
   font-size:1.3rem;letter-spacing:.06em;opacity:0;animation:vpunch .5s 2.2s cubic-bezier(.2,2,.3,1) forwards;transform:scale(2.4)}
 @keyframes vpunch{to{opacity:1;transform:scale(1)}}
+
+/* ══ I LOVE YOU DIDI ══ */
+.love-page{max-width:none;display:flex;align-items:center;justify-content:center;min-height:100dvh}
+#love-canvas{position:fixed;inset:0;pointer-events:none}
+#love-box{position:relative;z-index:2;text-align:center;padding:0 18px}
+#love-box .kicker{opacity:0;transition:opacity 1s .2s}
+#love-box.in .kicker{opacity:1}
+.love-title .fword{display:block}
+.love-title b{display:inline-block;font-weight:700;opacity:0;transform:translateY(40px) rotateX(-70deg);
+  transition:all .8s cubic-bezier(.2,1.2,.3,1);color:transparent;-webkit-text-stroke:1.5px rgba(217,164,65,.55)}
+#love-box.in .love-title b{opacity:1;transform:none}
+.love-title .fword.name{font-family:var(--f-hand);font-size:clamp(3rem,15vw,7rem);line-height:1.1;
+  margin-top:2vh;opacity:0;transform:scale(.6);transition:all 1.2s 2.2s cubic-bezier(.2,1.6,.3,1);
+  color:var(--reso);-webkit-text-stroke:0;text-shadow:0 0 60px rgba(217,164,65,.45)}
+#love-box.in .love-title .fword.name{opacity:1;transform:scale(1)}
+.love-heart{background:none;border:none;font-size:clamp(4rem,18vw,7rem);cursor:pointer;margin-top:4vh;
+  animation:heartbeat 1.4s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(255,46,77,.55));
+  transition:transform .15s}
+.love-heart:active{transform:scale(1.25)}
+@keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.14)}28%{transform:scale(1)}42%{transform:scale(1.1)}56%{transform:scale(1)}}
+.love-said{font-family:var(--f-hand);font-size:clamp(1.15rem,5vw,1.7rem);color:#efe9da;margin:4vh 0 1vh;
+  opacity:0;transition:opacity 1.2s 2.8s}
+#love-box.in .love-said{opacity:1}
+.love-deny{opacity:0;transition:opacity 1.2s 3.4s;font-size:9px}
+#love-box.in .love-deny{opacity:.7}
+.love-hint{margin-top:4vh;opacity:0;transition:opacity 1s 4s}
+#love-box.in .love-hint{opacity:1}

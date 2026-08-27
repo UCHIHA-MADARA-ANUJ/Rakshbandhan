@@ -69,6 +69,12 @@
       "namedRegex": "^/letter(?:/)?$"
     },
     {
+      "page": "/love",
+      "regex": "^/love(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/love(?:/)?$"
+    },
+    {
       "page": "/ritual",
       "regex": "^/ritual(?:/)?$",
       "routeKeys": {},
