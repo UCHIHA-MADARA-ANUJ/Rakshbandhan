@@ -143,16 +143,18 @@ export const RITUAL = {
 };
 
 export const TIMELINE = {
-  tag: 'HOW IT HAPPENED',
-  head: ['FOUR MONTHS.', 'ZERO BLOOD.', 'FULL SIBLINGS.'],
-  sub: 'april to rakhi. quickly.',
-  nodes: [
-    { date: 'APR 2026', title: 'FIRST CONTACT', d: "met her in april. didn't think she'd stay this long lol" },
-    { date: 'MAY 2026', title: 'THE ROAST ERA', d: 'she found out teasing me is fun. it never stopped.' },
-    { date: 'JUN–JUL', title: 'THE CALL ERA', d: 'actual calls. normal hours. she sleeps early like a normal person. i was up anyway.' },
-    { date: '28 AUG', title: 'THREAD TIED', d: 'she tied it herself. from pune. over a website. 2026 is wild.' },
+  tag: 'SYSTEM LOG \u00b7 2026 \u00b7 LIVE',
+  head: ['HOW IT', 'HAPPENED.'],
+  sub: 'four months. zero blood. full siblings. pulled from the records.',
+  entries: [
+    { d: 'APR 01', t: 'NEW PERSON DETECTED', l: 'appeared out of nowhere. refused to leave. respectfully.' },
+    { d: 'APR 14', t: 'FIRST ROAST RECEIVED', l: 'damage: moderate. recovery: never completed.' },
+    { d: 'MAY 09', t: 'TEASING MODE: ENABLED', l: 'has not been switched off since. will not be.' },
+    { d: 'JUN 21', t: 'CALL FREQUENCY: HIGH', l: 'she talks. i listen. best deal i ever made.' },
+    { d: 'JUL 17', t: 'GALLERY TAKEOVER: 40%', l: 'my wallpaper too. no i will not apologize.' },
+    { d: 'AUG 28', t: 'PROTOCOL: RAKHI', l: 'thread tied from 1,450 km away. system status: family.' },
   ],
-  tail: '— season 2 starts tomorrow —',
+  tail: '\u2014 log continues. forever, apparently \u2014',
 };
 
 export const LETTER = {

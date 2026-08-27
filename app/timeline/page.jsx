@@ -15,20 +15,19 @@ export default function Timeline() {
         <p className="dist-sub">{C.TIMELINE.sub}</p>
       </div>
 
-      <div className="tl">
-        {C.TIMELINE.nodes.map((n, i) => (
-          <div className="tl-node" key={i}>
-            <div className="tl-marker"><i /><em /></div>
-            <div className="tl-card gcard">
-              <i className="shine" />
-              <span className="hud-txt gold">{n.date}</span>
-              <h3 className="tl-title">{n.title}</h3>
-              <p className="tl-d">{n.d}</p>
-            </div>
-            <div className="tl-numeral">{n.date.split(' ')[0]}</div>
+      <div className="syslog glass-terminal">
+        <div className="term-dots"><i /><i /><i /></div>
+        {C.TIMELINE.entries.map((e, i) => (
+          <div className="logline" key={i} style={{ animationDelay: `${0.25 + i * 0.3}s` }}>
+            <span className="log-ts hud-txt gold">[{e.d} · 2026]</span>
+            <span className="log-t">{e.t}</span>
+            <span className="log-l">{e.l}</span>
           </div>
         ))}
-        <div className="tl-line" aria-hidden="true" />
+        <div className="logline live" style={{ animationDelay: `${0.25 + C.TIMELINE.entries.length * 0.3}s` }}>
+          <span className="log-ts hud-txt gold">[NOW]</span>
+          <span className="log-t">STATUS: <em className="pulse">READING THIS WEBSITE</em><i className="log-cursor" /></span>
+        </div>
       </div>
       <p className="hud-txt gold center tl-tail">{C.TIMELINE.tail}</p>
     </main>
