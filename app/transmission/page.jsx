@@ -27,13 +27,11 @@ export default function Transmission() {
       <div className="phone-zone">
         <div className="phone">
           <i className="phone-notch" />
-          <div className="phone-screen">
-            {C.TX.phone.map((p) => (
-              <div key={p.slug} className={`pp ${p.big ? 'big' : ''}`}>
-                <img loading="lazy" src={C.PHOTOS(p.slug)} alt={p.label} />
-                <span className="hud-txt">{p.label}</span>
-              </div>
-            ))}
+          <div className="phone-screen vault">
+            <div className="vault-shimmer" />
+            <span className="vault-seal">🔒</span>
+            <span className="vault-label hud-txt gold">{C.TX.vaultLabel}</span>
+            <span className="vault-note">{C.TX.vaultNote}</span>
           </div>
         </div>
       </div>

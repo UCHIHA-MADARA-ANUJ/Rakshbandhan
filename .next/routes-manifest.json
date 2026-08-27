@@ -33,12 +33,6 @@
       "namedRegex": "^/_not\\-found(?:/)?$"
     },
     {
-      "page": "/archive",
-      "regex": "^/archive(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/archive(?:/)?$"
-    },
-    {
       "page": "/distance",
       "regex": "^/distance(?:/)?$",
       "routeKeys": {},
@@ -69,6 +63,12 @@
       "namedRegex": "^/letter(?:/)?$"
     },
     {
+      "page": "/lie",
+      "regex": "^/lie(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/lie(?:/)?$"
+    },
+    {
       "page": "/love",
       "regex": "^/love(?:/)?$",
       "routeKeys": {},
@@ -79,12 +79,6 @@
       "regex": "^/ritual(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/ritual(?:/)?$"
-    },
-    {
-      "page": "/scanner",
-      "regex": "^/scanner(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/scanner(?:/)?$"
     },
     {
       "page": "/timeline",

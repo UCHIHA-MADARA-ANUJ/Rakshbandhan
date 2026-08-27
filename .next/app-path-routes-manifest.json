@@ -1,14 +1,13 @@
 {
   "/_not-found/page": "/_not-found",
   "/icon.svg/route": "/icon.svg",
-  "/archive/page": "/archive",
   "/distance/page": "/distance",
   "/dossier/page": "/dossier",
   "/finale/page": "/finale",
   "/letter/page": "/letter",
+  "/lie/page": "/lie",
   "/love/page": "/love",
   "/page": "/",
-  "/scanner/page": "/scanner",
   "/ritual/page": "/ritual",
   "/timeline/page": "/timeline",
   "/transmission/page": "/transmission"

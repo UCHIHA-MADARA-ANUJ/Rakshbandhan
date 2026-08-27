@@ -8,7 +8,7 @@ import { initAudio } from './chrome.jsx';
 const DESC = {
   '/timeline': 'april 2026 to today. the whole story.',
   '/dossier': 'subject file: dayan. charges included.',
-  '/scanner': 'face scan. 11 moods. all dumb.',
+  '/lie': 'the machine already knows the truth.',
   '/transmission': 'my phone is a museum of you.',
   '/distance': '1,450 km. and why it lost.',
   '/ritual': 'tie the rakhi yourself. hold the button.',
@@ -202,13 +202,6 @@ export default function Landing() {
             <span className="seq-a gold">ENTER →</span>
           </a>
         ))}
-        <a href="/archive" className="seqcard gcard secret">
-          <i className="shine" />
-          <span className="seq-n hud-txt">??</span>
-          <span className="seq-t dim">[EVERYTHING]</span>
-          <span className="seq-d hud-txt">all 37 pics. yes all.</span>
-          <span className="seq-a gold">OPEN →</span>
-        </a>
       </div>
     </main>
   );

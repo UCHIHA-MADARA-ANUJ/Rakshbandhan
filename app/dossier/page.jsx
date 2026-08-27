@@ -37,21 +37,16 @@ export default function Dossier() {
           </div>
         ))}
       </div>
-      <div id="evidence">
-        <p className="hud-txt gold mb center">{C.FILE.exhibitsTag}</p>
-        <div className="filmstrip">
-          {C.FILE.exhibits.map((e, i) => (
-            <figure className="evcard" key={e.slug}>
-              <img loading="lazy" src={C.PHOTOS(e.slug)} alt={e.cap} />
-              <figcaption>
-                <b className="gold">{e.tag}</b>
-                <span>{e.cap}</span>
-                <em className="hud-txt">EVIDENCE LOG</em>
-              </figcaption>
-            </figure>
+      <div id="incidents">
+        <p className="hud-txt gold mb center">{C.FILE.incidentsTag}</p>
+        <div className="incidents">
+          {C.FILE.incidents.map((t, i) => (
+            <div className="incident" key={i}>
+              <span className="inc-red hud-txt">[PHOTO REMOVED]</span>
+              <span className="inc-t">{t}</span>
+            </div>
           ))}
         </div>
-        <p className="drag-hint hud-txt">← DRAG →</p>
       </div>
     </main>
   );

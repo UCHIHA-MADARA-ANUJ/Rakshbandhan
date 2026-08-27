@@ -16,8 +16,8 @@ import * as C from './content.js';
 
 let A = null;
 export const getAudio = () => A;
-const ENERGY = { '/': 0.16, '/dossier': 0.2, '/scanner': 0.3, '/transmission': 0.45, '/distance': 0.55, '/timeline': 0.28, '/ritual': 0.7, '/letter': 0.5, '/finale': 1, '/love': 1, '/archive': 0.25 };
-const TITLES = { '/': 'SIGNAL', '/dossier': 'DOSSIER', '/scanner': 'SCANNER', '/transmission': 'TRANSMISSION', '/distance': 'DISTANCE', '/ritual': 'THE RITUAL', '/letter': 'THE LETTER', '/finale': 'FINALE', '/love': 'I LOVE YOU DIDI', '/archive': 'ARCHIVE', '/timeline': 'ORIGIN' };
+const ENERGY = { '/': 0.16, '/dossier': 0.2, '/lie': 0.3, '/transmission': 0.45, '/distance': 0.55, '/timeline': 0.28, '/ritual': 0.7, '/letter': 0.5, '/finale': 1, '/love': 1, '/archive': 0.25 };
+const TITLES = { '/': 'SIGNAL', '/dossier': 'DOSSIER', '/lie': 'LIE TEST', '/transmission': 'TRANSMISSION', '/distance': 'DISTANCE', '/ritual': 'THE RITUAL', '/letter': 'THE LETTER', '/finale': 'FINALE', '/love': 'I LOVE YOU DIDI', '/archive': 'ARCHIVE', '/timeline': 'ORIGIN' };
 
 export const toast = (msg, ms = 2600) => {
   let el = document.getElementById('rk-toast');
@@ -158,7 +158,7 @@ export default function Chrome({ children }) {
       e.preventDefault();
       if (wiped.current) return; wiped.current = true;
       A?.sfx('whoosh');
-      const r = C.ROUTES.concat([{ path: '/archive', tag: 'ARCHIVE' }]).find((x) => x.path === href);
+      const r = C.ROUTES.find((x) => x.path === href);
       const wl = document.querySelector('#wipe .wlabel');
       if (wl && r) wl.textContent = r.tag;
       document.body.classList.add('wiping');
@@ -201,7 +201,7 @@ export default function Chrome({ children }) {
       {menu && (
         <div id="routemenu" onClick={() => setMenu(false)}>
           <p className="hud-txt gold">PICK A SEQUENCE</p>
-          {C.ROUTES.concat([{ path: '/archive', tag: 'ARCHIVE', short: 'ARCHIVE' }]).map((r, i) => (
+          {C.ROUTES.map((r, i) => (
             <a key={r.path} href={r.path} className={r.path === path ? 'on' : ''} onClick={() => setMenu(false)}>
               <span className="rm-n">0{i}</span>
               <span className="rm-t">{r.tag}</span>

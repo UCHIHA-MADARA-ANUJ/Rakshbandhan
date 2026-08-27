@@ -25,7 +25,7 @@ export default function Timeline() {
               <h3 className="tl-title">{n.title}</h3>
               <p className="tl-d">{n.d}</p>
             </div>
-            <figure className="tl-photo"><img loading="lazy" src={C.PHOTOS(n.slug)} alt={n.title} /></figure>
+            <div className="tl-numeral">{n.date.split(' ')[0]}</div>
           </div>
         ))}
         <div className="tl-line" aria-hidden="true" />

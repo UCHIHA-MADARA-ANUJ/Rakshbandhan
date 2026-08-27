@@ -1,12 +1,11 @@
 // ⭐ ALL WORDS = BHAI'S OWN VOICE. edit anything here, site changes.
 
-export const PHOTOS = (s) => `/assets/photos/${s}.webp`;
-
+// no photos of her. anywhere. bhai's final word.
 export const ROUTES = [
   { path: '/', tag: 'SIGNAL', short: 'SIGNAL' },
   { path: '/timeline', tag: 'ORIGIN', short: 'ORIGIN' },
   { path: '/dossier', tag: 'DOSSIER', short: 'DOSSIER' },
-  { path: '/scanner', tag: 'SCANNER', short: 'SCANNER' },
+  { path: '/lie', tag: 'LIE TEST', short: 'LIE' },
   { path: '/transmission', tag: 'TX', short: 'TX' },
   { path: '/distance', tag: 'DISTANCE', short: 'DISTANCE' },
   { path: '/ritual', tag: 'RITUAL', short: 'RITUAL' },
@@ -66,15 +65,15 @@ export const FILE = {
     'sends pics labelled "rendem". to this day idk what it means',
     'was seen cleaning a fan ONCE. we keep proof',
   ],
-  exhibitsTag: 'EVIDENCE. SORRY NOT SORRY',
-  exhibits: [
-    { slug: 'alien', tag: 'EXHIBIT A', cap: 'the true form. i have proof.' },
-    { slug: 'funny-face', tag: 'EXHIBIT B', cap: 'the "what did i do" face. classic.' },
-    { slug: 'teasing', tag: 'EXHIBIT C', cap: 'job: teasing. full time.' },
-    { slug: 'pankha', tag: 'EXHIBIT D', cap: 'she cleaned a fan once. frame it.' },
-    { slug: 'dayumm', tag: 'EXHIBIT E', cap: 'impressed herself. valid tbh.' },
-    { slug: 'mirror-selfie', tag: 'EXHIBIT F', cap: 'the mirror selfie. a daily ritual.' },
-    { slug: 'style', tag: 'EXHIBIT G', cap: "thinks she's the main character. she is." },
+  incidentsTag: 'SELECTED INCIDENTS — VISUAL EVIDENCE: REMOVED BY ORDER OF BHAI',
+  incidents: [
+    '001 — the fan incident. it happened. the proof is gone. trust me.',
+    "002 — 'rendem'. two files. still unexplained.",
+    '003 — mirror selfie frequency: daily. location: pune.',
+    '004 — eyiz. no further comment at this time.',
+    '005 — the soft toy. classified.',
+    '006 — public roasting of bhai: ongoing since may.',
+    "007 — goes offline at 10pm. like a shop.",
   ],
 };
 
@@ -83,45 +82,30 @@ export const ALIASES = {
   list: ['DAYAN', 'CHUDAIL', 'DIII', 'DIDIIII', 'EYIZ 💀', 'M_____ (hidden)'],
 };
 
-export const SCAN = {
-  tag: 'FACE SCAN',
-  head: ['SCANNING', 'YOU…'],
-  moods: [
-    { slug: 'eyes', label: 'looking…' },
-    { slug: 'eyiz-smile', label: 'the eyiz one 💀' },
-    { slug: 'eyiz-nose', label: 'eyiz + nose. why.' },
-    { slug: 'edited-eyes', label: "she edits these and thinks we can't tell" },
-    { slug: 'straight-eyes', label: 'direct eye contact. rare.' },
-    { slug: 'left-side', label: 'angle #47 of 47' },
-    { slug: 'smile', label: 'this one. saving this one.' },
-    { slug: 'full-face', label: 'full power mode' },
-    { slug: 'normal', label: '"normal" (unverified)' },
-    { slug: 'idk', label: 'idk. literally idk.' },
-    { slug: 'blushing', label: "ok she's cute here. moving on." },
+export const LIE = {
+  tag: 'POLYGRAPH · ACCURACY 100% (TRUST ME)',
+  head: ['LIE', 'DETECTOR.'],
+  sub: 'pick a statement. the machine already knows.',
+  questions: [
+    { q: 'she is a dayan', v: 'TRUE. MAXIMUM DAYAN CONFIRMED.', danger: 92 },
+    { q: 'she teases him in public', v: 'TRUE. 47 INCIDENTS ON RECORD.', danger: 78 },
+    { q: 'she is cute when angry', v: 'TRUE. UNFORTUNATELY PROVEN.', danger: 64 },
+    { q: 'she will cry on this website', v: 'INCONCLUSIVE. CHECK AFTER THE LETTER.', danger: 40 },
+    { q: 'bhai loves her', v: 'ERROR. VALUE OFF THE CHART.', danger: 100 },
   ],
-  verdict: 'RESULT: 100% dayan. unfortunately my sister. stuck with me forever.',
-  foot: 'yes these are real. my phone is 40% your face. drag it.',
 };
 
 export const TX = {
-  tag: 'EVIDENCE: MY PHONE',
+  tag: 'THE PHONE VAULT',
   head: ['MY PHONE IS', 'A MUSEUM OF YOU'],
-  phone: [
-    { slug: 'insta-pfp', label: 'INSTA' },
-    { slug: 'wa-pfp', label: 'WHATSAPP' },
-    { slug: 'lock-screen', label: 'LOCK SCREEN' },
-    { slug: 'phone-wallpaper', label: 'WALLPAPER' },
-    { slug: 'my-wallpaper', label: 'MY WALLPAPER' },
-    { slug: 'wallpaper', label: 'BACKUP' },
-    { slug: 'randomly-received', label: 'RANDOM FILE FROM PUNE', big: true },
-    { slug: 'rendem-again', label: 'THE "RENDEM" SERIES' },
-  ],
+  vaultLabel: 'IMAGE VAULT: SEALED',
+  vaultNote: 'every pic removed. by order of me. the gallery stays full tho.',
   chatMeta: 'MY DRAFTS TO HER · NEVER SENT (TIL NOW)',
   chat: [
     { side: 'me', text: 'didi', time: '02:14' },
     { side: 'me', text: 'u asleep? obviously u are. its 2. u sleep at 10 like a hero', time: '02:14' },
     { side: 'me', text: 'u came in april and somehow the whole year became about u. idk how u did that', time: '02:16' },
-    { side: 'me', text: 'u were asleep obviously. u sleep at 10. so i am typing into the void', time: '02:19' },
+    { side: 'me', text: 'i never say stuff properly so. typing it here at 2am like an idiot', time: '02:19' },
     { side: 'me', text: 'my gallery is 40% ur pics. my wallpaper too. no i will not apologize', time: '02:21' },
     { side: 'me', text: 'thanks for staying ok thats it gn', time: '02:22' },
   ],
@@ -142,8 +126,7 @@ export const DIST = {
 };
 
 export const RAKHI = {
-  handSlug: 'hand-jwellery',
-  handAlt: 'the wrist. you know what to do.',
+  wrist: 'the wrist. you know what to do.',
 };
 
 export const RITUAL = {
@@ -164,10 +147,10 @@ export const TIMELINE = {
   head: ['FOUR MONTHS.', 'ZERO BLOOD.', 'FULL SIBLINGS.'],
   sub: 'april to rakhi. quickly.',
   nodes: [
-    { date: 'APR 2026', title: 'FIRST CONTACT', d: "met her in april. didn't think she'd stay this long lol", slug: 'grouped' },
-    { date: 'MAY 2026', title: 'THE ROAST ERA', d: 'she found out teasing me is fun. it never stopped.', slug: 'teasing' },
-    { date: 'JUN–JUL', title: 'THE CALL ERA', d: 'actual calls. normal hours. she sleeps early like a normal person. i was up anyway.', slug: 'mirror-selfie' },
-    { date: '28 AUG', title: 'THREAD TIED', d: 'she tied it herself. from pune. over a website. 2026 is wild.', slug: 'hand-smile' },
+    { date: 'APR 2026', title: 'FIRST CONTACT', d: "met her in april. didn't think she'd stay this long lol" },
+    { date: 'MAY 2026', title: 'THE ROAST ERA', d: 'she found out teasing me is fun. it never stopped.' },
+    { date: 'JUN–JUL', title: 'THE CALL ERA', d: 'actual calls. normal hours. she sleeps early like a normal person. i was up anyway.' },
+    { date: '28 AUG', title: 'THREAD TIED', d: 'she tied it herself. from pune. over a website. 2026 is wild.' },
   ],
   tail: '— season 2 starts tomorrow —',
 };
@@ -219,22 +202,6 @@ export const FINALE = {
 };
 
 export const FINALE_REPLY = "I SAW EVERYTHING.\nthe file?? the scanner?? THE CERTIFICATE?? 😭\nhappy raksha bandhan bhai. you built a WHOLE website at 2am. i'm telling everyone.";
-
-export const ARCHIVE = {
-  tag: 'ALL OF IT. YES, ALL.',
-  head: ['THE FULL', 'COLLECTION.'],
-  sub: 'every single pic i have of you. i am not apologizing. tap any.',
-};
-
-export const ALL_SLUGS = [
-  'alien', 'funny-face', 'teasing', 'pankha', 'dayumm', 'mirror-selfie', 'style',
-  'eyes', 'eyiz-smile', 'eyiz-nose', 'edited-eyes', 'straight-eyes', 'left-side',
-  'smile', 'full-face', 'fulll-pic', 'normal', 'idk', 'blushing',
-  'insta-pfp', 'wa-pfp', 'lock-screen', 'phone-wallpaper', 'my-wallpaper', 'wallpaper',
-  'randomly-received', 'rendem', 'rendem-again',
-  'with-soft-toy', 'again-with-soft-toy', 'grouped', 'again-grouped',
-  'hand-jwellery', 'hand-smile', 'my-pfp', 'blurry', 'mystery',
-];
 
 export const LOVE = {
   kicker: 'one last thing. then u can roast me forever —',

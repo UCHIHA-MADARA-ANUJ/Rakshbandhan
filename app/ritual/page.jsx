@@ -60,7 +60,12 @@ export default function Ritual() {
 
       <div className={`tie-stage ${tied ? 'tied' : ''}`}>
         <div className="hand-frame">
-          <img src={C.PHOTOS(C.RAKHI.handSlug)} alt={C.RAKHI.handAlt} />
+          <svg className="wrist-art" viewBox="0 0 300 300" aria-hidden="true">
+            <path className="wr-line" d="M14,118 C 90,100 210,100 286,118" />
+            <path className="wr-line" d="M14,182 C 90,200 210,200 286,182" />
+            <path className="wr-line faint" d="M286,118 C 300,124 300,176 286,182" />
+            <path className="wr-line faint" d="M22,130 C 30,150 30,150 22,170" />
+          </svg>
           <svg className="rakhi" viewBox="0 0 300 300" aria-hidden="true">
             <ellipse className="rk-wrap" style={{ strokeDashoffset: 100 - wrapP(0) * 100 }} cx="150" cy="150" rx="98" ry="36" />
             <ellipse className="rk-wrap alt" style={{ strokeDashoffset: 100 - wrapP(1) * 100 }} cx="150" cy="150" rx="84" ry="30" />

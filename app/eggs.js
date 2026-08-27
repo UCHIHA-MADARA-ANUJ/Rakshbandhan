@@ -23,7 +23,7 @@ export function initEggs({ sfx, onGallery }) {
     moonTaps++; clearTimeout(moonT);
     moonT = setTimeout(() => (moonTaps = 0), 1600);
     if (moonTaps === 3) toast('…continue 👀');
-    if (moonTaps >= 5) { moonTaps = 0; sfx?.('whoosh'); onGallery?.(true); }
+    if (moonTaps >= 5) { moonTaps = 0; sfx?.('whoosh'); toast('pics: deleted. all of them. forever. 🖤'); }
   });
 
   // type "chudail"
