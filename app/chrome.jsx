@@ -16,8 +16,8 @@ import * as C from './content.js';
 
 let A = null;
 export const getAudio = () => A;
-const ENERGY = { '/': 0.16, '/dossier': 0.2, '/lie': 0.3, '/transmission': 0.45, '/distance': 0.55, '/timeline': 0.28, '/ritual': 0.7, '/letter': 0.5, '/finale': 1, '/love': 1, '/archive': 0.25 };
-const TITLES = { '/': 'SIGNAL', '/dossier': 'DOSSIER', '/lie': 'LIE TEST', '/transmission': 'TRANSMISSION', '/distance': 'DISTANCE', '/ritual': 'THE RITUAL', '/letter': 'THE LETTER', '/finale': 'FINALE', '/love': 'I LOVE YOU DIDI', '/archive': 'ARCHIVE', '/timeline': 'ORIGIN' };
+const ENERGY = { '/': 0.16, '/dossier': 0.2, '/lie': 0.3, '/transmission': 0.45, '/distance': 0.55, '/timeline': 0.28, '/ritual': 0.7, '/letter': 0.5, '/finale': 1, '/love': 1, };
+const TITLES = { '/': 'SIGNAL', '/dossier': 'DOSSIER', '/lie': 'LIE TEST', '/transmission': 'TRANSMISSION', '/distance': 'DISTANCE', '/ritual': 'THE RITUAL', '/letter': 'THE LETTER', '/finale': 'FINALE', '/love': 'I LOVE YOU DIDI', '/timeline': 'ORIGIN' };
 
 export const toast = (msg, ms = 2600) => {
   let el = document.getElementById('rk-toast');
@@ -179,7 +179,6 @@ export default function Chrome({ children }) {
       A.setEnergy(ENERGY[path] ?? 0.2);
       import('./eggs.js').then((m) => m.initEggs({
         sfx: (k) => A.sfx(k),
-        onGallery: () => { location.href = '/archive'; },
       }));
     };
     addEventListener('pointerdown', init, { once: true });
