@@ -116,8 +116,7 @@ export default function Chrome({ children }) {
   useEffect(() => {
     document.title = `${TITLES[path] || 'SIGNAL'} — RAKHI.PROTOCOL`;
     if (A) A.setEnergy(ENERGY[path] ?? 0.2);
-    if (!sessionStorage.getItem('rk_in')) {
-      sessionStorage.setItem('rk_in', '1');
+    if (!sessionStorage.getItem('rk_wipe')) {
       setVeil(true);
       document.body.classList.add('locked');
     }
@@ -184,6 +183,7 @@ export default function Chrome({ children }) {
 
   return (
     <>
+      <div className="skyline-bg" aria-hidden="true" />
       <div className="bg-noise" />
       <div className="scanline" />
       <ParticleField />
@@ -193,6 +193,7 @@ export default function Chrome({ children }) {
         <div id="veil" onClick={enter}>
           <p className="hud-txt gold">{C.VEIL.small}</p>
           <h1 className="veil-big">{C.VEIL.big}</h1>
+          <p className="hud-txt veil-coords">SRC: GURUGRAM → DEST: MUMBAI · 1,424 KM · ONE THREAD</p>
           <button className="veil-btn" onClick={enter}>{C.VEIL.enter}</button>
           <p className="hud-txt veil-note">{C.VEIL.note}</p>
           <div className="veil-thread" />

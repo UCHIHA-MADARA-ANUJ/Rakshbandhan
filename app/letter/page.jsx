@@ -7,7 +7,7 @@ export default function Letter() {
   const [hasVoice, setHasVoice] = useState(false);
   useReveals();
   useEffect(() => {
-    fetch('audio/voice.m4a', { method: 'HEAD' }).then((r) => r.ok && setHasVoice(true)).catch(() => {});
+    fetch('/audio/voice.m4a', { method: 'HEAD' }).then((r) => r.ok && setHasVoice(true)).catch(() => {});
   }, []);
   return (
     <main className="page">

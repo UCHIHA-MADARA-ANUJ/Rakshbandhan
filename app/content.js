@@ -1,6 +1,6 @@
 // ⭐ RAKHI PROTOCOL — ALL CONTENT (edit here, site changes)
 
-export const PHOTOS = (s) => `assets/photos/${s}.webp`;
+export const PHOTOS = (s) => `/assets/photos/${s}.webp`;
 
 export const BOOT = {
   lines: [

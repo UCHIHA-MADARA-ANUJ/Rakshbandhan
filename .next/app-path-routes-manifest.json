@@ -6,9 +6,9 @@
   "/dossier/page": "/dossier",
   "/finale/page": "/finale",
   "/letter/page": "/letter",
-  "/ritual/page": "/ritual",
-  "/scanner/page": "/scanner",
   "/page": "/",
+  "/scanner/page": "/scanner",
   "/timeline/page": "/timeline",
-  "/transmission/page": "/transmission"
+  "/transmission/page": "/transmission",
+  "/ritual/page": "/ritual"
 }

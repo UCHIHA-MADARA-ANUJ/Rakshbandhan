@@ -119,6 +119,16 @@ void main() {
 let audioLevel = 0;          // module-level — page sets it via setAudioLevel()
 export function setAudioLevel(v) { audioLevel = Math.max(0, Math.min(1, v)); }
 
+function Drift() {
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    state.camera.position.x = Math.sin(t * 0.05) * 0.9;
+    state.camera.position.y = Math.cos(t * 0.04) * 0.55;
+    state.camera.lookAt(0, 0, 0);
+  });
+  return null;
+}
+
 function Particles({ count }) {
   const mat = useRef(null);
   const { viewport } = useThree();
@@ -186,13 +196,13 @@ function Particles({ count }) {
 }
 
 export default function ParticleField({ count = 60000 }) {
-  const n = typeof window !== 'undefined' && matchMedia('(hover:none)').matches ? Math.min(count, 22000) : count;
+  const n = typeof window !== 'undefined' && matchMedia('(hover:none)').matches ? Math.min(count, 28000) : count;
   return (
     <div className="particle-host" aria-hidden="true">
       <Canvas camera={{ position: [0, 0, 15], fov: 45 }} dpr={[1, 1.5]} gl={{ antialias: false, powerPreference: 'high-performance' }}>
-        <Particles count={n} />
+        <><Drift /><Particles count={n} /></>
         <EffectComposer>
-          <Bloom intensity={1.15} luminanceThreshold={0.12} luminanceSmoothing={0.5} mipmapBlur radius={0.72} />
+          <Bloom intensity={1.4} luminanceThreshold={0.08} luminanceSmoothing={0.6} mipmapBlur radius={0.85} />
         </EffectComposer>
       </Canvas>
     </div>
