@@ -45,6 +45,21 @@
       "static/chunks/791-3fb4550c1d581d57.js",
       "static/chunks/app/distance/page-de72c146597df439.js"
     ],
+    "/dossier/page": [
+      "static/chunks/webpack-a8a295398a138a8f.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-cf15ac3efcf391d6.js",
+      "static/chunks/main-app-13a966ac5e1aab84.js",
+      "static/chunks/bd904a5c-36c992c454f4c612.js",
+      "static/chunks/72c373f8-426e3ff925d41525.js",
+      "static/chunks/b536a0f1-570d8c271762af5c.js",
+      "static/chunks/a3cd4a83-0bad23312e7305d2.js",
+      "static/chunks/f6211eb1-a90701f552388441.js",
+      "static/chunks/c15bf2b0-52e8419f34af26ab.js",
+      "static/chunks/353-0ab971482afb0067.js",
+      "static/chunks/791-3fb4550c1d581d57.js",
+      "static/chunks/app/dossier/page-d322bceefeb30772.js"
+    ],
     "/finale/page": [
       "static/chunks/webpack-a8a295398a138a8f.js",
       "static/chunks/4bd1b696-c023c6e3521b1417.js",
@@ -74,21 +89,6 @@
       "static/chunks/353-0ab971482afb0067.js",
       "static/chunks/791-3fb4550c1d581d57.js",
       "static/chunks/app/letter/page-14e6cafdfa17978c.js"
-    ],
-    "/dossier/page": [
-      "static/chunks/webpack-a8a295398a138a8f.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-cf15ac3efcf391d6.js",
-      "static/chunks/main-app-13a966ac5e1aab84.js",
-      "static/chunks/bd904a5c-36c992c454f4c612.js",
-      "static/chunks/72c373f8-426e3ff925d41525.js",
-      "static/chunks/b536a0f1-570d8c271762af5c.js",
-      "static/chunks/a3cd4a83-0bad23312e7305d2.js",
-      "static/chunks/f6211eb1-a90701f552388441.js",
-      "static/chunks/c15bf2b0-52e8419f34af26ab.js",
-      "static/chunks/353-0ab971482afb0067.js",
-      "static/chunks/791-3fb4550c1d581d57.js",
-      "static/chunks/app/dossier/page-d322bceefeb30772.js"
     ],
     "/lie/page": [
       "static/chunks/webpack-a8a295398a138a8f.js",
@@ -133,7 +133,7 @@
       "static/chunks/c15bf2b0-52e8419f34af26ab.js",
       "static/chunks/353-0ab971482afb0067.js",
       "static/chunks/791-3fb4550c1d581d57.js",
-      "static/chunks/app/page-ca09e425c70f94c7.js"
+      "static/chunks/app/page-6e375a84c94d4097.js"
     ],
     "/ritual/page": [
       "static/chunks/webpack-a8a295398a138a8f.js",

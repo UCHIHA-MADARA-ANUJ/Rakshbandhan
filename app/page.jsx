@@ -141,10 +141,16 @@ export default function Landing() {
   useReveals();
 
   useEffect(() => {
-    if (sessionStorage.getItem('rk_ok') === '1') setStage('site');
+    // intro plays on EVERY fresh visit. only same-session returns to home skip it.
+    const ok = sessionStorage.getItem('rk_ok') === '1';
+    const seenIntro = sessionStorage.getItem('rk_seen_intro') === '1';
+    if (ok && seenIntro) setStage('site');
   }, []);
 
-  const toGate = () => { setStage('gate'); getAudio()?.sfx('whoosh'); };
+  const toGate = () => {
+    sessionStorage.setItem('rk_seen_intro', '1');
+    setStage('gate'); getAudio()?.sfx('whoosh');
+  };
   const toSite = () => {
     getAudio()?.sfx('whoosh');
     setStage('site');
