@@ -1,50 +1,47 @@
-// ⭐ RAKHI PROTOCOL — ALL CONTENT (edit here, site changes)
+// ⭐ ALL WORDS = BHAI'S OWN VOICE. edit anything here, site changes.
 
 export const PHOTOS = (s) => `/assets/photos/${s}.webp`;
 
-export const BOOT = {
-  lines: [
-    { t: '> ESTABLISHING SECURE LINK…', c: 'dim' },
-    { t: '> ROUTE: GURUGRAM → MUMBAI · 1,424 KM', c: 'dim' },
-    { t: '> TARGET: DIDI.EXE — LOCATED', c: '' },
-    { t: '> THREAT SCAN: DAYAN DETECTED · LEVEL: MAXIMUM', c: 'shock' },
-    { t: '> COUNTERMEASURE: RAKHI PROTOCOL — ARMED', c: '' },
-    { t: '> PROTECTION: LIFETIME · TERMINATION: NEVER', c: 'gold' },
-    { t: '> BOOTING RAKHI.PROTOCOL…', c: '' },
-    { t: '> CONNECTION: ETERNAL ✓', c: 'gold' },
-  ],
-  bigWord: 'RAKHI',
-  skip: '[ SKIP SEQUENCE ]',
-  duration: 8600,
+export const ROUTES = [
+  { path: '/', tag: 'SIGNAL', short: 'SIGNAL' },
+  { path: '/timeline', tag: 'ORIGIN', short: 'ORIGIN' },
+  { path: '/dossier', tag: 'DOSSIER', short: 'DOSSIER' },
+  { path: '/scanner', tag: 'SCANNER', short: 'SCANNER' },
+  { path: '/transmission', tag: 'TX', short: 'TX' },
+  { path: '/distance', tag: 'DISTANCE', short: 'DISTANCE' },
+  { path: '/ritual', tag: 'RITUAL', short: 'RITUAL' },
+  { path: '/letter', tag: 'LETTER', short: 'LETTER' },
+  { path: '/finale', tag: 'FINALE', short: 'FINALE' },
+];
+
+export const VEIL = {
+  small: 'NOT A WEBSITE. A GIFT. DO NOT SHARE.',
+  big: 'DIDI ONLY.',
+  enter: 'tap to open (sound on ok)',
+  note: 'made at 2am. be nice.',
 };
 
-export const HERO = {
-  hud: {
-    tl1: 'RAKHI.PROTOCOL v2.8',
-    tl2: 'SRC: GURUGRAM · 28.4595° N',
-    tl3: 'DEST: MUMBAI · 19.0760° N',
-    tr1: 'THREAD_STATUS: INTACT',
-    tr2: 'MOON: SHARED · 1',
-    br: 'SCROLL TO INITIATE SEQUENCE',
-    bl1: 'ONE-TIME DEPLOYMENT',
-    bl2: 'FOR: DIDI ONLY',
-  },
-  line1: 'SAME SKY.',
-  line2: 'ONE THREAD.',
-  sub: 'a raksha bandhan transmission · 28.08.2026',
+export const LANDING = {
+  kicker: '28.08.2026 · made in gurugram. for mumbai.',
+  line1: 'OK FINE.',
+  line2: 'I MADE THIS.',
+  sub: 'a whole website. for you. yes really.',
+  gateTag: 'FIRST. PROVE IT IS YOU',
+  gateQ: '> type what i call you',
+  placeholder: 'you know what it is…',
+  granted: "> ok. it's you. come.",
+  wrong: ['nope.', 'hint: who haunts my phone at 2am?', 'starts with D. dayan.'],
+  fine: "> fine. you're obviously her. come in.",
+  gridTag: 'PICK ANY ORDER. I MADE ALL OF IT',
 };
 
 export const GATE = {
-  tag: 'SECURITY CHECK',
-  q: '> IDENTIFY YOURSELF',
-  placeholder: 'enter codename…',
-  wrong: ['> ACCESS DENIED.', '> HINT: HAUNTS MY PHONE AT 2 AM.', '> STARTS WITH D. ENDS WITH DAYAN.'],
   accept: {
-    dayan:   { keys: ['dayan', 'dayaan', 'dayn'], resp: '> ACCESS GRANTED — WELCOME, DAYAN.', stamp: true },
-    chudail: { keys: ['chudail', 'witch'], resp: '> SELF-IDENTIFIED. RESPECT. ENTER.', stamp: true },
-    dii:     { keys: ['diii', 'didi', 'di'], resp: '> SOFT ACCESS — GRANTED, DIII 🌙', stamp: false },
-    real:    { keys: ['mital', 'mitu', 'mintu'], resp: '> REAL NAME DETECTED. HERE YOU ARE DAYAN. ENTER.', stamp: true },
-    eyiz:    { keys: ['eyiz', 'eyez', 'eyis'], resp: '> RARE USER — GRANTED 🥹', stamp: false },
+    dayan:   { keys: ['dayan', 'dayaan', 'dayn'], resp: '', stamp: true },
+    chudail: { keys: ['chudail', 'witch'], resp: '> you called YOURSELF that. respect.', stamp: true },
+    dii:     { keys: ['diii', 'didi', 'di'], resp: '> soft access granted. hi didi.', stamp: false },
+    real:    { keys: ['mital', 'mitu', 'mintu'], resp: '> real name has no power here. here you are DAYAN.', stamp: true },
+    eyiz:    { keys: ['eyiz', 'eyez', 'eyis'], resp: '> eyiz detected. come in.', stamp: false },
   },
 };
 
@@ -52,52 +49,57 @@ export const FILE = {
   tag: 'SUBJECT FILE 001',
   head: ['THE FILE:', 'DAYAN'],
   cards: [
-    { n: '18', l: 'AGE — RECORDED', d: 'adult by law. menace by nature.' },
-    { n: 'MUMBAI', l: 'LAST KNOWN LOCATION', d: 'base of operations. mirror selfies at 2:22 AM.' },
-    { n: '∞', l: '2 AM CALLS LOGGED', d: 'chronic. incurable. accepted.' },
-    { n: '100%', l: 'TEASING EFFICIENCY', d: 'no known defense exists.' },
+    { n: '18', l: 'AGE (APPARENTLY)', d: 'adult on paper. behaviour still pending.' },
+    { n: 'MUMBAI', l: 'LAST SEEN', d: 'where the mirror selfies come from. daily.' },
+    { n: '∞', l: '2AM CALLS', d: 'i stopped counting. my sleep stopped existing.' },
+    { n: '100%', l: 'TEASING RATE', d: 'mostly in front of people. thanks for that.' },
   ],
   charges: [
-    'driving her brother insane — daily',
-    'looking cute while angry — unfair tactics',
-    'telepathic call timing (always during dinner)',
-    'spotted cleaning a fan ONCE — rare footage',
+    'roasting me in front of everyone. always',
+    'acting innocent right after. every time',
+    'calling exactly when i sit down to eat',
+    'was seen cleaning a fan ONCE. we keep proof',
   ],
-  exhibitsTag: 'EVIDENCE LOCKER',
+  exhibitsTag: 'EVIDENCE. SORRY NOT SORRY',
   exhibits: [
-    { slug: 'alien', tag: 'EXHIBIT A', cap: 'true form — caught on camera' },
-    { slug: 'funny-face', tag: 'EXHIBIT B', cap: '"what did I do?" — every time' },
-    { slug: 'teasing', tag: 'EXHIBIT C', cap: 'occupation: teasing' },
-    { slug: 'pankha', tag: 'EXHIBIT D', cap: 'RARE — dayan working' },
-    { slug: 'dayumm', tag: 'EXHIBIT E', cap: 'impressed herself. valid.' },
-    { slug: 'mirror-selfie', tag: 'EXHIBIT F', cap: 'mumbai · 2:22 AM' },
-    { slug: 'style', tag: 'EXHIBIT G', cap: 'main character energy' },
+    { slug: 'alien', tag: 'EXHIBIT A', cap: 'the true form. i have proof.' },
+    { slug: 'funny-face', tag: 'EXHIBIT B', cap: 'the "what did i do" face. classic.' },
+    { slug: 'teasing', tag: 'EXHIBIT C', cap: 'job: teasing. full time.' },
+    { slug: 'pankha', tag: 'EXHIBIT D', cap: 'she cleaned a fan once. frame it.' },
+    { slug: 'dayumm', tag: 'EXHIBIT E', cap: 'impressed herself. valid tbh.' },
+    { slug: 'mirror-selfie', tag: 'EXHIBIT F', cap: 'mumbai mirror. 2:22am obviously.' },
+    { slug: 'style', tag: 'EXHIBIT G', cap: "thinks she's the main character. she is." },
   ],
+};
+
+export const ALIASES = {
+  tag: 'KNOWN ALIASES',
+  list: ['DAYAN', 'CHUDAIL', 'DIII', 'DIDIIII', 'EYIZ 💀', 'M_____ (hidden)'],
 };
 
 export const SCAN = {
-  tag: 'FACIAL RECOGNITION',
-  head: ['SCANNING', 'SUBJECT…'],
+  tag: 'FACE SCAN',
+  head: ['SCANNING', 'YOU…'],
   moods: [
-    { slug: 'eyes', label: 'ANALYZING…' },
-    { slug: 'eyiz-smile', label: 'EYIZ + SMILE — RARE COMBO' },
-    { slug: 'eyiz-nose', label: 'EYIZ + NOSE — ANATOMY CH.2' },
-    { slug: 'edited-eyes', label: 'SELF-EDITED — SKILLS: MID' },
-    { slug: 'straight-eyes', label: 'DIRECT EYE CONTACT — ULTRA RARE' },
-    { slug: 'left-side', label: 'ANGLE #47' },
-    { slug: 'smile', label: 'SAVE THIS ONE' },
-    { slug: 'full-face', label: 'FULL POWER' },
-    { slug: 'normal', label: '"NORMAL" — CITATION NEEDED' },
-    { slug: 'idk', label: 'IDK × 1000' },
-    { slug: 'blushing', label: 'SHY MODE — REAL STORY STARTS HERE' },
+    { slug: 'eyes', label: 'looking…' },
+    { slug: 'eyiz-smile', label: 'the eyiz one 💀' },
+    { slug: 'eyiz-nose', label: 'eyiz + nose. why.' },
+    { slug: 'edited-eyes', label: "she edits these and thinks we can't tell" },
+    { slug: 'straight-eyes', label: 'direct eye contact. rare.' },
+    { slug: 'left-side', label: 'angle #47 of 47' },
+    { slug: 'smile', label: 'this one. saving this one.' },
+    { slug: 'full-face', label: 'full power mode' },
+    { slug: 'normal', label: '"normal" (unverified)' },
+    { slug: 'idk', label: 'idk. literally idk.' },
+    { slug: 'blushing', label: "ok she's cute here. moving on." },
   ],
-  verdict: 'MATCH: 100% · SUBJECT: DAYAN · STATUS: MY SISTER',
-  foot: 'yes, real photos. my phone is full of these. drag to scan.',
+  verdict: 'RESULT: 100% dayan. unfortunately my sister. stuck with me forever.',
+  foot: 'yes these are real. my phone is 40% your face. drag it.',
 };
 
 export const TX = {
-  tag: 'INCOMING TRANSMISSION',
-  head: ['MY PHONE IS', 'A MUSEUM OF HER'],
+  tag: 'THE 2AM FILES',
+  head: ['MY PHONE IS', 'A MUSEUM OF YOU'],
   phone: [
     { slug: 'insta-pfp', label: 'INSTA' },
     { slug: 'wa-pfp', label: 'WHATSAPP' },
@@ -105,86 +107,116 @@ export const TX = {
     { slug: 'phone-wallpaper', label: 'WALLPAPER' },
     { slug: 'my-wallpaper', label: 'MY WALLPAPER' },
     { slug: 'wallpaper', label: 'BACKUP' },
-    { slug: 'randomly-received', label: '2 AM FILE — MUMBAI', big: true },
-    { slug: 'rendem-again', label: '"RENDEM" SERIES' },
+    { slug: 'randomly-received', label: '2AM FILE FROM MUMBAI', big: true },
+    { slug: 'rendem-again', label: 'THE "RENDEM" SERIES' },
   ],
-  chatMeta: 'UNSENT DRAFTS · 02:22 — NEVER DELIVERED (UNTIL TODAY)',
+  chatMeta: 'DRAFTS · 02:22 · NEVER SENT (TIL NOW)',
   chat: [
     { side: 'me', text: 'didi', time: '02:14' },
-    { side: 'me', text: 'you appeared in april and somehow became the biggest part of the year', time: '02:17' },
-    { side: 'me', text: 'i keep screenshots of the good days. my gallery is 40% you and i am not sorry', time: '02:19' },
-    { side: 'me', text: 'kabhi bolta nahi hoon properly so im typing it here at 2am where you will never see it', time: '02:21' },
-    { side: 'me', text: 'thank you for choosing to stay', time: '02:22' },
+    { side: 'me', text: 'u came in april and somehow the whole year became about u. idk how u did that', time: '02:16' },
+    { side: 'me', text: 'i never say stuff properly so. typing it here at 2am like an idiot', time: '02:19' },
+    { side: 'me', text: 'my gallery is 40% ur pics. my wallpaper too. no i will not apologize', time: '02:21' },
+    { side: 'me', text: 'thanks for staying ok thats it gn', time: '02:22' },
   ],
-  turn: ['i typed these at 2 AM. never sent them.', 'today, i am sending everything.'],
+  turn: ['typed at 2am. never sent.', 'today i am sending everything.'],
 };
 
 export const DIST = {
-  tag: 'GEO-DATA',
+  tag: 'THE DISTANCE THING',
   kmMax: 1424,
-  thesis: ['THE DISTANCE NEVER', 'BROKE US.'],
-  thesis2: 'IT JUST MADE THE THREAD LONGER.',
+  thesis: ['1,424 KM', 'AND STILL ANNOYING.'],
+  thesis2: 'distance tried. distance failed.',
   cards: [
-    { n: 'APR 2026', l: 'WHERE IT STARTED', d: 'one random month. one not-so-random person.' },
-    { n: '2', l: 'CITIES', d: 'gurugram ↔ mumbai. one sky over both.' },
-    { n: '1,424 KM', l: 'DISTANCE', d: 'measured. irrelevant. the thread is longer.' },
-    { n: '1', l: 'MOON', d: 'shared asset. look up tonight. i am too.' },
+    { n: 'APR 2026', l: 'START', d: 'random month. random person. now this.' },
+    { n: '2', l: 'CITIES', d: 'gurugram ↔ mumbai. same sky tho.' },
+    { n: '1,424 KM', l: 'DISTANCE', d: 'checked. irrelevant. the thread is longer.' },
+    { n: '1', l: 'MOON', d: 'look up tonight. i am looking too. deal?' },
   ],
 };
 
 export const RAKHI = {
-  tag: 'PROTOCOL EXECUTION',
   handSlug: 'hand-jwellery',
-  handAlt: 'the wrist — protocol target',
-  lines: ['THREAD DEPLOYED', 'TO WRIST.'],
-  sub: 'no network issues. no expiry date. tied by code, meant by heart.',
-  stamp: 'SECURED · 28.08.2026',
+  handAlt: 'the wrist. you know what to do.',
+};
+
+export const RITUAL = {
+  tag: 'THE MAIN PART',
+  head: ['NOW YOU', 'TIE IT.'],
+  sub: "i can't come to mumbai rn so. hold the button and tie it yourself ok.",
+  hold: 'HOLD TO TIE',
+  releasing: "don't let go…",
+  tiedTitle: 'TIED. DONE.',
+  tiedSub: "u just tied a rakhi from 1,424 km away. tell me that's not cool.",
+  tiedNext: 'ok now the letter →',
+  stamp: 'DONE · 28.08.2026 · FOREVER',
+  hint: 'hold it. watch the wrist.',
+};
+
+export const TIMELINE = {
+  tag: 'HOW IT HAPPENED',
+  head: ['FOUR MONTHS.', 'ZERO BLOOD.', 'FULL SIBLINGS.'],
+  sub: 'april to rakhi. quickly.',
+  nodes: [
+    { date: 'APR 2026', title: 'FIRST CONTACT', d: "met her in april. didn't think she'd stay this long lol", slug: 'grouped' },
+    { date: 'MAY 2026', title: 'THE ROAST ERA', d: 'she found out teasing me is fun. it never stopped.', slug: 'teasing' },
+    { date: 'JUN–JUL', title: '2AM HOURS', d: 'calls at insane hours. sleep destroyed. worth it.', slug: 'mirror-selfie' },
+    { date: '28 AUG', title: 'THREAD TIED', d: 'she tied it herself. from mumbai. over a website. 2026 is wild.', slug: 'hand-smile' },
+  ],
+  tail: '— season 2 starts tomorrow —',
 };
 
 export const LETTER = {
-  tag: 'FINAL TRANSMISSION',
-  flipWords: ['CHOSEN.', 'NOT GIVEN.'],
+  tag: 'THE PART I CANNOT SAY OUT LOUD',
+  flipWords: ['NOT BLOOD.', 'STILL FAMILY.'],
   body: [
-    'Diii,',
-    'writing this because i stop halfway every time i try to say it out loud.',
-    'april 2026. you appeared out of nowhere. now you matter more than most things that were always here.',
-    'there\'s no blood between us — and that\'s the best part. we chose this. every single day, i\'d choose it again.',
-    'i still have the screenshot of your birthday message. i re-read it sometimes.',
-    'mumbai is far. but it\'s the same moon up there, right? look up tonight — i\'m looking too.',
-    'happy raksha bandhan, dayan.',
+    'ok so.',
+    "i can't say things properly in person. you know this about me. so i made a whole website instead. yes. an entire website.",
+    "here's the thing. we're not blood related at all. zero. and you're still the most sister anyone has ever been to me. i think that's bigger.",
+    'april was 4 months ago. now my gallery, my wallpaper, my 2am calls. all you.',
+    "your birthday text? still saved. i read it sometimes. don't act cool about it.",
+    'mumbai is far but the moon is the same one. look at it sometimes. i am on the other side doing the same dumb thing.',
+    'happy raksha bandhan didi. the roasting never stops. that is a threat and a promise.',
   ],
-  sign: '— your brother (15, gurugram)',
-  ps: 'P.S. the roasting never stops. stay ready.',
+  sign: '— your bhai (15, sleep-deprived, gurugram)',
+  ps: 'P.S. if you screenshot this to make fun of me, the certificate gets revoked.',
 };
 
 export const FINALE = {
-  kicker: 'SEQUENCE COMPLETE — SAY IT PROPERLY',
+  kicker: 'ok. finally. say it properly —',
   title: ['HAPPY', 'RAKSHA', 'BANDHAN'],
   name: 'DIDI 🌙',
-  credit: ['— your 15-year-old brother', 'built at 2 AM. remember that.'],
-  call: 'call — you know the number',
-  callJoke: 'RULE NO.1 — dayan calls first. she has the number 😤',
-  cert: 'rakhi certificate 📜',
-  reply: 'copy your reply 📋',
-  replyDone: 'copied. now paste it to him 🖤',
-  footer: 'NO BLOOD RELATION DETECTED · CHOSEN FAMILY CONFIRMED · RAKHI.PROTOCOL © 2026',
+  credit: ['— your bhai', 'made at 2am. on a school night. remember that.'],
+  call: 'call. u have my number',
+  callJoke: 'RULE 1: dayan calls first 😤',
+  cert: 'get ur certificate 📜',
+  reply: 'copy ur reply 📋',
+  replyDone: 'copied. now go paste it to him.',
+  footer: 'no blood relation detected · chosen family confirmed · © bhai, 2026',
   certData: {
     title: 'RAKHI CERTIFICATE',
-    id: 'ID: DAYAN-2808 · OFFICIAL',
+    id: 'ID: DAYAN-2808 · 100% OFFICIAL',
     lines: [
       'This is to certify that',
-      'D I I I',
+      'D I D I',
       '(a.k.a. THE DAYAN · Mumbai)',
-      'has performed sister duties at an',
-      'EXCELLENT level since April 2026,',
-      'and is entitled to:',
+      'has been doing sister duties at an',
+      'UNREASONABLY GOOD level since April 2026,',
+      'and therefore gets:',
       'lifetime brother protection',
       'unlimited roast insurance',
-      '2 AM call rights — forever',
+      '2am call rights. forever.',
     ],
-    sign: '— your brother',
-    footer: '28.08.2026 · valid: permanently · rakhi protocol',
+    sign: '— your bhai',
+    footer: '28.08.2026 · valid forever · no refunds',
   },
+};
+
+export const FINALE_REPLY = "I SAW EVERYTHING.\nthe file?? the scanner?? THE CERTIFICATE?? 😭\nhappy raksha bandhan bhai. you built a WHOLE website at 2am. i'm telling everyone.";
+
+export const ARCHIVE = {
+  tag: 'ALL OF IT. YES, ALL.',
+  head: ['THE FULL', 'COLLECTION.'],
+  sub: 'every single pic i have of you. i am not apologizing. tap any.',
 };
 
 export const ALL_SLUGS = [
@@ -196,76 +228,3 @@ export const ALL_SLUGS = [
   'with-soft-toy', 'again-with-soft-toy', 'grouped', 'again-grouped',
   'hand-jwellery', 'hand-smile', 'my-pfp', 'blurry', 'mystery',
 ];
-
-// ── multi-route mission map ──
-export const ROUTES = [
-  { path: '/', tag: 'SIGNAL', short: 'SIGNAL' },
-  { path: '/timeline', tag: 'ORIGIN', short: 'ORIGIN' },
-  { path: '/dossier', tag: 'DOSSIER', short: 'DOSSIER' },
-  { path: '/scanner', tag: 'SCANNER', short: 'SCANNER' },
-  { path: '/transmission', tag: 'TRANSMISSION', short: 'TX' },
-  { path: '/distance', tag: 'DISTANCE', short: 'DISTANCE' },
-  { path: '/ritual', tag: 'RITUAL', short: 'RITUAL' },
-  { path: '/letter', tag: 'LETTER', short: 'LETTER' },
-  { path: '/finale', tag: 'FINALE', short: 'FINALE' },
-];
-
-export const LANDING = {
-  kicker: 'INCOMING TRANSMISSION · 28.08.2026 · ONE RECIPIENT',
-  line1: 'SAME SKY.',
-  line2: 'ONE THREAD.',
-  sub: 'a raksha bandhan protocol · deployed from gurugram → mumbai',
-  gateTag: 'VERIFY RECIPIENT',
-  gateQ: '> WHO IS THIS FOR?',
-  placeholder: 'her codename…',
-  granted: '> RECIPIENT VERIFIED — PROCEED, DAYAN',
-  wrong: ['> NOT HER. TRY AGAIN.', '> HINT: HAUNTS MY PHONE AT 2 AM.', '> STARTS WITH D. ENDS WITH DAYAN.'],
-  fine: '> …fine. come in anyway. you are obviously her.',
-  gridTag: 'SELECT SEQUENCE',
-};
-
-export const RITUAL = {
-  tag: 'PROTOCOL 05 — THE RITUAL',
-  head: ['NOW TIE IT', 'YOURSELF.'],
-  sub: 'press and hold. the thread knows the way from here.',
-  hold: 'HOLD TO TIE',
-  releasing: 'DON\'T LET GO…',
-  tiedTitle: 'THREAD SECURED.',
-  tiedSub: 'tied by you, from 1,424 km away. no network issues. no expiry. lifetime warranty.',
-  tiedNext: 'read the letter →',
-  stamp: 'SECURED · 28.08.2026 · LIFETIME',
-  hint: 'hold the button — watch the wrist',
-};
-
-export const ARCHIVE = {
-  tag: 'CLASSIFIED ARCHIVE — DECLASSIFIED',
-  head: ['THE FULL', 'COLLECTION.'],
-  sub: 'every file my phone holds. yes, all of them. no, i will not apologize.',
-};
-
-export const VEIL = {
-  small: 'RAKHI.PROTOCOL_v2.8 — ENCRYPTED TRANSMISSION',
-  big: 'FOR DIDI. ONLY.',
-  enter: 'TAP TO OPEN — SOUND ON 🎧',
-  note: 'headphones strongly advised. this was built at 2 AM.',
-};
-
-export const FINALE_REPLY = "i saw it. ALL of it.\nthe dayan file? the scanner? THE CERTIFICATE? 😭\nhappy raksha bandhan, bhai. you're insane. thank you for all of this.";
-
-export const TIMELINE = {
-  tag: 'ORIGIN STORY — DECLASSIFIED',
-  head: ['WHERE IT', 'ALL STARTED.'],
-  sub: 'four months. zero blood relation. full siblingship.',
-  nodes: [
-    { date: 'APR 2026', title: 'FIRST CONTACT', d: 'a random month. a not-so-random person appeared. nobody asked her to stay. she did anyway.', slug: 'grouped' },
-    { date: 'MAY 2026', title: 'THE ROAST WARS', d: 'she discovered teasing as a love language. casualties: my self-esteem. the war continues.', slug: 'teasing' },
-    { date: 'JUN–JUL 2026', title: '2 AM PROTOCOL', d: 'calls at hours that worry doctors. sleep schedule: destroyed. worth it: yes.', slug: 'mirror-selfie' },
-    { date: '28 AUG 2026', title: 'THREAD TIED', d: '1,424 km crossed by one thread. protocol complete. lifetime warranty activated.', slug: 'hand-smile' },
-  ],
-  tail: '— and this is just season one. —',
-};
-
-export const ALIASES = {
-  tag: 'KNOWN ALIASES',
-  list: ['DAYAN', 'CHUDAIL', 'DIII', 'DIDIIII', 'EYIZ 🥹', 'M█████ (redacted)'],
-};

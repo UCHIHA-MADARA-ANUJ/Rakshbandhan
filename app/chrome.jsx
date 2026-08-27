@@ -107,6 +107,7 @@ export default function Chrome({ children }) {
   const path = usePathname();
   const [muted, setMuted] = useState(false);
   const [veil, setVeil] = useState(false);
+  const [menu, setMenu] = useState(false);
   const wiped = useRef(false);
   const idx = C.ROUTES.findIndex((r) => r.path === path);
   const prev = idx > 0 ? C.ROUTES[idx - 1] : null;
@@ -201,6 +202,19 @@ export default function Chrome({ children }) {
       )}
       <div id="wipe" aria-hidden="true"><i /></div>
 
+      {menu && (
+        <div id="routemenu" onClick={() => setMenu(false)}>
+          <p className="hud-txt gold">PICK A SEQUENCE</p>
+          {C.ROUTES.concat([{ path: '/archive', tag: 'ARCHIVE', short: 'ARCHIVE' }]).map((r, i) => (
+            <a key={r.path} href={r.path} className={r.path === path ? 'on' : ''} onClick={() => setMenu(false)}>
+              <span className="rm-n">0{i}</span>
+              <span className="rm-t">{r.tag}</span>
+            </a>
+          ))}
+          <button className="lb-close" onClick={() => setMenu(false)}>CLOSE ✕</button>
+        </div>
+      )}
+
       <header className="topnav">
         <a href="/" className="brand">RAKHI<span className="gold">.</span>PROTOCOL_</a>
         <Clock />
@@ -211,6 +225,7 @@ export default function Chrome({ children }) {
             </a>
           ))}
         </nav>
+        <button id="menubtn" onClick={() => setMenu(true)} aria-label="sequences">≡</button>
         <button id="mute" onClick={toggleMute} aria-label="sound">{muted ? '🔇' : '🔊'}</button>
       </header>
 
