@@ -6,7 +6,7 @@ import { resolve, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const srcDir = resolve(process.argv[2] || '/home/user/uploads');
+const srcDir = resolve(process.argv[2] || 'pics');
 const outDir = resolve(root, 'public/assets/photos');
 const audioDir = resolve(root, 'public/audio');
 mkdirSync(outDir, { recursive: true }); mkdirSync(audioDir, { recursive: true });
