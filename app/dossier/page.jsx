@@ -16,6 +16,12 @@ export default function Dossier() {
       <div className="charge-roll hud-txt">
         {C.FILE.charges.map((c, i) => <span key={i}>⚠ {c}</span>)}
       </div>
+      <div className="aliases">
+        <p className="hud-txt gold mb">{C.ALIASES.tag}</p>
+        <div className="alias-row">
+          {C.ALIASES.list.map((a, i) => <span key={i} className="alias">{a}</span>)}
+        </div>
+      </div>
       <div className="cards">
         {C.FILE.cards.map((c, i) => (
           <div className="gcard" key={i}>

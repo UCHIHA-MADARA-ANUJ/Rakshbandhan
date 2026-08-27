@@ -81,6 +81,12 @@
       "namedRegex": "^/scanner(?:/)?$"
     },
     {
+      "page": "/timeline",
+      "regex": "^/timeline(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/timeline(?:/)?$"
+    },
+    {
       "page": "/transmission",
       "regex": "^/transmission(?:/)?$",
       "routeKeys": {},

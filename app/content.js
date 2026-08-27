@@ -198,6 +198,7 @@ export const ALL_SLUGS = [
 // ── multi-route mission map ──
 export const ROUTES = [
   { path: '/', tag: 'SIGNAL', short: 'SIGNAL' },
+  { path: '/timeline', tag: 'ORIGIN', short: 'ORIGIN' },
   { path: '/dossier', tag: 'DOSSIER', short: 'DOSSIER' },
   { path: '/scanner', tag: 'SCANNER', short: 'SCANNER' },
   { path: '/transmission', tag: 'TRANSMISSION', short: 'TX' },
@@ -248,3 +249,21 @@ export const VEIL = {
 };
 
 export const FINALE_REPLY = "i saw it. ALL of it.\nthe dayan file? the scanner? THE CERTIFICATE? 😭\nhappy raksha bandhan, bhai. you're insane. thank you for all of this.";
+
+export const TIMELINE = {
+  tag: 'ORIGIN STORY — DECLASSIFIED',
+  head: ['WHERE IT', 'ALL STARTED.'],
+  sub: 'four months. zero blood relation. full siblingship.',
+  nodes: [
+    { date: 'APR 2026', title: 'FIRST CONTACT', d: 'a random month. a not-so-random person appeared. nobody asked her to stay. she did anyway.', slug: 'grouped' },
+    { date: 'MAY 2026', title: 'THE ROAST WARS', d: 'she discovered teasing as a love language. casualties: my self-esteem. the war continues.', slug: 'teasing' },
+    { date: 'JUN–JUL 2026', title: '2 AM PROTOCOL', d: 'calls at hours that worry doctors. sleep schedule: destroyed. worth it: yes.', slug: 'mirror-selfie' },
+    { date: '28 AUG 2026', title: 'THREAD TIED', d: '1,424 km crossed by one thread. protocol complete. lifetime warranty activated.', slug: 'hand-smile' },
+  ],
+  tail: '— and this is just season one. —',
+};
+
+export const ALIASES = {
+  tag: 'KNOWN ALIASES',
+  list: ['DAYAN', 'CHUDAIL', 'DIII', 'DIDIIII', 'EYIZ 🥹', 'M█████ (redacted)'],
+};

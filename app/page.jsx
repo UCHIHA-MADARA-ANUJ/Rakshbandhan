@@ -5,6 +5,7 @@ import { useReveals, getAudio } from './chrome.jsx';
 import { setAudioLevel } from './particles.jsx';
 
 const DESC = {
+  '/timeline': 'april 2026 → today. the whole story.',
   '/dossier': 'subject file: dayan — charges, evidence, threat level',
   '/scanner': 'facial recognition — 11 moods indexed',
   '/transmission': 'her phone. her words. the birthday.',

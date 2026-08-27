@@ -16,8 +16,8 @@ import * as C from './content.js';
 
 let A = null;
 export const getAudio = () => A;
-const ENERGY = { '/': 0.16, '/dossier': 0.2, '/scanner': 0.3, '/transmission': 0.45, '/distance': 0.55, '/ritual': 0.7, '/letter': 0.5, '/finale': 1, '/archive': 0.25 };
-const TITLES = { '/': 'SIGNAL', '/dossier': 'DOSSIER', '/scanner': 'SCANNER', '/transmission': 'TRANSMISSION', '/distance': 'DISTANCE', '/ritual': 'THE RITUAL', '/letter': 'THE LETTER', '/finale': 'FINALE', '/archive': 'ARCHIVE' };
+const ENERGY = { '/': 0.16, '/dossier': 0.2, '/scanner': 0.3, '/transmission': 0.45, '/distance': 0.55, '/timeline': 0.28, '/ritual': 0.7, '/letter': 0.5, '/finale': 1, '/archive': 0.25 };
+const TITLES = { '/': 'SIGNAL', '/dossier': 'DOSSIER', '/scanner': 'SCANNER', '/transmission': 'TRANSMISSION', '/distance': 'DISTANCE', '/ritual': 'THE RITUAL', '/letter': 'THE LETTER', '/finale': 'FINALE', '/archive': 'ARCHIVE', '/timeline': 'ORIGIN' };
 
 export const toast = (msg, ms = 2600) => {
   let el = document.getElementById('rk-toast');

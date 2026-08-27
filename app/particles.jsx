@@ -6,6 +6,7 @@
 // ═══════════════════════════════════════════════════════════
 import { useEffect, useRef, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
 const VERT = /* glsl */`
@@ -97,7 +98,7 @@ void main() {
   float mixFactor = smoothstep(-2.0, 2.0, curl.y + aRandom.y);
   vColor = mix(colorGold, colorRed, mixFactor);
 
-  vAlpha = smoothstep(0.0, 1.0, sin(uTime * (aRandom.z * 5.0) + aRandom.x * 10.0)) * 0.8 + 0.2;
+  vAlpha = smoothstep(0.0, 1.0, sin(uTime * (aRandom.z * 5.0) + aRandom.x * 10.0)) * 0.85 + 0.35;
   vAlpha *= smoothstep(15.0, 5.0, length(pos.xy));
 
   vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
@@ -188,8 +189,11 @@ export default function ParticleField({ count = 60000 }) {
   const n = typeof window !== 'undefined' && matchMedia('(hover:none)').matches ? Math.min(count, 22000) : count;
   return (
     <div className="particle-host" aria-hidden="true">
-      <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
+      <Canvas camera={{ position: [0, 0, 15], fov: 45 }} dpr={[1, 1.5]} gl={{ antialias: false, powerPreference: 'high-performance' }}>
         <Particles count={n} />
+        <EffectComposer>
+          <Bloom intensity={1.15} luminanceThreshold={0.12} luminanceSmoothing={0.5} mipmapBlur radius={0.72} />
+        </EffectComposer>
       </Canvas>
     </div>
   );
