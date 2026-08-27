@@ -41,7 +41,7 @@ export default function Dossier() {
               <figcaption>
                 <b className="gold">{e.tag}</b>
                 <span>{e.cap}</span>
-                <em className="hud-txt">2:22 AM</em>
+                <em className="hud-txt">EVIDENCE LOG</em>
               </figcaption>
             </figure>
           ))}

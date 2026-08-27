@@ -4,11 +4,11 @@
   "/archive/page": "/archive",
   "/distance/page": "/distance",
   "/dossier/page": "/dossier",
-  "/finale/page": "/finale",
   "/letter/page": "/letter",
+  "/finale/page": "/finale",
   "/page": "/",
   "/ritual/page": "/ritual",
-  "/scanner/page": "/scanner",
   "/timeline/page": "/timeline",
+  "/scanner/page": "/scanner",
   "/transmission/page": "/transmission"
 }
