@@ -632,3 +632,7 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
 .veil-coords{letter-spacing:.34em;animation:veilin 1.4s .5s both}
 .veil-big{animation:veiltrack 2.4s cubic-bezier(.16,1,.3,1) both}
 @keyframes veiltrack{from{letter-spacing:.3em;opacity:0;filter:blur(14px)}to{letter-spacing:-.02em;opacity:1;filter:blur(0)}}
+
+/* unsent drafts — my side */
+.bub.me{align-self:flex-end;background:rgba(217,164,65,.13);border:1px solid rgba(217,164,65,.35);
+  border-bottom-right-radius:4px;color:var(--t1)}

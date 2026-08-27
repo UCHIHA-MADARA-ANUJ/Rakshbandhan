@@ -7,8 +7,8 @@
   "/finale/page": "app/finale/page.js",
   "/letter/page": "app/letter/page.js",
   "/page": "app/page.js",
+  "/ritual/page": "app/ritual/page.js",
   "/scanner/page": "app/scanner/page.js",
   "/timeline/page": "app/timeline/page.js",
-  "/transmission/page": "app/transmission/page.js",
-  "/ritual/page": "app/ritual/page.js"
+  "/transmission/page": "app/transmission/page.js"
 }

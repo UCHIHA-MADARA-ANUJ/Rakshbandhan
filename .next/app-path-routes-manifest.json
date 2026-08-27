@@ -7,8 +7,8 @@
   "/finale/page": "/finale",
   "/letter/page": "/letter",
   "/page": "/",
+  "/ritual/page": "/ritual",
   "/scanner/page": "/scanner",
   "/timeline/page": "/timeline",
-  "/transmission/page": "/transmission",
-  "/ritual/page": "/ritual"
+  "/transmission/page": "/transmission"
 }

@@ -46,7 +46,7 @@ export default function Finale() {
   }, []);
 
   const copyReply = async () => {
-    try { await navigator.clipboard.writeText(C.FINALE_REPLY); toast('copied. now paste it to bhai 🖤'); }
+    try { await navigator.clipboard.writeText(C.FINALE_REPLY); toast(C.FINALE.replyDone); }
     catch { toast('copy blocked — screenshot it 😅'); }
   };
 
@@ -117,11 +117,10 @@ export default function Finale() {
           <div className="fin-name">{C.FINALE.name}</div>
           <p className="fin-credit">{C.FINALE.credit[0]}<br /><span className="dim2">{C.FINALE.credit[1]}</span></p>
           <div className="fin-actions">
-            <a className="fbtn primary" href="#" {...mag}>{C.FINALE.call}</a>
-            <button className="fbtn" onClick={openCert} {...mag}>{C.FINALE.cert}</button>
-            <a className="fbtn" href="#" target="_blank" rel="noopener" {...mag}>{C.FINALE.reply}</a>
+            <button className="fbtn" onClick={() => toast(C.FINALE.callJoke)} {...mag}>{C.FINALE.call}</button>
+            <button className="fbtn primary" onClick={openCert} {...mag}>{C.FINALE.cert}</button>
+            <button className="fbtn" onClick={copyReply} {...mag}>{C.FINALE.reply}</button>
           </div>
-          <button className="copy-reply" onClick={copyReply}>or tap to copy your reply 📋</button>
         </div>
         <footer className="hud-txt fin-footer">{C.FINALE.footer}</footer>
       </section>

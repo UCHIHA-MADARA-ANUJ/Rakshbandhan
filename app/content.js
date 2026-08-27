@@ -108,14 +108,15 @@ export const TX = {
     { slug: 'randomly-received', label: '2 AM FILE — MUMBAI', big: true },
     { slug: 'rendem-again', label: '"RENDEM" SERIES' },
   ],
-  chatMeta: 'TRANSMISSION — THE BIRTHDAY',
-  // ⚠️ BHAJI: replace with her real messages (side: 'her' | 'me')
+  chatMeta: 'UNSENT DRAFTS · 02:22 — NEVER DELIVERED (UNTIL TODAY)',
   chat: [
-    { side: 'her', text: 'HAPPY BIRTHDAY BHAI 🎂', time: '00:02' },
-    { side: 'her', text: 'i love you yaar' },
-    { side: 'her', text: 'god bless. always smiling, ok?' },
+    { side: 'me', text: 'didi', time: '02:14' },
+    { side: 'me', text: 'you appeared in april and somehow became the biggest part of the year', time: '02:17' },
+    { side: 'me', text: 'i keep screenshots of the good days. my gallery is 40% you and i am not sorry', time: '02:19' },
+    { side: 'me', text: 'kabhi bolta nahi hoon properly so im typing it here at 2am where you will never see it', time: '02:21' },
+    { side: 'me', text: 'thank you for choosing to stay', time: '02:22' },
   ],
-  turn: ['she only writes like this when nobody\'s watching.', 'so i built this.'],
+  turn: ['i typed these at 2 AM. never sent them.', 'today, i am sending everything.'],
 };
 
 export const DIST = {
@@ -161,10 +162,11 @@ export const FINALE = {
   title: ['HAPPY', 'RAKSHA', 'BANDHAN'],
   name: 'DIDI 🌙',
   credit: ['— your 15-year-old brother', 'built at 2 AM. remember that.'],
-  // TODO(bhai): tel:+91XXXXXXXXXX + https://wa.me/91XXXXXXXXXX
-  call: 'call kar abhi',
+  call: 'call — you know the number',
+  callJoke: 'RULE NO.1 — dayan calls first. she has the number 😤',
   cert: 'rakhi certificate 📜',
-  reply: 'reply likh do',
+  reply: 'copy your reply 📋',
+  replyDone: 'copied. now paste it to him 🖤',
   footer: 'NO BLOOD RELATION DETECTED · CHOSEN FAMILY CONFIRMED · RAKHI.PROTOCOL © 2026',
   certData: {
     title: 'RAKHI CERTIFICATE',
