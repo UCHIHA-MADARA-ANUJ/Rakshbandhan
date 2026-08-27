@@ -10,5 +10,9 @@
     "files": [
       "static/chunks/527.26272755d6cfde06.js"
     ]
+  },
+  "app/page.jsx -> ./particles.jsx": {
+    "id": 4226,
+    "files": []
   }
 }

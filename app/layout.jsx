@@ -2,20 +2,11 @@ import './globals.css';
 import localFont from 'next/font/local';
 
 const display = localFont({
-  variable: '--font-display',
+  variable: '--font-oswald',
   src: [
-    { path: './fonts/fraunces-latin-400-normal.woff2', weight: '400', style: 'normal' },
-    { path: './fonts/fraunces-latin-400-italic.woff2', weight: '400', style: 'italic' },
-    { path: './fonts/fraunces-latin-600-normal.woff2', weight: '600', style: 'normal' },
-    { path: './fonts/fraunces-latin-700-normal.woff2', weight: '700', style: 'normal' },
-  ],
-});
-const ui = localFont({
-  variable: '--font-ui',
-  src: [
-    { path: './fonts/space-grotesk-latin-400-normal.woff2', weight: '400', style: 'normal' },
-    { path: './fonts/space-grotesk-latin-500-normal.woff2', weight: '500', style: 'normal' },
-    { path: './fonts/space-grotesk-latin-700-normal.woff2', weight: '700', style: 'normal' },
+    { path: './fonts/oswald-latin-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/oswald-latin-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: './fonts/oswald-latin-700-normal.woff2', weight: '700', style: 'normal' },
   ],
 });
 const mono = localFont({
@@ -34,18 +25,18 @@ const hand = localFont({
 });
 
 export const metadata = {
-  title: 'for dayan only 🌙',
-  description: 'yeh website nahi hai. ye reply hai.',
+  title: 'RAKHI.PROTOCOL — for didi only',
+  description: 'this is not a website. it is a reply. 28.08.2026',
   robots: { index: false, follow: false },
   openGraph: {
-    title: 'for dayan only 🌙',
-    description: 'yeh website nahi hai. ye reply hai. — tumhara bhai',
+    title: 'RAKHI.PROTOCOL — for didi only',
+    description: 'this is not a website. it is a reply.',
     images: ['/og-image.png'],
   },
 };
 
 export const viewport = {
-  themeColor: '#06060B',
+  themeColor: '#000000',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -53,8 +44,8 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="hi">
-      <body className={`${display.variable} ${ui.variable} ${mono.variable} ${hand.variable}`}>
+    <html lang="en">
+      <body className={`${display.variable} ${mono.variable} ${hand.variable}`}>
         {children}
       </body>
     </html>

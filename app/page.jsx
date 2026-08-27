@@ -1,115 +1,187 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import * as C from './content.js';
-import { Engine, formations } from './engine.js';
+import { setAudioLevel } from './particles.jsx';
 
-const TOTAL = 10; // chapters 0..9
-const clampCh = (n) => Math.max(0, Math.min(TOTAL - 1, n));
+const ParticleField = dynamic(() => import('./particles.jsx'), { ssr: false });
+gsap.registerPlugin(ScrollTrigger);
+
+const flip = (containerSel, wordSel) => {
+  const words = document.querySelectorAll(wordSel);
+  if (!words.length) return;
+  gsap.fromTo(words,
+    { y: 120, opacity: 0, rotateX: -80, skewY: 6 },
+    { y: 0, opacity: 1, rotateX: 0, skewY: 0, duration: 1.4, stagger: 0.12, ease: 'power4.out',
+      scrollTrigger: { trigger: containerSel, start: 'top 78%' } });
+};
 
 export default function Page() {
-  const [ch, setCh] = useState(0);
+  const [booted, setBooted] = useState(false);
   const [bootLine, setBootLine] = useState(-1);
-  const [ready, setReady] = useState(false);
-  const [unlocked, setUnlocked] = useState(false);
-  const [granted, setGranted] = useState(false);
   const [gateResp, setGateResp] = useState('');
-  const [stampOn, setStampOn] = useState(false);
-  const [muted, setMuted] = useState(false);
+  const [gateOk, setGateOk] = useState(false);
+  const [stamp, setStamp] = useState(false);
   const [mood, setMood] = useState(0);
   const [km, setKm] = useState(0);
+  const [muted, setMuted] = useState(false);
+  const [gallery, setGallery] = useState(false);
+  const [cert, setCert] = useState(false);
   const [hasVoice, setHasVoice] = useState(false);
-  const [galleryOpen, setGalleryOpen] = useState(false);
-  const [certOpen, setCertOpen] = useState(false);
-
-  const engineRef = useRef(null);
-  const audioRef = useRef(null);
-  const cvRef = useRef(null);
+  const audio = useRef(null);
+  const wrong = useRef(0);
   const inputRef = useRef(null);
   const petalsRef = useRef(null);
-  const wrongRef = useRef(0);
-  const doneGateRef = useRef(false);
-  const lastNavRef = useRef(0);
-  const burstTRef = useRef(null);
 
-  // ── engine boot (particles live from second zero) ──
+  // boot terminal
   useEffect(() => {
     document.body.classList.add('locked');
-    engineRef.current = new Engine(cvRef.current);
-    engineRef.current.setFormation(formations.ring);
-    (async () => { try { await import('./eggs.js').then(m => m.initEggs({
-      sfx: (k) => audioRef.current?.sfx(k),
-      onGallery: setGalleryOpen,
-    })); } catch {} })();
-    try {
-      fetch('audio/voice.m4a', { method: 'HEAD' }).then(r => r.ok && setHasVoice(true)).catch(() => {});
-    } catch {}
-    const timers = C.PRELOADER.lines.map((_, i) => setTimeout(() => setBootLine(i), 400 + i * 1100));
-    const t = setTimeout(() => setReady(true), Math.max(2200, 400 + C.PRELOADER.lines.length * 1100 + 500));
-    return () => { timers.forEach(clearTimeout); clearTimeout(t); };
+    const ts = C.BOOT.lines.map((_, i) => setTimeout(() => setBootLine(i), 350 + i * 900));
+    const end = setTimeout(() => finishBoot(), 350 + C.BOOT.lines.length * 900 + 900);
+    return () => { ts.forEach(clearTimeout); clearTimeout(end); };
+  }, []);
+  const finishBoot = () => {
+    setBooted(true);
+    document.body.classList.remove('locked');
+    setTimeout(() => {
+      flip('#hero', '#hero .flip');
+      flip('#file-head', '#file-head .flip');
+    }, 150);
+  };
+
+  // audio unlock on first gesture
+  useEffect(() => {
+    const init = async () => {
+      if (audio.current) return;
+      const { Baarishein } = await import('./audio.js');
+      const a = new Baarishein();
+      audio.current = a;
+      await a.unlock();
+      a.setEnergy(0.14);
+      a.onPulse = (v) => setAudioLevel(Math.min(1, v * 1.5));
+      import('./eggs.js').then((m) => m.initEggs({
+        sfx: (k) => a.sfx(k),
+        onGallery: setGallery,
+      }));
+    };
+    addEventListener('pointerdown', init, { once: true });
+    fetch('audio/voice.m4a', { method: 'HEAD' }).then((r) => r.ok && setHasVoice(true)).catch(() => {});
   }, []);
 
-  // ── chapter → particle formation ──
+  // scroll story
   useEffect(() => {
-    const E = engineRef.current; if (!E) return;
-    let disp = 'sans-serif';
-    try { disp = getComputedStyle(document.querySelector('.wanted-name')).fontFamily; } catch {}
-    const T = (lines, size) => formations.text(lines, { font: `700 90px ${disp}`, size });
-    const map = {
-      0: formations.ring,
-      1: granted ? T(['DAYAN'], 0.20) : T(['WHO ?'], 0.16),
-      2: T(['DAYAN'], 0.20),
-      3: formations.edge,
-      4: formations.halo,
-      5: formations.edge,
-      6: formations.cities,
-      7: formations.wrist,
-      8: formations.calm,
-      9: T(['HAPPY', 'RAKSHA', 'BANDHAN'], 0.11),
-    };
-    E.setFormation(map[ch] ?? formations.ring);
-    if (ch === 9) {
-      clearTimeout(burstTRef.current);
-      burstTRef.current = setTimeout(() => E.burstFree(), 4600);
+    if (!booted) return;
+    const h = document.documentElement;
+    // reveals
+    flip('#scan-head', '#scan-head .flip');
+    flip('#tx-head', '#tx-head .flip');
+    flip('#dist-thesis', '#dist-thesis .flip');
+    flip('#letter-flip', '#letter-flip .flip');
+    // cards
+    document.querySelectorAll('.gcard').forEach((card) => {
+      gsap.fromTo(card, { y: 60, opacity: 0 }, {
+        y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: card, start: 'top 88%' },
+      });
+    });
+    // exhibits
+    gsap.fromTo('.evcard', { y: 80, opacity: 0, rotate: -2 }, {
+      y: 0, opacity: 1, rotate: 0, duration: 1, stagger: 0.08, ease: 'power3.out',
+      scrollTrigger: { trigger: '#evidence', start: 'top 80%' },
+    });
+    // km counter
+    ScrollTrigger.create({
+      trigger: '#dist', start: 'top 70%', once: true,
+      onEnter: () => {
+        const t0 = performance.now();
+        const step = (t) => {
+          const p = Math.min(1, (t - t0) / 2200);
+          setKm(Math.round((1 - Math.pow(1 - p, 3)) * C.DIST.kmMax));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      },
+    });
+    // energy per zone
+    const zones = [
+      ['#hero', 0.14], ['#file', 0.18], ['#scan', 0.3], ['#tx', 0.5],
+      ['#dist', 0.62], ['#rakhi', 0.85], ['#letter', 0.55], ['#finale', 1],
+    ];
+    zones.forEach(([sel, e]) => ScrollTrigger.create({
+      trigger: sel, start: 'top 60%', end: 'bottom 40%',
+      onToggle: (self) => self.isActive && audio.current?.setEnergy(e),
+    }));
+    // rakhi draw + finale
+    ScrollTrigger.create({ trigger: '#rakhi', start: 'top 65%', once: true,
+      onEnter: () => document.getElementById('hand-wrap')?.classList.add('in') });
+    ScrollTrigger.create({ trigger: '#finale', start: 'top 70%', once: true,
+      onEnter: () => {
+        document.getElementById('finale-box')?.classList.add('in');
+        startPetals();
+        audio.current?.sfx('whoosh');
+      } });
+    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+  }, [booted]);
+
+  // gate
+  const check = () => {
+    const v = inputRef.current?.value.trim().toLowerCase();
+    if (!v || gateOk) return;
+    for (const g of Object.values(C.GATE.accept)) {
+      if (g.keys.some((k) => v.includes(k))) {
+        setGateResp(g.resp);
+        setGateOk(true);
+        if (g.stamp) setStamp(true);
+        audio.current?.sfx('stamp');
+        setAudioLevel(1);
+        setTimeout(() => setAudioLevel(0.2), 900);
+        setTimeout(() => document.getElementById('file')?.scrollIntoView({ behavior: 'smooth' }), 1600);
+        return;
+      }
     }
-  }, [ch, granted]);
+    setGateResp(C.GATE.wrong[wrong.current % C.GATE.wrong.length]);
+    wrong.current++;
+    inputRef.current.value = '';
+    audio.current?.sfx('tick');
+  };
 
-  // ── focus gate input ──
-  useEffect(() => { if (ch === 1 && !doneGateRef.current) setTimeout(() => inputRef.current?.focus(), 80); }, [ch]);
-
-  // ── km counter ──
-  useEffect(() => {
-    if (ch !== 6) { setKm(0); return; }
-    let raf, t0;
-    const step = (ts) => {
-      if (!t0) t0 = ts;
-      const p = Math.min(1, (ts - t0) / 2400);
-      setKm(Math.round((1 - Math.pow(1 - p, 3)) * C.ACT4.kmMax));
-      if (p < 1) raf = requestAnimationFrame(step);
+  // mood drag
+  const moodDrag = (() => {
+    let sx = null, acc = 0;
+    return {
+      down: (e) => { sx = e.clientX; acc = 0; try { e.currentTarget.setPointerCapture(e.pointerId); } catch {} },
+      move: (e) => {
+        if (sx == null) return;
+        acc += e.clientX - sx; sx = e.clientX;
+        while (Math.abs(acc) > 42) {
+          setMood((m) => Math.max(0, Math.min(C.SCAN.moods.length - 1, m + (acc > 0 ? 1 : -1))));
+          acc = 0;
+        }
+      },
+      up: () => { sx = null; },
     };
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
-  }, [ch]);
+  })();
 
-  // ── petals (finale) ──
-  useEffect(() => {
-    if (ch !== 9) return;
+  // petals
+  const startPetals = () => {
     const cv = petalsRef.current; if (!cv) return;
     const ctx = cv.getContext('2d');
     const fit = () => { cv.width = cv.offsetWidth; cv.height = cv.offsetHeight; };
     fit(); addEventListener('resize', fit);
-    const colors = ['#C4453A', '#D9A441', '#F2E8D5', '#a8362e'];
+    const cols = ['#FF2E4D', '#D9A441', '#F2E8D5', '#a8362e'];
     const P = Array.from({ length: 40 }, () => ({
       x: Math.random(), y: Math.random(), r: 3 + Math.random() * 5,
       vy: 0.4 + Math.random() * 0.8, ph: Math.random() * 6.28,
-      c: colors[(Math.random() * colors.length) | 0], a: 0.5 + Math.random() * 0.5,
+      c: cols[(Math.random() * cols.length) | 0], a: 0.5 + Math.random() * 0.5,
     }));
-    let t = 0, run = true;
+    let t = 0;
     (function loop() {
-      if (!run) return;
       t += 0.016;
       ctx.clearRect(0, 0, cv.width, cv.height);
       for (const p of P) {
-        p.y += p.vy / 650; p.ph += 0.02;
+        p.y += p.vy / 620; p.ph += 0.02;
         if (p.y > 1.05) { p.y = -0.05; p.x = Math.random(); }
         ctx.save();
         ctx.translate((p.x + Math.sin(p.ph) * 0.02) * cv.width, p.y * cv.height);
@@ -120,121 +192,25 @@ export default function Page() {
       }
       requestAnimationFrame(loop);
     })();
-    return () => { run = false; removeEventListener('resize', fit); };
-  }, [ch]);
-
-  // ── navigation ──
-  const go = (d) => setCh((c) => {
-    const n = clampCh(c + d);
-    if (c === 1 && !doneGateRef.current && d > 0) return c; // gate locked
-    audioRef.current?.sfx('tick');
-    return n;
-  });
-  const jump = (n) => { if (n <= 1 && !doneGateRef.current && n === 1 && ch === 0 && !unlocked) return; setCh(clampCh(n)); };
-
-  useEffect(() => {
-    let sy = null, sx = null;
-    const onWheel = (e) => {
-      if (Math.abs(e.deltaY) < 24 || e.target.closest('.ch-scroll')?.scrollHeight > innerHeight + 40 &&
-        e.target.closest('.ch-scroll') && Math.abs(e.deltaY) < 60) return;
-      const now = Date.now(); if (now - lastNavRef.current < 950) return;
-      lastNavRef.current = now;
-      go(e.deltaY > 0 ? 1 : -1);
-    };
-    const onTS = (e) => {
-      if (e.target.closest('.mood-stack, .filmstrip, input, .letter')) { sy = null; return; }
-      sy = e.touches[0].clientY; sx = e.touches[0].clientX;
-    };
-    const onTE = (e) => {
-      if (sy == null) return;
-      const dy = sy - e.changedTouches[0].clientY;
-      const dx = sx - e.changedTouches[0].clientX;
-      if (Math.max(Math.abs(dy), Math.abs(dx)) > 65) go(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 1 : -1) : (dy > 0 ? 1 : -1));
-      sy = null;
-    };
-    const onKey = (e) => {
-      if (['ArrowDown', 'ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(1); }
-      if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); go(-1); }
-    };
-    addEventListener('wheel', onWheel, { passive: true });
-    addEventListener('touchstart', onTS, { passive: true });
-    addEventListener('touchend', onTE, { passive: true });
-    addEventListener('keydown', onKey);
-    return () => {
-      removeEventListener('wheel', onWheel); removeEventListener('touchstart', onTS);
-      removeEventListener('touchend', onTE); removeEventListener('keydown', onKey);
-    };
-  }, []);
-
-  // ── gate logic ──
-  const grant = (g) => {
-    doneGateRef.current = true;
-    if (inputRef.current) inputRef.current.disabled = true;
-    setGateResp(g.resp || C.GATE.grantedLine);
-    if (g.stamp) { setStampOn(true); audioRef.current?.sfx('stamp'); }
-    setGranted(true);
-    engineRef.current?.kick(0.9);
-    setTimeout(() => setCh(2), g.stamp ? 2000 : 1600);
-  };
-  const check = () => {
-    const v = inputRef.current?.value.trim().toLowerCase();
-    if (!v || doneGateRef.current) return;
-    for (const g of Object.values(C.GATE.accept)) {
-      if (g.keys.some((k) => v.includes(k))) { grant(g); return; }
-    }
-    setGateResp(C.GATE.wrong[wrongRef.current % C.GATE.wrong.length]);
-    wrongRef.current++;
-    inputRef.current.value = '';
-    inputRef.current.classList.add('shake');
-    setTimeout(() => inputRef.current?.classList.remove('shake'), 400);
-  };
-
-  // ── audio init ──
-  const initialize = async () => {
-    const { Baarishein } = await import('./audio.js');
-    const a = new Baarishein();
-    audioRef.current = a;
-    await a.unlock();
-    a.setEnergy(0.08);
-    a.sfx('whoosh');
-    a.onPulse = (v) => engineRef.current?.kick(Math.min(1, v * 1.6));
-    setUnlocked(true);
-    setCh(1);
   };
 
   const toggleMute = () => {
-    const a = audioRef.current; if (!a) return;
+    const a = audio.current; if (!a) return;
     a.setMuted(!a.muted); setMuted(a.muted);
   };
 
-  const dragMood = (() => {
-    let sx = null, acc = 0;
-    return {
-      down: (e) => { sx = e.clientX; acc = 0; try { e.currentTarget.setPointerCapture(e.pointerId); } catch {} },
-      move: (e) => {
-        if (sx == null) return;
-        acc += e.clientX - sx; sx = e.clientX;
-        while (Math.abs(acc) > 42) {
-          setMood((m) => Math.max(0, Math.min(C.ACT2.moods.length - 1, m + (acc > 0 ? 1 : -1))));
-          acc = 0;
-        }
-      },
-      up: () => { sx = null; },
-    };
-  })();
-
   const openCert = async () => {
-    setCertOpen(true);
+    setCert(true);
     await new Promise((r) => setTimeout(r, 30));
     const cv = document.getElementById('cert-canvas'); if (!cv) return;
     await (document.fonts?.ready || Promise.resolve());
     const ctx = cv.getContext('2d');
     const W = cv.width, H = cv.height, cx = W / 2, gold = '#D9A441';
-    let disp = 'serif', mono = 'monospace', hand = 'cursive';
+    let disp = 'sans-serif', mono = 'monospace', hand = 'cursive';
     try {
-      disp = getComputedStyle(document.querySelector('.wanted-name')).fontFamily;
-      mono = getComputedStyle(document.querySelector('.scene-caption')).fontFamily;
-      hand = getComputedStyle(document.querySelector('#letter')).fontFamily;
+      disp = getComputedStyle(document.querySelector('.giant')).fontFamily;
+      mono = getComputedStyle(document.querySelector('.hud-txt')).fontFamily;
+      hand = getComputedStyle(document.querySelector('.letter-body')).fontFamily;
     } catch {}
     ctx.fillStyle = '#06060B'; ctx.fillRect(0, 0, W, H);
     ctx.strokeStyle = gold; ctx.lineWidth = 6; ctx.strokeRect(50, 50, W - 100, H - 100);
@@ -244,189 +220,247 @@ export default function Page() {
     const center = (txt, font, y, color = '#F2E8D5') => {
       ctx.font = font; ctx.fillStyle = color; ctx.textAlign = 'center'; ctx.fillText(txt, cx, y);
     };
-    center(C.ACT6.cert.title, `700 92px ${disp}`, 470, gold);
-    center(C.ACT6.cert.id, `400 34px ${mono}`, 530, '#8E8CA3');
+    const D = C.FINALE.certData;
+    center(D.title, `700 92px ${disp}`, 470, gold);
+    center(D.id, `400 34px ${mono}`, 530, '#8E8CA3');
     let y = 660;
-    for (const l of C.ACT6.cert.lines) {
+    for (const l of D.lines) {
       const isName = l.startsWith('D I');
       center(l, isName ? `700 110px ${disp}` : `400 44px ${disp}`, y, isName ? '#F2E8D5' : '#bdb9d0');
       y += isName ? 130 : 74;
     }
-    ctx.strokeStyle = '#C4453A'; ctx.lineWidth = 8;
+    ctx.strokeStyle = '#FF2E4D'; ctx.lineWidth = 8;
     ctx.beginPath(); ctx.arc(cx, y + 90, 74, 0, 6.29); ctx.stroke();
-    ctx.fillStyle = '#C4453A'; ctx.font = `700 30px ${mono}`; ctx.textAlign = 'center';
-    ctx.fillText('EK HI', cx, y + 80); ctx.fillText('CHAAND', cx, y + 118);
+    ctx.fillStyle = '#FF2E4D'; ctx.font = `700 30px ${mono}`; ctx.textAlign = 'center';
+    ctx.fillText('RAKHI', cx, y + 80); ctx.fillText('PROTOCOL', cx, y + 118);
     ctx.fillStyle = gold; ctx.font = `400 54px ${hand}`;
-    ctx.fillText(C.ACT6.cert.sign, cx, H - 220);
+    ctx.fillText(D.sign, cx, H - 220);
     ctx.fillStyle = '#8E8CA3'; ctx.font = `400 28px ${mono}`;
-    ctx.fillText(C.ACT6.cert.footer, cx, H - 120);
+    ctx.fillText(D.footer, cx, H - 120);
     const dl = document.getElementById('cert-dl');
     if (dl) dl.href = cv.toDataURL('image/png');
   };
 
-  const chProps = (n) => ({ className: `chapter ${ch === n ? 'active' : ''}`, 'aria-hidden': ch !== n });
-  const ph = () => C.PHOTOS;
+  const mag = {
+    onMouseMove: (e) => {
+      const el = e.currentTarget;
+      const r = el.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = e.clientY - (r.top + r.height / 2);
+      el.style.transform = `translate(${dx * 0.25}px,${dy * 0.3}px)`;
+    },
+    onMouseLeave: (e) => { e.currentTarget.style.transform = ''; },
+  };
 
   return (
     <>
-      <canvas id="engine" ref={cvRef} aria-hidden="true" />
-      <div id="threadbar" style={{ width: `${(ch / (TOTAL - 1)) * 100}%` }} aria-hidden="true" />
-      {unlocked && (
-        <button id="mute" aria-label="sound" onClick={toggleMute}><span>{muted ? '🔇' : '🔊'}</span></button>
+      <div className="bg-noise" />
+      <div className="scanline" />
+      <ParticleField />
+
+      {/* ══ BOOT ══ */}
+      {!booted && (
+        <div id="boot" onClick={finishBoot}>
+          <h1 className="boot-word">{C.BOOT.bigWord}</h1>
+          <div className="glass-terminal boot-term">
+            <div className="term-dots"><i /><i /><i /></div>
+            <div className="term-lines">
+              {C.BOOT.lines.slice(0, bootLine + 1).map((l, i) => (
+                <p key={i} className={l.c}>{l.t}</p>
+              ))}
+              <span className="cursor" />
+            </div>
+          </div>
+          <button className="skip" onClick={finishBoot}>{C.BOOT.skip}</button>
+          <p className="boot-hint">🔊 tap anywhere — sound is part of the gift</p>
+        </div>
       )}
 
-      {/* 0 · BOOT */}
-      <section {...chProps(0)}>
-        <div className="boot">
-          <div className="pre-lines">
-            {C.PRELOADER.lines.map((l, i) => (
-              <p key={i} className={`${l.cls || ''} ${i <= bootLine ? 'on' : ''}`}>{l.t}</p>
+      {booted && (
+        <button id="mute" onClick={toggleMute} aria-label="sound">{muted ? '🔇' : '🔊'}</button>
+      )}
+
+      <main>
+        {/* ══ HERO ══ */}
+        <section id="hero">
+          <div className="hud">
+            <div className="hud-txt tl">
+              <span className="gold pulse">■ {C.HERO.hud.tl1}</span>
+              <span>{C.HERO.hud.tl2}</span>
+              <span>{C.HERO.hud.tl3}</span>
+            </div>
+            <div className="hud-txt tr">
+              <span>{C.HERO.hud.tr1}</span>
+              <span>{C.HERO.hud.tr2}</span>
+            </div>
+            <div className="hud-txt bl">
+              <span>{C.HERO.hud.bl1}</span>
+              <span className="gold">{C.HERO.hud.bl2}</span>
+            </div>
+            <div className="hud-txt br">
+              <span className="pulse">{C.HERO.hud.br}</span>
+              <i className="hud-line" />
+            </div>
+            <i className="corner c1" /><i className="corner c2" />
+          </div>
+          <div className="hero-type">
+            <h1 className="giant">
+              <span className="flip outline">{C.HERO.line1}</span>
+              <span className="flip glow">{C.HERO.line2}</span>
+            </h1>
+            <p className="hero-sub hud-txt">{C.HERO.sub}</p>
+          </div>
+        </section>
+
+        {/* ══ GATE ══ */}
+        <section id="gate">
+          <div className="glass-terminal gate-box">
+            <p className="hud-txt gold mb">{C.GATE.tag}</p>
+            <h2 className="gate-q">{C.GATE.q}</h2>
+            <input ref={inputRef} type="text" autoComplete="off" spellCheck="false"
+              placeholder={C.GATE.placeholder} aria-label="identify yourself"
+              onKeyDown={(e) => e.key === 'Enter' && check()} />
+            <button className="gate-btn" onClick={check}>SUBMIT ↵</button>
+            <p className="gate-resp hud-txt">{gateResp}</p>
+            {stamp && <div className="gate-stamp on">ACCESS GRANTED<br /><span>— DAYAN CONFIRMED —</span></div>}
+          </div>
+        </section>
+
+        {/* ══ SUBJECT FILE ══ */}
+        <section id="file">
+          <div className="sec-head" id="file-head">
+            <p className="hud-txt gold mb">{C.FILE.tag}</p>
+            <h2 className="giant md">
+              <span className="flip">{C.FILE.head[0]}</span>
+              <span className="flip shock">{C.FILE.head[1]}</span>
+            </h2>
+          </div>
+          <div className="charge-roll hud-txt">
+            {C.FILE.charges.map((c, i) => <span key={i}>⚠ {c}</span>)}
+          </div>
+          <div className="cards">
+            {C.FILE.cards.map((c, i) => (
+              <div className="gcard" key={i}>
+                <i className="shine" />
+                <div className="gcard-n">{c.n}</div>
+                <div className="gcard-l hud-txt gold">{c.l}</div>
+                <p className="gcard-d">{c.d}</p>
+              </div>
             ))}
           </div>
-          <button className={`init-btn ${ready ? '' : 'hidden'}`} onClick={initialize}>
-            {ready ? C.PRELOADER.enter : ''}
-          </button>
-          <p className={`pre-hint ${ready ? '' : 'hidden'}`}>{C.PRELOADER.hint}</p>
-        </div>
-      </section>
-
-      {/* 1 · IDENTIFY */}
-      <section {...chProps(1)}>
-        <div className="gate2">
-          <p className="gate-q2">{granted ? '' : <>pehle batao —<br /><em>{C.GATE.question}</em></>}</p>
-          <input
-            ref={inputRef} type="text" autoComplete="off" spellCheck="false"
-            placeholder={C.GATE.placeholder} aria-label="identify yourself"
-            onKeyDown={(e) => e.key === 'Enter' && check()}
-            onBlur={() => !doneGateRef.current && setTimeout(() => inputRef.current?.focus(), 40)}
-          />
-          <p className="gate-resp2">{gateResp}</p>
-          {stampOn && (
-            <div className="gate-stamp on">ACCESS GRANTED<br /><span>— DAYAN DETECTED —</span></div>
-          )}
-        </div>
-      </section>
-
-      {/* 2 · SUBJECT */}
-      <section {...chProps(2)}>
-        <div className="ch-scroll">
-          <div className="spacer50" aria-hidden="true" />
-          <div id="wanted-card">
-            <div className="wanted-head">WANTED</div>
-            <div className="wanted-name">DAYAN</div>
-            <div className="wanted-meta">{C.ACT1.wanted.meta}</div>
-            <ul className="charges">{C.ACT1.wanted.charges.map((c, i) => <li key={i}>{c}</li>)}</ul>
-            <div className="wanted-foot">{C.ACT1.wanted.foot}</div>
-          </div>
-          <div className="scene-caption">{C.ACT1.caption}</div>
-        </div>
-      </section>
-
-      {/* 3 · EVIDENCE */}
-      <section {...chProps(3)}>
-        <div className="ch-scroll evidence-ch">
-          <div className="act-head">
-            <span className="mono-tag">EXHIBITS</span>
-            <h2>{C.ACT2.head[0]}<br /><em>{C.ACT2.head[1]}</em></h2>
-          </div>
-          <div className="filmstrip">
-            {C.ACT2.exhibits.map((e, i) => (
-              <figure key={e.slug} className="slide" style={{ '--rot': `${[-3, 2.5, -1.5, 3, -2.6, 2, -3.4][i % 7]}deg` }}>
-                <div className="polaroid in">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+          <div id="evidence">
+            <p className="hud-txt gold mb center">{C.FILE.exhibitsTag}</p>
+            <div className="filmstrip">
+              {C.FILE.exhibits.map((e, i) => (
+                <figure className="evcard" key={e.slug}>
                   <img loading="lazy" src={C.PHOTOS(e.slug)} alt={e.cap} />
-                  <span className="pol-time">2:22 AM</span>
-                  <figcaption className="pol-cap"><b>{e.tag}</b> — {e.cap}</figcaption>
-                </div>
-              </figure>
-            ))}
+                  <figcaption>
+                    <b className="gold">{e.tag}</b>
+                    <span>{e.cap}</span>
+                    <em className="hud-txt">2:22 AM</em>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+            <p className="drag-hint hud-txt">← DRAG →</p>
           </div>
-          <p className="drag-hint mono">← drag →</p>
-        </div>
-      </section>
+        </section>
 
-      {/* 4 · MOOD ENGINE */}
-      <section {...chProps(4)}>
-        <div className="ch-scroll mood-ch">
-          <div className="mood-head"><span className="mono-tag">{C.ACT2.moodLabel}</span></div>
-          <div
-            className="mood-stack"
-            onPointerDown={dragMood.down} onPointerMove={dragMood.move}
-            onPointerUp={dragMood.up} onPointerCancel={dragMood.up}
-          >
-            {C.ACT2.moods.map((m, i) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img key={m.slug} src={C.PHOTOS(m.slug)} alt={m.label} loading="lazy"
-                   className={i === mood ? 'on' : ''} />
-            ))}
+        {/* ══ SCANNER ══ */}
+        <section id="scan">
+          <div className="sec-head" id="scan-head">
+            <p className="hud-txt gold mb">{C.SCAN.tag}</p>
+            <h2 className="giant md">
+              <span className="flip">{C.SCAN.head[0]}</span>
+              <span className="flip shock">{C.SCAN.head[1]}</span>
+            </h2>
           </div>
-          <div className="mood-label mono" id="mood-label">{C.ACT2.moods[mood]?.label}</div>
-          <div className="mood-foot">{C.ACT2.moodFoot[0]}<br /><span className="dim">{C.ACT2.moodFoot[1]}</span></div>
-        </div>
-      </section>
+          <div className="scanner">
+            <div className="mood-stack"
+              onPointerDown={moodDrag.down} onPointerMove={moodDrag.move}
+              onPointerUp={moodDrag.up} onPointerCancel={moodDrag.up}>
+              {C.SCAN.moods.map((m, i) => (
+                <img key={m.slug} src={C.PHOTOS(m.slug)} alt={m.label} loading="lazy"
+                  className={i === mood ? 'on' : ''} draggable={false} />
+              ))}
+              <i className="scan-beam" />
+              <i className="scan-grid" />
+            </div>
+            <div className="mood-label hud-txt" id="mood-label">{C.SCAN.moods[mood]?.label}</div>
+            <div className="verdict hud-txt gold">{C.SCAN.verdict}</div>
+            <p className="scan-foot">{C.SCAN.foot}</p>
+          </div>
+        </section>
 
-      {/* 5 · HER PHONE */}
-      <section {...chProps(5)}>
-        <div className="ch-scroll phone-ch">
-          <div className="act-head">
-            <span className="mono-tag">EVIDENCE: PHONE</span>
-            <h2>{C.ACT3.head[0]}<br /><em>{C.ACT3.head[1]}</em></h2>
+        {/* ══ TRANSMISSION ══ */}
+        <section id="tx">
+          <div className="sec-head" id="tx-head">
+            <p className="hud-txt gold mb">{C.TX.tag}</p>
+            <h2 className="giant md">
+              <span className="flip">{C.TX.head[0]}</span>
+              <span className="flip shock">{C.TX.head[1]}</span>
+            </h2>
           </div>
           <div className="phone-zone">
-            <div className="phone" id="phone">
-              <div className="phone-notch" />
-              <div className="phone-screen" id="phone-screen">
-                {C.ACT3.phone.map((p) => (
+            <div className="phone">
+              <i className="phone-notch" />
+              <div className="phone-screen">
+                {C.TX.phone.map((p) => (
                   <div key={p.slug} className={`pp ${p.big ? 'big' : ''}`}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img loading="lazy" src={C.PHOTOS(p.slug)} alt={p.label} /><span>{p.label}</span>
+                    <img loading="lazy" src={C.PHOTOS(p.slug)} alt={p.label} />
+                    <span className="hud-txt">{p.label}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <p className="phone-cap">{C.ACT3.phoneCap}</p>
           </div>
           <div className="turn">
-            <div className="chat" id="chat">
-              <div className="meta">{C.ACT3.chatMeta} · 🔒</div>
-              {C.ACT3.chat.map((m, i) => (
+            <div className="glass-terminal chat">
+              <div className="term-dots"><i /><i /><i /></div>
+              <p className="hud-txt dim mb">{C.TX.chatMeta} · 🔒</p>
+              {C.TX.chat.map((m, i) => (
                 <div key={i} className={`bub ${m.side}`}>
-                  {m.text}{m.time ? <span className="t">{m.time}</span> : null}
+                  {m.text}{m.time ? <span className="t hud-txt">{m.time}</span> : null}
                 </div>
               ))}
             </div>
             <div className="turn-lines">
-              <p className="big-line">{C.ACT3.turnLines[0]}</p>
-              <p className="big-line soft">{C.ACT3.turnLines[1]}</p>
+              <p className="tline">{C.TX.turn[0]}</p>
+              <p className="tline soft">{C.TX.turn[1]}</p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 6 · DISTANCE */}
-      <section {...chProps(6)}>
-        <div className="dist-ch">
-          <div className="stats2" id="stats">
-            {C.ACT4.stats.map((s, i) => <span key={i} dangerouslySetInnerHTML={{ __html: s }} />)}
+        {/* ══ DISTANCE ══ */}
+        <section id="dist">
+          <p className="hud-txt gold mb center">{C.DIST.tag}</p>
+          <div className="km-wrap">
+            <span className="km" id="km-num">{km.toLocaleString('en-IN')}</span>
+            <span className="km-unit hud-txt">KM BETWEEN US</span>
           </div>
-          <div className="km2 mono">{km.toLocaleString('en-IN')} km</div>
-          <div className="thesis2">
-            <p className="big-line">{C.ACT4.thesis[0]}</p>
-            <p className="big-line soft">{C.ACT4.thesis[1]}</p>
+          <h2 className="giant md" id="dist-thesis">
+            <span className="flip">{C.DIST.thesis[0]}</span>
+            <span className="flip shock">{C.DIST.thesis[1]}</span>
+          </h2>
+          <p className="dist-sub">{C.DIST.thesis2}</p>
+          <div className="cards">
+            {C.DIST.cards.map((c, i) => (
+              <div className="gcard" key={i}>
+                <i className="shine" />
+                <div className="gcard-n">{c.n}</div>
+                <div className="gcard-l hud-txt gold">{c.l}</div>
+                <p className="gcard-d">{c.d}</p>
+              </div>
+            ))}
           </div>
-          <div className="city-tags mono">
-            <span>GURUGRAM — bhai</span><span>MUMBAI — dayan</span>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 7 · RAKHI */}
-      <section {...chProps(7)}>
-        <div className="ch-scroll">
-          <div className={`hand-wrap ${ch === 7 ? 'in' : ''}`} id="hand-wrap">
+        {/* ══ RAKHI ══ */}
+        <section id="rakhi">
+          <p className="hud-txt gold mb center">{C.RAKHI.tag}</p>
+          <div className="hand-wrap" id="hand-wrap">
             <div className="hand-frame">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img id="hand-img" src={C.PHOTOS(C.ACT5.handSlug)} alt={C.ACT5.handAlt} />
+              <img id="hand-img" src={C.PHOTOS(C.RAKHI.handSlug)} alt={C.RAKHI.handAlt} />
               <svg className="rakhi" viewBox="0 0 300 300" aria-hidden="true">
                 <path className="rk-thread" d="M4,150 C 70,132 110,150 150,150 C 190,150 230,168 296,150" />
                 <g className="rk-center">
@@ -440,81 +474,81 @@ export default function Page() {
                   <circle className="rk-dot d6" cx="116" cy="128" r="4" />
                 </g>
               </svg>
-              <div className="date-stamp mono">{C.ACT5.dateStamp}</div>
+              <div className="date-stamp hud-txt">{C.RAKHI.stamp}</div>
             </div>
-            <p className="big-line">{C.ACT5.lines[0]}</p>
-            <p className="big-line soft">{C.ACT5.lines[1]}</p>
+            <h2 className="giant md">
+              <span>{C.RAKHI.lines[0]}</span>
+              <span className="shock">{C.RAKHI.lines[1]}</span>
+            </h2>
+            <p className="dist-sub">{C.RAKHI.sub}</p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 8 · LETTER */}
-      <section {...chProps(8)}>
-        <div className="ch-scroll letter-ch">
-          <div className="letter" id="letter">
-            {C.ACT6.letter.map((l, i) => <p key={i}>{l}</p>)}
-            <p className="sign">{C.ACT6.sign}</p>
-            <p className="ps">{C.ACT6.ps}</p>
+        {/* ══ LETTER ══ */}
+        <section id="letter">
+          <p className="hud-txt gold mb center">{C.LETTER.tag}</p>
+          <div className="letter-grid">
+            <h2 className="giant md" id="letter-flip">
+              <span className="flip">{C.LETTER.flipWords[0]}</span>
+              <span className="flip gold-t">{C.LETTER.flipWords[1]}</span>
+            </h2>
+            <div className="letter-col">
+              <div className="letter-body">
+                {C.LETTER.body.map((l, i) => <p key={i}>{l}</p>)}
+                <p className="sign">{C.LETTER.sign}</p>
+                <p className="ps">{C.LETTER.ps}</p>
+              </div>
+              {hasVoice && (
+                <button className="voice-btn" onClick={() => {
+                  const el = new Audio('audio/voice.m4a');
+                  audio.current?.duck(true);
+                  el.play(); el.addEventListener('ended', () => audio.current?.duck(false));
+                }}>▶ bhai ki awaaz</button>
+              )}
+            </div>
           </div>
-          {hasVoice && (
-            <button id="voice-btn" className="voice-btn" type="button"
-              onClick={() => {
-                const el = new Audio('audio/voice.m4a');
-                audioRef.current?.duck(true);
-                el.play(); el.addEventListener('ended', () => audioRef.current?.duck(false));
-              }}>▶ bhai ki awaaz</button>
-          )}
-        </div>
-      </section>
+        </section>
 
-      {/* 9 · FINALE */}
-      <section {...chProps(9)}>
-        <div className={`end ${ch === 9 ? 'in' : ''}`} id="end">
+        {/* ══ FINALE ══ */}
+        <section id="finale">
           <canvas id="petals" ref={petalsRef} aria-hidden="true" />
-          <div className="moon moon-final" data-moon />
-          <div className="end-kicker mono">{C.ACT6.end.kicker}</div>
-          <h1 className="end-title">{C.ACT6.end.title.map((t, i) => <span key={i}>{t}</span>)}</h1>
-          <div className="end-name">{C.ACT6.end.name}</div>
-          <p className="end-credit">{C.ACT6.end.credit[0]}<br /><span className="dim">{C.ACT6.end.credit[1]}</span></p>
-          <div className="end-actions">
-            <a className="end-btn primary" id="btn-call" href={C.ACT6.end.callHref}>call kar abhi</a>
-            <button className="end-btn" onClick={openCert}>rakhi certificate 📜</button>
-            <a className="end-btn" id="btn-reply" href={C.ACT6.end.replyHref} target="_blank" rel="noopener">reply likh do</a>
+          <div id="finale-box">
+            <div className="moon-final" data-moon />
+            <p className="hud-txt gold kicker">{C.FINALE.kicker}</p>
+            <h1 className="giant lg">
+              {C.FINALE.title.map((t, i) => <span key={i} className="fout">{t}</span>)}
+            </h1>
+            <div className="fin-name">{C.FINALE.name}</div>
+            <p className="fin-credit">{C.FINALE.credit[0]}<br />
+              <span className="dim2">{C.FINALE.credit[1]}</span></p>
+            <div className="fin-actions">
+              <a className="fbtn primary" href="#" {...mag}>{C.FINALE.call}</a>
+              <button className="fbtn" onClick={openCert} {...mag}>{C.FINALE.cert}</button>
+              <a className="fbtn" href="#" target="_blank" rel="noopener" {...mag}>{C.FINALE.reply}</a>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* nav */}
-      {ch >= 2 && (
-        <nav className="dots" aria-label="chapters">
-          {Array.from({ length: TOTAL }, (_, i) => (
-            <button key={i} className={i === ch ? 'on' : ''} aria-label={`chapter ${i}`} onClick={() => setCh(clampCh(i))} />
-          ))}
-        </nav>
-      )}
-      {ch >= 2 && ch < 9 && <button className="nav-arrow next" onClick={() => go(1)} aria-label="next">→</button>}
-      {ch >= 3 && <button className="nav-arrow prev" onClick={() => go(-1)} aria-label="back">←</button>}
-      {ch === 0 && ready && <div className="scroll-cue mono" aria-hidden="true">tap initialize to begin</div>}
+          <footer className="hud-txt fin-footer">{C.FINALE.footer}</footer>
+        </section>
+      </main>
 
       {/* overlays */}
-      {galleryOpen && (
+      {gallery && (
         <div id="gallery" className="overlay">
-          <div className="overlay-head mono">DAYAN KI POORI FILE 🔓</div>
-          <div className="gallery-grid" id="gallery-grid">
+          <p className="hud-txt gold">DAYAN KI POORI FILE — DECLASSIFIED 🔓</p>
+          <div className="gallery-grid">
             {C.ALL_SLUGS.map((s) => (
-              // eslint-disable-next-line @next/next/no-img-element
               <img key={s} loading="lazy" src={C.PHOTOS(s)} alt={s} />
             ))}
           </div>
-          <button className="overlay-close" onClick={() => setGalleryOpen(false)}>band karo ✕</button>
+          <button className="fbtn" onClick={() => setGallery(false)}>CLOSE ✕</button>
         </div>
       )}
-      {certOpen && (
+      {cert && (
         <div id="cert-modal" className="overlay">
           <canvas id="cert-canvas" width="1400" height="1980" />
           <div className="cert-actions">
-            <a className="end-btn primary" id="cert-dl" download="rakhi-certificate-diii.png" href="#">download 📜</a>
-            <button className="end-btn" onClick={() => setCertOpen(false)}>wapas →</button>
+            <a className="fbtn primary" id="cert-dl" download="rakhi-certificate-didi.png" href="#">DOWNLOAD 📜</a>
+            <button className="fbtn" onClick={() => setCert(false)}>BACK →</button>
           </div>
         </div>
       )}
