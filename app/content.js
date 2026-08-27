@@ -1,5 +1,5 @@
 // photos live ONLY in the dossier evidence file. nowhere else. bhai's rule.
-export const PHOTOS = (s) => `/assets/photos/${s}.webp`;
+export const PHOTOS = (s) => `/assets/photos/${s}.webp?v=evidence7`;
 
 // ⭐ ALL WORDS = BHAI'S OWN VOICE. edit anything here, site changes.
 
