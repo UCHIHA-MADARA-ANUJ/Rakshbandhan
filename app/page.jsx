@@ -16,24 +16,42 @@ const DESC = {
   '/love': 'ok. one time only. look quick. ❤️',
 };
 
-// ── the 30 second opening film ──
+const HOLD = 3600; // ms each line stays
+
+// ── the 30 second opening film (one line at a time, crossfade) ──
 function Intro({ onDone }) {
-  const [beat, setBeat] = useState(-1);
+  const [now, setNow] = useState(0);
+  const t0 = useRef(performance.now());
+
   useEffect(() => {
-    const ts = C.INTRO.beats.map((b) => setTimeout(() => setBeat(b.at), b.at));
-    const end = setTimeout(onDone, C.INTRO.total);
-    return () => { ts.forEach(clearTimeout); clearTimeout(end); };
+    let raf;
+    const step = (t) => {
+      const el = t - t0.current;
+      setNow(el);
+      if (el < C.INTRO.total) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
   }, []);
+
+  // which line is on stage right now
+  let cur = -1;
+  C.INTRO.beats.forEach((b, i) => {
+    if (now >= b.at && now < b.at + HOLD) cur = i;
+  });
+  const threadOn = cur === C.INTRO.beats.findIndex((b) => b.cls?.includes('thread'));
+
   return (
     <div id="intro">
       <div className="intro-stage">
         {C.INTRO.beats.map((b, i) => (
-          <p key={i} className={`ibeat ${b.cls || ''} ${beat >= b.at ? 'on' : ''}`}>{b.t}</p>
+          <p key={i} className={`ibeat ${b.cls || ''} ${i === cur ? 'on' : ''}`}>{b.t}</p>
         ))}
-        <svg className="intro-thread" viewBox="0 0 300 40" aria-hidden="true">
+        <svg className={`intro-thread ${threadOn ? 'draw' : ''}`} viewBox="0 0 300 40" aria-hidden="true">
           <circle className="it-dot a" cx="10" cy="20" r="4" />
           <circle className="it-dot b" cx="290" cy="20" r="4" />
           <path className="it-line" pathLength="100" d="M18,20 C 90,8 210,32 282,20" />
+          <text className="it-label" x="150" y="12" textAnchor="middle">1,450 KM</text>
         </svg>
       </div>
       <div className="intro-progress"><i /></div>
@@ -62,7 +80,7 @@ function Gate({ onPass }) {
         try { navigator.vibrate?.(60); } catch {}
         sessionStorage.setItem('rk_ok', '1');
         dispatchEvent(new Event('rk-unlocked'));
-        setTimeout(onPass, stamp ? 1500 : 1300);
+        setTimeout(onPass, 1500);
         return;
       }
     }
@@ -88,17 +106,14 @@ function Gate({ onPass }) {
 
 export default function Landing() {
   const [stage, setStage] = useState('intro'); // intro → gate → site
-  const unlockedRef = useRef(false);
   useReveals();
 
-  // already passed the gate this session? straight to site (no redirect weirdness)
   useEffect(() => {
-    if (sessionStorage.getItem('rk_ok') === '1') { setStage('site'); unlockedRef.current = true; }
+    if (sessionStorage.getItem('rk_ok') === '1') setStage('site');
   }, []);
 
   const toGate = () => { setStage('gate'); getAudio()?.sfx('whoosh'); };
   const toSite = () => {
-    unlockedRef.current = true;
     getAudio()?.sfx('whoosh');
     setStage('site');
     setTimeout(() => setAudioLevel(0.16), 600);
