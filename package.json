@@ -1,0 +1,35 @@
+{
+  "name": "ek-hi-chaand",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "photos": "node tools/process-photos.mjs",
+    "placeholders": "node tools/placeholders.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UCHIHA-MADARA-ANUJ/Rakshbandhan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UCHIHA-MADARA-ANUJ/Rakshbandhan/issues"
+  },
+  "homepage": "https://github.com/UCHIHA-MADARA-ANUJ/Rakshbandhan#readme",
+  "dependencies": {
+    "gsap": "^3.15.0"
+  },
+  "devDependencies": {
+    "@fontsource/fraunces": "^5.3.0",
+    "@fontsource/kalam": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "@fontsource/space-mono": "^5.3.0",
+    "sharp": "^0.35.4",
+    "vite": "^8.2.2"
+  }
+}

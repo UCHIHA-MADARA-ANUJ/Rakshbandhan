@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>for dayan only 🌙</title>
+  <meta name="description" content="yeh website nahi hai. ye reply hai." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="for dayan only 🌙" />
+  <meta property="og:description" content="yeh website nahi hai. ye reply hai. — tumhara 15-saal ka bhai" />
+  <meta property="og:image" content="/og-image.png" />
+  <meta name="theme-color" content="#06060B" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%23F2E8D5'/><circle cx='64' cy='42' r='34' fill='%2306060B'/></svg>" />
+  <style>/* critical: kill FOUC before module CSS lands */ html{background:#06060B} body{margin:0;background:#06060B;color:#F2E8D5}</style>
+</head>
+<body class="locked">
+
+  <!-- ══════════ PRELOADER ══════════ -->
+  <div id="preloader">
+    <svg class="moon-ring" viewBox="0 0 120 120" aria-hidden="true">
+      <circle class="mr-bg" cx="60" cy="60" r="52"/>
+      <circle class="mr-fg" cx="60" cy="60" r="52" id="moon-ring-fg"/>
+      <circle class="mr-core" cx="60" cy="60" r="34"/>
+    </svg>
+    <div class="pre-lines" id="pre-lines"></div>
+    <button id="enter-btn" class="hidden" type="button">ok, dikhao</button>
+    <p class="pre-hint hidden" id="pre-hint">🔊 sound on karo — headphones = 🤌</p>
+  </div>
+
+  <!-- ══════════ GATE ══════════ -->
+  <div id="gate" class="hidden">
+    <div class="gate-inner">
+      <p class="gate-q">pehle batao —<br/><em>kaun ho tum?</em></p>
+      <input id="gate-input" type="text" autocomplete="off" spellcheck="false"
+             placeholder="jo wo mujhe bulata hai…" aria-label="apna naam batao" />
+      <p class="gate-resp" id="gate-resp"></p>
+      <div class="gate-stamp hidden" id="gate-stamp">ACCESS GRANTED<br/><span>— DAYAN DETECTED —</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════ PERSISTENT UI ══════════ -->
+  <div id="threadbar" aria-hidden="true"></div>
+  <button id="mute" aria-label="sound on/off" hidden><span id="mute-ico">🔊</span></button>
+
+  <main id="story" aria-label="the gift">
+
+    <!-- ══════════ ACT I — WANTED: DAYAN ══════════ -->
+    <section id="act1" data-act="1">
+      <div class="sticky-wrap">
+        <div class="sky">
+          <div class="stars" id="stars-a1"></div>
+          <div class="moon" id="moon-a1" data-moon></div>
+        </div>
+        <svg class="skyline skyline-ggm" viewBox="0 0 400 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <path d="M0,140 L0,110 L18,110 L18,92 L30,92 L30,110 L44,110 L44,70 L52,70 L52,40 L58,40 L58,26 L61,18 L64,26 L64,40 L70,40 L70,70 L78,70 L78,110 L96,110 L96,84 L104,84 L104,60 L110,60 L110,84 L118,84 L118,110 L134,110 L134,50 L140,50 L140,30 L146,30 L146,50 L152,50 L152,110 L170,110 L170,90 L186,90 L186,64 L196,64 L196,90 L212,90 L212,110 L228,110 L228,74 L236,74 L236,54 L244,54 L244,74 L252,74 L252,110 L270,110 L270,86 L286,86 L286,58 L294,58 L294,86 L302,86 L302,110 L318,110 L318,66 L330,66 L330,110 L348,110 L348,88 L364,88 L364,108 L382,108 L382,118 L400,118 L400,140 Z"/>
+        </svg>
+        <div class="scene-caption" id="cap-a1">28 August · Gurugram · 2:22 AM</div>
+        <div class="wanted" id="wanted-card">
+          <div class="wanted-head">WANTED</div>
+          <div class="wanted-name">DAYAN</div>
+          <div class="wanted-meta">umar: 17 going 18 · sheher: Mumbai · khatra: MAXIMUM</div>
+          <ul class="charges" id="charges"></ul>
+          <div class="wanted-foot">evidence neeche hai. scroll kar.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ ACT II — EXHIBITS + MOOD INDEX ══════════ -->
+    <section id="act2" data-act="2">
+      <div class="act-head"><span class="mono-tag">EXHIBITS</span><h2>dayan ki file,<br/><em>kholdi gayi.</em></h2></div>
+      <div id="exhibits" class="exhibits"></div>
+
+      <div id="moods" class="moodwall">
+        <div class="mood-head"><span class="mono-tag">MOOD INDEX — v4.2</span></div>
+        <div class="mood-stack" id="mood-stack"></div>
+        <div class="mood-label mono" id="mood-label"></div>
+        <div class="mood-foot">haan, real photos hain. bhai ka phone bhar rakha hai in se.<br/><span class="dim">scroll karte raho — dayan react karegi.</span></div>
+      </div>
+    </section>
+
+    <!-- ══════════ ACT III — HER PHONE + THE TURN ══════════ -->
+    <section id="act3" data-act="3">
+      <div class="act-head"><span class="mono-tag">EVIDENCE: PHONE</span><h2>mera phone<br/><em>yaadon ka godown hai.</em></h2></div>
+      <div class="phone-zone">
+        <div class="phone" id="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen" id="phone-screen"></div>
+        </div>
+        <p class="phone-cap" id="phone-cap">sab kuch iska hai. wallpapers tak.</p>
+      </div>
+
+      <div class="turn" id="turn">
+        <div class="chat" id="chat"></div>
+        <div class="turn-lines">
+          <p class="big-line" id="tl1">dayan aise likhti hai<br/>jab koi dekh nahi raha hota.</p>
+          <p class="big-line soft" id="tl2">isliye ye site ban rahi thi.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ ACT IV — ALAG AASMAAN, EK HI CHAAND ══════════ -->
+    <section id="act4" data-act="4">
+      <div class="sticky-wrap cities-wrap">
+        <div class="cities">
+          <div class="city city-ggm">
+            <svg class="skyline" viewBox="0 0 400 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#svg-ggm"/></svg>
+            <span class="city-name mono">GURUGRAM — bhai wala sheher</span>
+          </div>
+          <div class="city city-mum">
+            <svg class="skyline" viewBox="0 0 400 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+              <path d="M0,140 L0,118 L26,118 L26,96 L34,96 L34,70 L40,70 L46,58 L52,70 L58,70 L58,96 L84,96 L84,118 L108,118 L108,84 L118,84 L126,60 L132,60 L138,84 L148,84 L148,118 L170,118 L170,74 L176,74 L176,52 L182,52 L188,74 L194,74 L194,118 L216,118 L216,92 L228,92 L236,92 L236,118 L258,118 L258,50 L262,50 L266,42 L270,50 L274,50 L274,118 L300,118 L300,100 L360,100 L360,94 L316,58 L322,52 L366,88 L372,82 L328,46 L334,40 L378,76 L400,54 L400,118 L400,140 Z M294,60 l6,8 l6,-8 z"/>
+            </svg>
+            <span class="city-name mono">MUMBAI — dayan ka kila</span>
+          </div>
+          <div class="moon moon-shared" id="moon-shared" data-moon></div>
+          <svg class="thread-path" id="thread-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path id="thread-curve" d="M2,86 C 30,78 55,40 98,14" fill="none"/>
+          </svg>
+          <div class="km mono" id="km">0 km</div>
+        </div>
+        <div class="thesis">
+          <p class="big-line">doori ne humein<br/><em>toota nahi.</em></p>
+          <p class="big-line soft">bas rakhi ka thread<br/><em>lamba kar diya.</em></p>
+        </div>
+        <div class="stats" id="stats"></div>
+      </div>
+    </section>
+
+    <!-- ══════════ ACT V — THE HAND ══════════ -->
+    <section id="act5" data-act="5">
+      <div class="hand-wrap" id="hand-wrap">
+        <div class="hand-frame">
+          <img id="hand-img" alt="diii ka haath — rakhi yahan bandhi hai" />
+          <svg class="rakhi" viewBox="0 0 300 300" aria-hidden="true">
+            <path class="rk-thread" d="M4,150 C 70,132 110,150 150,150 C 190,150 230,168 296,150" />
+            <g class="rk-center">
+              <circle class="rk-outer" cx="150" cy="150" r="34"/>
+              <circle class="rk-inner" cx="150" cy="150" r="20"/>
+              <circle class="rk-dot d1" cx="150" cy="112" r="4"/>
+              <circle class="rk-dot d2" cx="184" cy="128" r="4"/>
+              <circle class="rk-dot d3" cx="184" cy="172" r="4"/>
+              <circle class="rk-dot d4" cx="150" cy="188" r="4"/>
+              <circle class="rk-dot d5" cx="116" cy="172" r="4"/>
+              <circle class="rk-dot d6" cx="116" cy="128" r="4"/>
+            </g>
+          </svg>
+          <div class="date-stamp mono" id="date-stamp">28 · 08 · 2026</div>
+        </div>
+        <p class="big-line">thread ab wrist pe hai.</p>
+        <p class="big-line soft">isme network issue nahi hota.</p>
+      </div>
+    </section>
+
+    <!-- ══════════ ACT VI — LETTER + END ══════════ -->
+    <section id="act6" data-act="6">
+      <div class="letter-zone">
+        <div class="letter" id="letter"></div>
+        <button id="voice-btn" class="voice-btn hidden" type="button">▶ sun lo — bhai ki awaaz</button>
+      </div>
+
+      <div class="end" id="end">
+        <canvas id="petals" aria-hidden="true"></canvas>
+        <div class="moon moon-final" data-moon></div>
+        <div class="end-kicker mono">finally, bol hi dete hain —</div>
+        <h1 class="end-title" id="end-title">HAPPY<br/>RAKSHA<br/>BANDHAN</h1>
+        <div class="end-name">Diii 🌙</div>
+        <p class="end-credit">— tumhara 15-saal ka bhai<br/><span class="dim">raat 2 baje ye bana raha tha. yaad rakhna.</span></p>
+        <div class="end-actions">
+          <a class="end-btn primary" id="btn-call" href="#">call kar abhi</a>
+          <button class="end-btn" id="btn-cert" type="button">rakhi certificate lo 📜</button>
+          <a class="end-btn" id="btn-reply" href="#" target="_blank" rel="noopener">reply likh do</a>
+        </div>
+      </div>
+      <footer class="site-foot mono">khoon ka rishta nahi tha. isliye sabse khaas hai. — ek hi chand ® 2026</footer>
+    </section>
+  </main>
+
+  <!-- shared skyline defs -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs><path id="svg-ggm" d="M0,140 L0,110 L18,110 L18,92 L30,92 L30,110 L44,110 L44,70 L52,70 L52,40 L58,40 L58,26 L61,18 L64,26 L64,40 L70,40 L70,70 L78,70 L78,110 L96,110 L96,84 L104,84 L104,60 L110,60 L110,84 L118,84 L118,110 L134,110 L134,50 L140,50 L140,30 L146,30 L146,50 L152,50 L152,110 L170,110 L170,90 L186,90 L186,64 L196,64 L196,90 L212,90 L212,110 L228,110 L228,74 L236,74 L236,54 L244,54 L244,74 L252,74 L252,110 L270,110 L270,86 L286,86 L286,58 L294,58 L294,86 L302,86 L302,110 L318,110 L318,66 L330,66 L330,110 L348,110 L348,88 L364,88 L364,108 L382,108 L382,118 L400,118 L400,140 Z"/></defs>
+  </svg>
+
+  <!-- overlays -->
+  <div id="gallery" class="overlay hidden"><div class="overlay-head mono">DAYAN KI POORI FILE — classified 🔓</div><div class="gallery-grid" id="gallery-grid"></div><button class="overlay-close" id="gallery-close" type="button">band karo ✕</button></div>
+  <div id="cert-modal" class="overlay hidden"><canvas id="cert-canvas" width="1400" height="1980"></canvas><div class="cert-actions"><a class="end-btn primary" id="cert-dl" download="rakhi-certificate-diii.png" href="#">download 📜</a><button class="end-btn" id="cert-close" type="button">wapas →</button></div></div>
+  <div id="flicker" aria-hidden="true"></div>
+
+  <noscript><div style="position:fixed;inset:0;background:#06060B;color:#F2E8D5;display:grid;place-items:center;text-align:center;padding:2rem;font-family:monospace">JavaScript on karo dayan. tabhi gift khulega. 🌙</div></noscript>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
