@@ -106,39 +106,33 @@ function Clock() {
 export default function Chrome({ children }) {
   const path = usePathname();
   const [muted, setMuted] = useState(false);
-  const [veil, setVeil] = useState(false);
+  const [locked, setLocked] = useState(true);
   const [menu, setMenu] = useState(false);
   const wiped = useRef(false);
   const idx = C.ROUTES.findIndex((r) => r.path === path);
   const prev = idx > 0 ? C.ROUTES[idx - 1] : null;
   const next = idx >= 0 && idx < C.ROUTES.length - 1 ? C.ROUTES[idx + 1] : null;
 
-  // entry veil (once per session) — the acoustic-engine moment
+  // site lock: everything except / requires the gate
+  useEffect(() => {
+    const ok = sessionStorage.getItem('rk_ok') === '1';
+    if (!ok && path !== '/') { location.replace('/'); return; }
+    setLocked(!ok);
+    const onUnlock = () => setLocked(false);
+    addEventListener('rk-unlocked', onUnlock);
+    return () => removeEventListener('rk-unlocked', onUnlock);
+  }, [path]);
+
+  // incoming wipe + tab title
   useEffect(() => {
     document.title = `${TITLES[path] || 'SIGNAL'} — RAKHI.PROTOCOL`;
     if (A) A.setEnergy(ENERGY[path] ?? 0.2);
-    if (!sessionStorage.getItem('rk_wipe')) {
-      setVeil(true);
-      document.body.classList.add('locked');
-    }
-    // incoming wipe
     if (sessionStorage.getItem('rk_wipe')) {
       sessionStorage.removeItem('rk_wipe');
       document.body.classList.add('wipe-in');
       requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('wipe-in')));
     }
-    const onKey = (e) => { if (veil && (e.key === 'Enter' || e.key === ' ')) enter(); };
-    addEventListener('keydown', onKey);
-    return () => removeEventListener('keydown', onKey);
   }, [path]);
-
-  const enter = async () => {
-    await initAudio();
-    A.setEnergy(ENERGY[path] ?? 0.2);
-    A.sfx('whoosh');
-    setVeil(false);
-    document.body.classList.remove('locked');
-  };
 
   // link interception: cinematic wipe + dead-link guard
   useEffect(() => {
@@ -190,16 +184,6 @@ export default function Chrome({ children }) {
       <ParticleField />
       <Cursor />
 
-      {veil && (
-        <div id="veil" onClick={enter}>
-          <p className="hud-txt gold">{C.VEIL.small}</p>
-          <h1 className="veil-big">{C.VEIL.big}</h1>
-          <p className="hud-txt veil-coords">SRC: GURUGRAM → DEST: MUMBAI · 1,424 KM · ONE THREAD</p>
-          <button className="veil-btn" onClick={enter}>{C.VEIL.enter}</button>
-          <p className="hud-txt veil-note">{C.VEIL.note}</p>
-          <div className="veil-thread" />
-        </div>
-      )}
       <div id="wipe" aria-hidden="true"><i /></div>
 
       {menu && (
@@ -215,7 +199,7 @@ export default function Chrome({ children }) {
         </div>
       )}
 
-      <header className="topnav">
+      {!locked && (<header className="topnav">
         <a href="/" className="brand">RAKHI<span className="gold">.</span>PROTOCOL_</a>
         <Clock />
         <nav className="navlinks">
@@ -227,11 +211,11 @@ export default function Chrome({ children }) {
         </nav>
         <button id="menubtn" onClick={() => setMenu(true)} aria-label="sequences">≡</button>
         <button id="mute" onClick={toggleMute} aria-label="sound">{muted ? '🔇' : '🔊'}</button>
-      </header>
+      </header>)}
 
       {children}
 
-      {idx >= 0 && (
+      {idx >= 0 && !locked && (
         <footer className="pagenav">
           {prev ? <a className="pn-btn" href={prev.path}>← {prev.short || prev.tag}</a> : <span />}
           <span className="pn-idx hud-txt">{String(idx).padStart(2, '0')} / {String(C.ROUTES.length - 1).padStart(2, '0')}</span>

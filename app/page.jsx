@@ -5,44 +5,106 @@ import { useReveals, getAudio } from './chrome.jsx';
 import { setAudioLevel } from './particles.jsx';
 
 const DESC = {
-  '/timeline': 'april 2026 → today. the whole story.',
-  '/dossier': 'subject file: dayan — charges, evidence, threat level',
-  '/scanner': 'facial recognition — 11 moods indexed',
-  '/transmission': 'her phone. her words. the birthday.',
-  '/distance': '1,424 km — and why it lost',
-  '/ritual': 'tie the rakhi yourself. hold to tie.',
-  '/letter': 'the part i can\'t say out loud',
-  '/finale': 'the final transmission',
+  '/timeline': 'april 2026 to today. the whole story.',
+  '/dossier': 'subject file: dayan. charges included.',
+  '/scanner': 'face scan. 11 moods. all dumb.',
+  '/transmission': 'my phone is a museum of you.',
+  '/distance': '1,424 km. and why it lost.',
+  '/ritual': 'tie the rakhi yourself. hold the button.',
+  '/letter': 'the part i cannot say out loud',
+  '/finale': 'the ending. obviously.',
 };
 
-export default function Landing() {
-  const [gateResp, setGateResp] = useState('');
-  const [ok, setOk] = useState(false);
+// ── the 30 second opening film ──
+function Intro({ onDone }) {
+  const [beat, setBeat] = useState(-1);
+  useEffect(() => {
+    const ts = C.INTRO.beats.map((b) => setTimeout(() => setBeat(b.at), b.at));
+    const end = setTimeout(onDone, C.INTRO.total);
+    return () => { ts.forEach(clearTimeout); clearTimeout(end); };
+  }, []);
+  return (
+    <div id="intro">
+      <div className="intro-stage">
+        {C.INTRO.beats.map((b, i) => (
+          <p key={i} className={`ibeat ${b.cls || ''} ${beat >= b.at ? 'on' : ''}`}>{b.t}</p>
+        ))}
+        <svg className="intro-thread" viewBox="0 0 300 40" aria-hidden="true">
+          <circle className="it-dot a" cx="10" cy="20" r="4" />
+          <circle className="it-dot b" cx="290" cy="20" r="4" />
+          <path className="it-line" pathLength="100" d="M18,20 C 90,8 210,32 282,20" />
+        </svg>
+      </div>
+      <div className="intro-progress"><i /></div>
+      <button className="intro-skip" onClick={onDone}>{C.INTRO.skip}</button>
+      <p className="intro-sound hud-txt">🎧 sound on, volume low</p>
+    </div>
+  );
+}
+
+// ── the strict gate ──
+function Gate({ onPass }) {
+  const [resp, setResp] = useState('');
+  const [shake, setShake] = useState(false);
+  const [stamp, setStamp] = useState(false);
   const wrong = useRef(0);
   const inputRef = useRef(null);
-  useReveals();
-
   useEffect(() => { inputRef.current?.focus(); }, []);
-
   const check = () => {
-    const v = inputRef.current?.value.trim().toLowerCase();
-    if (!v || ok) return;
+    const v = (inputRef.current?.value || '').trim().toLowerCase();
+    if (!v) return;
     for (const g of Object.values(C.GATE.accept)) {
       if (g.keys.some((k) => v.includes(k))) {
-        setOk(true);
-        setGateResp(C.LANDING.granted);
+        setResp(g.resp); setStamp(true);
         getAudio()?.sfx('stamp');
-        setAudioLevel(1); setTimeout(() => setAudioLevel(0.2), 900);
+        setAudioLevel(1); setTimeout(() => setAudioLevel(0.2), 800);
+        try { navigator.vibrate?.(60); } catch {}
+        sessionStorage.setItem('rk_ok', '1');
+        dispatchEvent(new Event('rk-unlocked'));
+        setTimeout(onPass, stamp ? 1500 : 1300);
         return;
       }
     }
-    if (wrong.current >= 2) {
-      setOk(true); setGateResp(C.LANDING.fine); return;
-    }
-    setGateResp(C.LANDING.wrong[wrong.current % C.LANDING.wrong.length]);
+    setResp(C.INTRO.wrong[wrong.current % C.INTRO.wrong.length]);
     wrong.current++;
     inputRef.current.value = '';
+    setShake(true); setTimeout(() => setShake(false), 450);
+    getAudio()?.sfx('tick');
   };
+  return (
+    <div id="gate2">
+      <p className="hud-txt gold mb">{C.INTRO.gateTag}</p>
+      <h2 className="gate-q">{C.INTRO.gateLine}</h2>
+      <input ref={inputRef} className={shake ? 'shake' : ''} type="text"
+        autoComplete="off" spellCheck="false" placeholder="type it…" aria-label="the name"
+        onKeyDown={(e) => e.key === 'Enter' && check()} />
+      <button className="gate-btn" onClick={check}>ENTER ↵</button>
+      <p className="gate-resp hud-txt">{resp}</p>
+      {stamp && <div className="gate-stamp on">ACCESS GRANTED<br /><span>— DAYAN CONFIRMED —</span></div>}
+    </div>
+  );
+}
+
+export default function Landing() {
+  const [stage, setStage] = useState('intro'); // intro → gate → site
+  const unlockedRef = useRef(false);
+  useReveals();
+
+  // already passed the gate this session? straight to site (no redirect weirdness)
+  useEffect(() => {
+    if (sessionStorage.getItem('rk_ok') === '1') { setStage('site'); unlockedRef.current = true; }
+  }, []);
+
+  const toGate = () => { setStage('gate'); getAudio()?.sfx('whoosh'); };
+  const toSite = () => {
+    unlockedRef.current = true;
+    getAudio()?.sfx('whoosh');
+    setStage('site');
+    setTimeout(() => setAudioLevel(0.16), 600);
+  };
+
+  if (stage === 'intro') return <Intro onDone={toGate} />;
+  if (stage === 'gate') return <Gate onPass={toSite} />;
 
   return (
     <main className="page landing">
@@ -61,7 +123,7 @@ export default function Landing() {
           <span className="gold">FOR: DIDI ONLY</span>
         </div>
         <div className="hud-txt br">
-          <span className="pulse">SELECT SEQUENCE BELOW</span>
+          <span className="pulse">PICK A SEQUENCE BELOW</span>
           <i className="hud-line" />
         </div>
         <i className="corner c1" /><i className="corner c2" />
@@ -69,7 +131,6 @@ export default function Landing() {
 
       <p className="hud-txt gold center kicker-top">{C.LANDING.kicker}</p>
 
-      {/* the rakhi that ties itself */}
       <div className="selfrakhi" aria-hidden="true">
         <svg viewBox="0 0 300 300">
           <path className="spiral" pathLength="100"
@@ -90,24 +151,8 @@ export default function Landing() {
       </h1>
       <p className="hero-sub hud-txt">{C.LANDING.sub}</p>
 
-      {/* verify */}
-      <div className={`glass-terminal gate-box ${ok ? 'ok' : ''}`}>
-        <p className="hud-txt gold mb">{C.LANDING.gateTag}</p>
-        <h2 className="gate-q">{ok ? C.LANDING.granted : C.LANDING.gateQ}</h2>
-        {!ok && (
-          <>
-            <input ref={inputRef} type="text" autoComplete="off" spellCheck="false"
-              placeholder={C.LANDING.placeholder} aria-label="verify recipient"
-              onKeyDown={(e) => e.key === 'Enter' && check()} />
-            <button className="gate-btn" onClick={check}>SUBMIT ↵</button>
-          </>
-        )}
-        <p className="gate-resp hud-txt">{gateResp}</p>
-      </div>
-
-      {/* sequence grid */}
       <p className="hud-txt gold center grid-tag">{C.LANDING.gridTag}</p>
-      <div className={`seqgrid ${ok ? 'ok' : 'locked'}`}>
+      <div className="seqgrid ok">
         {C.ROUTES.slice(1).map((r, i) => (
           <a key={r.path} href={r.path} className="seqcard gcard">
             <i className="shine" />
@@ -115,15 +160,14 @@ export default function Landing() {
             <span className="seq-t">{r.tag}</span>
             <span className="seq-d hud-txt">{DESC[r.path]}</span>
             <span className="seq-a gold">ENTER →</span>
-            {!ok && <span className="lock">🔒</span>}
           </a>
         ))}
         <a href="/archive" className="seqcard gcard secret">
           <i className="shine" />
           <span className="seq-n hud-txt">??</span>
-          <span className="seq-t dim">[REDACTED]</span>
-          <span className="seq-d hud-txt">classified archive · 37 files</span>
-          <span className="seq-a gold">CRACK →</span>
+          <span className="seq-t dim">[EVERYTHING]</span>
+          <span className="seq-d hud-txt">all 37 pics. yes all.</span>
+          <span className="seq-a gold">OPEN →</span>
         </a>
       </div>
     </main>

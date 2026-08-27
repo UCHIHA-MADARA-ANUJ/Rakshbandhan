@@ -14,11 +14,24 @@ export const ROUTES = [
   { path: '/finale', tag: 'FINALE', short: 'FINALE' },
 ];
 
-export const VEIL = {
-  small: 'NOT A WEBSITE. A GIFT. DO NOT SHARE.',
-  big: 'DIDI ONLY.',
-  enter: 'tap to open (sound on ok)',
-  note: 'made at 2am. be nice.',
+export const INTRO = {
+  // ~30 second opening film. his voice. lowercase.
+  beats: [
+    { at: 500,  t: '28 august 2026.', cls: 'mono' },
+    { at: 4000, t: "raksha bandhan. and a problem.", cls: 'mono' },
+    { at: 7500, t: 'bhai is in gurugram. didi is in mumbai.', cls: '' },
+    { at: 11500, t: "can't be there in person. so.", cls: '' },
+    { at: 14500, t: 'he stayed up stupidly late', cls: '' },
+    { at: 17500, t: 'and built this instead.', cls: 'big' },
+    { at: 21500, t: 'GURUGRAM ————————— MUMBAI', cls: 'thread mono' },
+    { at: 25000, t: 'one sky. one thread. 1,424 km.', cls: '' },
+    { at: 28500, t: 'for one person only.', cls: 'big' },
+  ],
+  total: 31500,
+  skip: 'skip >>',
+  gateLine: "> ok. prove you're her.",
+  gateTag: 'ONLY ONE NAME (OR TWO) OPENS THIS',
+  wrong: ['nope.', "that's not it.", 'two names work. mine for her: DAYAN. hers for herself: CHUDAIL.'],
 };
 
 export const LANDING = {
@@ -26,22 +39,14 @@ export const LANDING = {
   line1: 'OK FINE.',
   line2: 'I MADE THIS.',
   sub: 'a whole website. for you. yes really.',
-  gateTag: 'FIRST. PROVE IT IS YOU',
-  gateQ: '> type what i call you',
-  placeholder: 'you know what it is…',
-  granted: "> ok. it's you. come.",
-  wrong: ['nope.', 'wrong. she would get this instantly.', 'starts with D. dayan. obviously.'],
-  fine: "> fine. you're obviously her. come in.",
   gridTag: 'PICK ANY ORDER. I MADE ALL OF IT',
 };
 
 export const GATE = {
+  // ONLY these open the site. case does not matter.
   accept: {
-    dayan:   { keys: ['dayan', 'dayaan', 'dayn'], resp: '', stamp: true },
-    chudail: { keys: ['chudail', 'witch'], resp: '> you called YOURSELF that. respect.', stamp: true },
-    dii:     { keys: ['diii', 'didi', 'di'], resp: '> soft access granted. hi didi.', stamp: false },
-    real:    { keys: ['mital', 'mitu', 'mintu'], resp: '> real name has no power here. here you are DAYAN.', stamp: true },
-    eyiz:    { keys: ['eyiz', 'eyez', 'eyis'], resp: '> eyiz detected. come in.', stamp: false },
+    dayan:   { keys: ['dayan', 'dayaan', 'dayn'],   resp: "> correct. come in.", stamp: true },
+    chudail: { keys: ['chudail', 'chudayl', 'witch'], resp: '> self-identified as chudail. respect. come in.', stamp: true },
   },
 };
 
