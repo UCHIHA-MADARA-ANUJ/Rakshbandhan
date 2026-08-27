@@ -4,11 +4,11 @@
   "/archive/page": "app/archive/page.js",
   "/distance/page": "app/distance/page.js",
   "/dossier/page": "app/dossier/page.js",
-  "/letter/page": "app/letter/page.js",
   "/finale/page": "app/finale/page.js",
+  "/letter/page": "app/letter/page.js",
   "/page": "app/page.js",
   "/ritual/page": "app/ritual/page.js",
-  "/timeline/page": "app/timeline/page.js",
   "/scanner/page": "app/scanner/page.js",
+  "/timeline/page": "app/timeline/page.js",
   "/transmission/page": "app/transmission/page.js"
 }

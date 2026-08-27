@@ -98,7 +98,7 @@ export const SCAN = {
 };
 
 export const TX = {
-  tag: 'THE 2AM FILES',
+  tag: 'EVIDENCE: MY PHONE',
   head: ['MY PHONE IS', 'A MUSEUM OF YOU'],
   phone: [
     { slug: 'insta-pfp', label: 'INSTA' },
@@ -110,9 +110,10 @@ export const TX = {
     { slug: 'randomly-received', label: 'RANDOM FILE FROM MUMBAI', big: true },
     { slug: 'rendem-again', label: 'THE "RENDEM" SERIES' },
   ],
-  chatMeta: 'DRAFTS · 02:22 · NEVER SENT (TIL NOW)',
+  chatMeta: 'MY DRAFTS TO HER · NEVER SENT (TIL NOW)',
   chat: [
     { side: 'me', text: 'didi', time: '02:14' },
+    { side: 'me', text: 'u asleep? obviously u are. its 2. u sleep at 10 like a hero', time: '02:14' },
     { side: 'me', text: 'u came in april and somehow the whole year became about u. idk how u did that', time: '02:16' },
     { side: 'me', text: 'u were asleep obviously. u sleep at 10. so i am typing into the void', time: '02:19' },
     { side: 'me', text: 'my gallery is 40% ur pics. my wallpaper too. no i will not apologize', time: '02:21' },
