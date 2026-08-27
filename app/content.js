@@ -1,3 +1,6 @@
+// photos live ONLY in the dossier evidence file. nowhere else. bhai's rule.
+export const PHOTOS = (s) => `/assets/photos/${s}.webp`;
+
 // ⭐ ALL WORDS = BHAI'S OWN VOICE. edit anything here, site changes.
 
 // no photos of her. anywhere. bhai's final word.
@@ -65,15 +68,22 @@ export const FILE = {
     'sends pics labelled "rendem". to this day idk what it means',
     'was seen cleaning a fan ONCE. we keep proof',
   ],
-  incidentsTag: 'SELECTED INCIDENTS — VISUAL EVIDENCE: REMOVED BY ORDER OF BHAI',
-  incidents: [
-    '001 — the fan incident. it happened. the proof is gone. trust me.',
-    "002 — 'rendem'. two files. still unexplained.",
-    '003 — mirror selfie frequency: daily. location: pune.',
-    '004 — eyiz. no further comment at this time.',
-    '005 — the soft toy. classified.',
-    '006 — public roasting of bhai: ongoing since may.',
-    "007 — goes offline at 10pm. like a shop.",
+  exhibitsTag: 'EVIDENCE \u2014 DECLASSIFIED FOR THE FILE',
+  exhibits: [
+    { slug: 'alien', tag: 'EXHIBIT A', cap: 'the true form. i have proof.' },
+    { slug: 'funny-face', tag: 'EXHIBIT B', cap: 'the "what did i do" face. classic.' },
+    { slug: 'teasing', tag: 'EXHIBIT C', cap: 'job: teasing. full time.' },
+    { slug: 'pankha', tag: 'EXHIBIT D', cap: 'she cleaned a fan once. frame it.' },
+    { slug: 'dayumm', tag: 'EXHIBIT E', cap: 'impressed herself. valid tbh.' },
+    { slug: 'mirror-selfie', tag: 'EXHIBIT F', cap: 'pune mirror. daily ritual.' },
+    { slug: 'style', tag: 'EXHIBIT G', cap: "thinks she's the main character. she is." },
+  ],
+  withheldTag: 'FURTHER INCIDENTS \u2014 VISUALS WITHHELD',
+  withheld: [
+    "002 \u2014 'rendem'. two files. still unexplained.",
+    '004 \u2014 eyiz. no further comment at this time.',
+    '005 \u2014 the soft toy. classified.',
+    "007 \u2014 goes offline at 10pm. like a shop.",
   ],
 };
 
@@ -99,7 +109,7 @@ export const TX = {
   tag: 'THE PHONE VAULT',
   head: ['MY PHONE IS', 'A MUSEUM OF YOU'],
   vaultLabel: 'IMAGE VAULT: SEALED',
-  vaultNote: 'every pic removed. by order of me. the gallery stays full tho.',
+  vaultNote: 'the dossier got the good ones. the rest stays sealed. by order of me.',
   chatMeta: 'MY DRAFTS TO HER · NEVER SENT (TIL NOW)',
   chat: [
     { side: 'me', text: 'didi', time: '02:14' },
